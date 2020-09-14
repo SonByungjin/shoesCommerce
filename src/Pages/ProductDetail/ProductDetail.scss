@@ -1,0 +1,15 @@
+.ProductDetail {
+  display: flex;
+  flex-direction: column;
+  .ProductMain {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 1440px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .ProductDetailRecommend {
+    width: 100%;
+  }
+}
