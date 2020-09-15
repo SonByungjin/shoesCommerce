@@ -1,0 +1,40 @@
+$fontsize: 13px;
+
+.ProductRightEtc {
+  border: 1px solid black;
+  font-size: $fontsize;
+
+  div {
+    margin-top: 20px;
+  }
+
+  .shareIcons {
+    ul {
+      display: flex;
+      img {
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
+
+  .freeShippingBtn {
+    padding: 14px;
+    border: 1px solid black;
+    text-align: center;
+  }
+
+  .shippingInfo {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    p {
+      color: rgb(171, 171, 171);
+      margin-left: 12px;
+      text-decoration: underline;
+    }
+    p:hover {
+      text-decoration: none;
+    }
+  }
+}

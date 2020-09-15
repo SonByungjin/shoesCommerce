@@ -1,0 +1,16 @@
+.ProductRightColor {
+  border: 1px solid blue;
+
+  .ProductColorInfo {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .ProductColorPic {
+    img {
+      width: 65px;
+      margin-right: 6px;
+      border-bottom: 2px solid black;
+    }
+  }
+}

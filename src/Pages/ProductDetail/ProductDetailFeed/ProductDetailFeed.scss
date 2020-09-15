@@ -1,6 +1,7 @@
 .ProductDetailFeed {
   display: flex;
   flex-direction: column;
-  max-width: 940px;
-  margin-right: 20px;
+  border: 1px solid black;
+  flex-basis: 66.66%;
+  max-width: 66.66%;
 }
