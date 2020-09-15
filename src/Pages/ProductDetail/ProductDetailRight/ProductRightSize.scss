@@ -1,3 +1,84 @@
 .ProductRightSize {
-  border: 1px solid green;
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+
+  // 사이즈 첫번째 파트 (사이즈 가이드 버튼)
+  .first {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    div {
+      width: 100%;
+      max-width: 67%;
+      text-align: center;
+      color: white;
+      background-color: #000;
+      font-size: 12px;
+      padding: 6px 2px;
+      cursor: pointer;
+    }
+    span {
+      font-size: 14px;
+      text-decoration: underline;
+    }
+  }
+  //사이즈 두번째 파트 (사이즈 선택 부분)
+  .second {
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+    .size {
+      display: flex;
+      width: 100%;
+      span {
+        font-size: 14px;
+        border: 1px solid #e5e5e5;
+        padding: 15px 24px;
+        cursor: pointer;
+      }
+    }
+    .quantity {
+      margin: 30px 0;
+      input,
+      button {
+        font-size: 14px;
+        background-color: white;
+        border: 1px solid #e5e5e5;
+        padding: 15px 24px;
+        cursor: pointer;
+      }
+      .quantitySelect {
+        width: 80px;
+        text-align: center;
+      }
+    }
+  }
+  //사이즈 세번째 파트 (장바구니 및 바로구매 버튼)
+  .third {
+    display: flex;
+    justify-content: flex-start;
+    div {
+      height: 50px;
+      margin-right: 6px;
+      padding-top: 16px;
+      padding-bottom: 16px;
+      text-align: center;
+    }
+    .cart {
+      width: 150px;
+      border: 1px solid black;
+    }
+    .buy {
+      width: 150px;
+      color: white;
+      background-color: #000;
+    }
+    .heart {
+      border: 1px solid black;
+      padding: 12px 12px;
+      width: 50px;
+      font-size: 25px;
+    }
+  }
 }

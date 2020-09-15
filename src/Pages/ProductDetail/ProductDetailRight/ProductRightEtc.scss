@@ -1,11 +1,11 @@
 $fontsize: 13px;
 
 .ProductRightEtc {
-  border: 1px solid black;
   font-size: $fontsize;
 
   div {
     margin-top: 20px;
+    margin-bottom: 20px;
   }
 
   .shareIcons {
@@ -20,7 +20,7 @@ $fontsize: 13px;
 
   .freeShippingBtn {
     padding: 14px;
-    border: 1px solid black;
+    border: 1px solid #e5e5e5;
     text-align: center;
   }
 

@@ -1,9 +1,10 @@
 import React from "react";
+import "./ProductInfo.scss";
 
 class ProductInfo extends React.Component {
   render() {
     return (
-      <div className="ProductInfo">
+      <section className="ProductInfo">
         <h1>상품정보</h1>
         <section className="detailInfo">
           <ul>
@@ -19,7 +20,7 @@ class ProductInfo extends React.Component {
             <li>Model</li>
           </ul>
         </section>
-      </div>
+      </section>
     );
   }
 }

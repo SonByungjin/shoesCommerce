@@ -1,10 +1,11 @@
 import React from "react";
+import "./ProductDetailImg.scss";
 
 class ProductDetailImg extends React.Component {
   render() {
     return (
       <div className="ProductDetailImg">
-        <section>
+        <section className="ProductDetailImgInfo">
           <h1>언타이틀드 라이벌</h1>
           <p>
             클래식하면서도 완벽한 디테일이 독창적 디자인인 반면에 유선형의 스타
@@ -17,7 +18,7 @@ class ProductDetailImg extends React.Component {
           <p>*다양한 색상에서 영감을 받은 컬러 블록 디자인</p>
           <p>*디컷 스타 패치</p>
         </section>
-        <section>
+        <section className="ProductDetailImgPic">
           <img
             alt="Product Detail pic"
             src="https://image.converse.co.kr/cmsstatic/product/27750/168636C.jpg"

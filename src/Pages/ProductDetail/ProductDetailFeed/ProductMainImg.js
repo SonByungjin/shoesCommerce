@@ -11,24 +11,26 @@ class ProductMainImg extends React.Component {
             src="https://image.converse.co.kr/cmsstatic/product/168636C_168636C_pdp-primary.jpg?gallery="
           />
         </section>
-        <section className="mainImg2">
-          <ul>
-            <li>
-              <img src="https://image.converse.co.kr/cmsstatic/product/168636C_168636C_02.jpg?browse=" />
-            </li>
-            <li>
-              <img src="https://image.converse.co.kr/cmsstatic/product/168636C_168636C_03.jpg?browse=" />
-            </li>
-            <li>
-              <img src="https://image.converse.co.kr/cmsstatic/product/168636C_168636C_04.jpg?browse=" />
-            </li>
-            <li>
-              <img src="https://image.converse.co.kr/cmsstatic/product/168636C_168636C_05.jpg?browse=" />
-            </li>
-            <li>
-              <img src="https://image.converse.co.kr/cmsstatic/product/168636C_168636C_06.jpg?browse=" />
-            </li>
-          </ul>
+        <section className="mainImgMore">
+          <div className="imgMoreContainer">
+            <ul>
+              <li>
+                <img src="https://image.converse.co.kr/cmsstatic/product/168636C_168636C_02.jpg?browse=" />
+              </li>
+              <li>
+                <img src="https://image.converse.co.kr/cmsstatic/product/168636C_168636C_03.jpg?browse=" />
+              </li>
+              <li>
+                <img src="https://image.converse.co.kr/cmsstatic/product/168636C_168636C_04.jpg?browse=" />
+              </li>
+              <li>
+                <img src="https://image.converse.co.kr/cmsstatic/product/168636C_168636C_05.jpg?browse=" />
+              </li>
+              <li>
+                <img src="https://image.converse.co.kr/cmsstatic/product/168636C_168636C_06.jpg?browse=" />
+              </li>
+            </ul>
+          </div>
         </section>
       </div>
     );

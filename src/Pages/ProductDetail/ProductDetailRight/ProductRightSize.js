@@ -6,8 +6,8 @@ class ProductRightSize extends React.Component {
     return (
       <section className="ProductRightSize">
         <div className="first">
-          <button>사이즈가 고민되면 클릭하세요!</button>
-          <p>사이즈 가이드</p>
+          <div>사이즈가 고민되면 클릭하세요!</div>
+          <span>사이즈 가이드</span>
         </div>
         <div className="second">
           <div className="size">
@@ -17,15 +17,15 @@ class ProductRightSize extends React.Component {
             <span>280</span>
           </div>
           <div className="quantity">
-            <input value="1"></input>
+            <input className="quantitySelect" value="1"></input>
             <button className="decrease">-</button>
             <button className="increase">+</button>
           </div>
         </div>
         <div className="third">
-          <button className="cart">장바구니</button>
-          <button className="buy">바로구매</button>
-          <button className="heart"></button>
+          <div className="cart">장바구니</div>
+          <div className="buy">바로구매</div>
+          <div className="heart">♥</div>
         </div>
       </section>
     );
