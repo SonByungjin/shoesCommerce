@@ -1,0 +1,56 @@
+:root {
+  --FilterColor: #e5e5e5;
+}
+.ProductList {
+  .FilterHorizontalBar {
+    display: flex;
+    justify-content: center;
+    height: 60px;
+    border-top: 1px solid var(--FilterColor);
+    border-bottom: 1px solid var(--FilterColor);
+    .filterContainer {
+      max-width: 1400px;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .hideFilter {
+        // max-width: 338px;
+        padding-right: 50px;
+        // width: 100%;
+        width: 350px;
+        height: 100%;
+        color: #757575;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        img {
+          width: 15px;
+        }
+      }
+      .numberingProduct {
+        // max-width: 700px;
+        // width: 100%;
+        width: 50%;
+        height: 100%;
+        border-left: 1px solid var(--FilterColor);
+        padding: 15px;
+        font-weight: 600;
+      }
+      .arrayProduct {
+        // max-width: 300px;
+        // width: 100%;
+        width: 300px;
+        height: 100%;
+        padding-left: 15px;
+        border-left: 1px solid var(--FilterColor);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        img {
+          width: 15px;
+        }
+      }
+    }
+  }
+}

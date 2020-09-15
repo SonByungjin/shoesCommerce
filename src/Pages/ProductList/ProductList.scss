@@ -1,0 +1,31 @@
+.ProductList {
+  header {
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    .shoesTitle {
+      position: absolute;
+      top: 40%;
+      left: 45%;
+      font-size: 40px;
+      font-weight: 900;
+    }
+    img {
+      width: 100%;
+    }
+  }
+  .bottomOfPage {
+    display: flex;
+    justify-content: center;
+  }
+  .ProductListMain {
+    margin: 34px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+    grid-auto-rows: minmax(100px, auto);
+    // display: flex;
+    // flex-wrap: wrap;
+    // width: 800px;
+  }
+}
