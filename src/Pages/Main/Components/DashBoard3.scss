@@ -1,0 +1,22 @@
+@mixin background-default-setting {
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.dashBoard3 {
+  display: flex;
+
+  .modelPhoto {
+    width: 720px;
+    height: 900px;
+    background-image: url("https://image.converse.co.kr/cmsstatic/structured-content/18085/01_Home_04_Template_1440x900_Big_01.jpg?gallery");
+    @include background-default-setting;
+  }
+
+  .productDesc {
+    width: 720px;
+    height: 900px;
+    background-image: url("https://image.converse.co.kr/cmsstatic/structured-content/18083/KakaoTalk_20200907_101456078.jpg?gallery");
+    @include background-default-setting;
+  }
+}
