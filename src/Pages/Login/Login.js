@@ -4,40 +4,66 @@ import "./Login.scss";
 class Login extends React.Component {
   constructor() {
     super();
+
     this.state = {
       idValue: "",
-      passValue: "",
+      passwordValue: "",
+      idError: "",
+      passwordError: "",
     };
   }
-
-  // handleClick = () => {
-  //   const { idValue, passValue } = this.state;
-  //   fetch("", {
-  //     method: "GET",
-  //     body: JSON.stringify({
-  //       email: idValue,
-  //       password: passValue,
-  //     }),
-  //   });
-  //   then(res);
-  // };
+  handleClick = () => {
+    const { idValue, passwordValue } = this.state;
+    if (idValue.length < 1 && passwordValue.length < 1) {
+      this.setState({
+        idError: "필수 입력 항목입니다",
+        passwordError: "필수 입력 항목입니다",
+      });
+    }
+  };
 
   handleIdValue = (e) => {
     const { value } = e.target;
-    this.setState({
-      idValue: value,
-    });
+    this.setState(
+      {
+        idValue: value,
+      },
+      () => {
+        if (value.includes("@") && value.includes(".")) {
+          this.setState({ idError: "" });
+        } else if (this.state.idValue.length === 0) {
+          this.setState({ idError: "필수 입력 항목입니다" });
+        } else {
+          this.setState({ idError: "이메일 형태로 입력해주세요" });
+        }
+      }
+    );
   };
 
   handlePassValue = (e) => {
     const { value } = e.target;
-    this.setState({
-      passValue: value,
-    });
+    const passwordRegExp = /^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#$%]).{8,16}$/;
+    this.setState(
+      {
+        passwordValue: value,
+      },
+      () => {
+        if (value.match(passwordRegExp)) {
+          this.setState({ passwordError: "" });
+        } else if (this.state.passwordValue.length === 0) {
+          this.setState({ passwordError: "필수 입력 항목입니다" });
+        } else {
+          this.setState({
+            passwordError:
+              "영문/숫자/특수문자 조합 8~16자 조합으로 입력해주세요.",
+          });
+        }
+      }
+    );
   };
 
   render() {
-    // const { idValue, passValue } = this.state;
+    const { idValue, passwordValue } = this.state;
 
     return (
       <div className="login">
@@ -48,18 +74,20 @@ class Login extends React.Component {
               <div className="loginForm">
                 <input
                   className="inputLoginId"
+                  value={idValue}
                   onChange={this.handleIdValue}
                   type="text"
                   placeholder="이메일 형태로 입력해주세요"
                 ></input>
-                <span className="errorMsg">필수 입력 항목입니다</span>
+                <span>{this.state.idError}</span>
                 <input
                   className="inputLoginPw"
+                  value={passwordValue}
                   onChange={this.handlePassValue}
                   type="password"
                   placeholder="비밀번호(영문/숫자/특수문자 조합 8자 이상)"
                 ></input>
-                <span className="errorMsg">필수 입력 항목입니다</span>
+                <span>{this.state.passwordError}</span>
               </div>
               <div className="loginTools">
                 <label className="loginCheckbox">
@@ -70,9 +98,9 @@ class Login extends React.Component {
                   아이디/비밀번호 찾기
                 </a>
               </div>
-              <div className="loginbuttons">
+              <div className="loginButtons">
                 <button
-                  className="loginbutton"
+                  className="loginButton"
                   onClick={this.handleClick}
                   type="submit"
                 >
