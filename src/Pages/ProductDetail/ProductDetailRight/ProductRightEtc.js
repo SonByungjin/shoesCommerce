@@ -7,15 +7,13 @@ class ProductRightEtc extends React.Component {
       <section className="ProductRightEtc">
         <div className="shareIcons">
           <ul>
-            <li>
-              <img src="https://www.vhv.rs/dpng/d/41-417248_share-button-icon-png-transparent-png.png" />
-            </li>
-            <li>
-              <img src="https://www.vhv.rs/dpng/d/41-417248_share-button-icon-png-transparent-png.png" />
-            </li>
-            <li>
-              <img src="https://www.vhv.rs/dpng/d/41-417248_share-button-icon-png-transparent-png.png" />
-            </li>
+            {shareImgs.map((icon, index) => {
+              return (
+                <li key={index}>
+                  <img alt={`share_icons_${index}`} src={icon} />
+                </li>
+              );
+            })}
           </ul>
         </div>
         <div className="freeShippingBtn">
@@ -31,3 +29,9 @@ class ProductRightEtc extends React.Component {
 }
 
 export default ProductRightEtc;
+
+const shareImgs = [
+  "/images/productDetail/facebook_icon.png",
+  "/images/productDetail/kakao_icon.png",
+  "/images/productDetail/line_icon.png",
+];

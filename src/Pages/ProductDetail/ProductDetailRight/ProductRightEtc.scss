@@ -12,8 +12,15 @@ $fontsize: 13px;
     ul {
       display: flex;
       img {
-        width: 24px;
-        height: 24px;
+        position: relative;
+        top: 0;
+        transition: top linear 0.3s;
+        margin: 0 3px;
+        width: 36px;
+        height: 36px;
+      }
+      img:hover {
+        top: -10px;
       }
     }
   }
