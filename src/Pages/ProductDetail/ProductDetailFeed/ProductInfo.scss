@@ -1,6 +1,24 @@
 .ProductInfo {
+  margin: 80px 0 0 0;
   padding: 0 60px;
   h1 {
-    font-size: 36px;
+    padding: 20px 0;
+    border-top: 1px solid black;
+    font-size: 24px;
+  }
+  .detailInfo {
+    margin: 20px 0;
+    dl {
+      dt {
+        float: left;
+        clear: left;
+        width: 180px;
+        font-weight: 300;
+      }
+      dd {
+        margin: 0 0 0 80px;
+        padding: 0 0 0.8em 0;
+      }
+    }
   }
 }

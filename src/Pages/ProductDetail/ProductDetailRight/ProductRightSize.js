@@ -2,6 +2,13 @@ import React from "react";
 import "./ProductRightSize.scss";
 
 class ProductRightSize extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      isLogined: true,
+    };
+  }
+
   render() {
     return (
       <section className="ProductRightSize">
@@ -23,9 +30,17 @@ class ProductRightSize extends React.Component {
           </div>
         </div>
         <div className="third">
-          <div className="cart">장바구니</div>
-          <div className="buy">바로구매</div>
-          <div className="heart">♥</div>
+          {this.state.isLogined ? (
+            <div className="isLogout">
+              <div className="loginBtn">로그인</div>
+            </div>
+          ) : (
+            <div className="isLogin">
+              <span className="cart">장바구니</span>
+              <span className="buy">바로구매</span>
+              <span className="heart">♥</span>
+            </div>
+          )}
         </div>
       </section>
     );

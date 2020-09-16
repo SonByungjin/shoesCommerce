@@ -2,6 +2,20 @@ import React from "react";
 import "./ProductDetailImg.scss";
 
 class ProductDetailImg extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      isClosed: true,
+    };
+  }
+
+  handleClick = () => {
+    const { isClosed } = this.state;
+    this.setState({
+      isClosed: !isClosed,
+    });
+  };
+
   render() {
     return (
       <div className="ProductDetailImg">
@@ -20,10 +34,14 @@ class ProductDetailImg extends React.Component {
         </section>
         <section className="ProductDetailImgPic">
           <img
-            alt="Product Detail pic"
+            className={this.state.isClosed ? "imgClosed" : "imgOpened"}
+            alt="Product DetailedImg"
             src="https://image.converse.co.kr/cmsstatic/product/27750/168636C.jpg"
           />
         </section>
+        <span className="showMore" onClick={this.handleClick}>
+          {this.state.isClosed ? "더보기 +" : "닫기 -"}
+        </span>
       </div>
     );
   }
