@@ -1,7 +1,8 @@
 .registerMain {
+    font-family: "proxima nova", "proxima-nova", "Nanum Gothic", Helvetica, Arial, sans-serif;
     .signUpContainer {
         .signUpHeader {
-            width: 1777px;
+            width: 100%;
             height: 260px;
             background-repeat:no-repeat;
             background-position: 50% 50%;
@@ -35,29 +36,31 @@
                 }
             }
         }
-    
+        
         .signUpBody {
-            border: 1px solid red;
             .signUpForm{
+                margin-top: 50px;
+                margin-bottom: 100px;
                 display:flex;
                 justify-content: center; 
-                border: 1px solid green;
                 .entryField {
-                    width: 683.63px;
-                    height: 839.98px;
-                    border: 1px solid blue;
+                    border-right: 1px solid #e5e5e5;
+                    height: 624px;
+                    width: 839.98px;
                     padding: 0px 30px 30px;
                     display:flex;
                     justify-content: center;
                     .signUpInfo {
-                        border: 1px solid purple;
+                        max-width: 384px;
+                        width: 100%;
+                        margin: 0 auto;
                         .socialSignUp {
                             // height: 89.625px;
                             // width: 384px;
                             display: flex;
                             flex-direction: column;
                            
-                            button{
+                            button {
                                 display: flex;
                                 justify-content: center;
                                 align-items: center;
@@ -66,9 +69,15 @@
                                 padding: 16px;
                                 text-decoration: none;
                                 background-color: #f5ca0f;
+                                border: 1px solid #f5ca0f;
                                 font-size: 14px;
                                 font-weight: 600;
                                 text-align: center;
+                                transition: opacity 0.35s ease-in-out;
+                                cursor: pointer;
+                                &:hover {
+                                    opacity: 0.5;
+                                }
                                 #icon-kakao {
                                     height: 20px;
                                     width: 21.82px;
@@ -76,53 +85,173 @@
 
                                 }
                             }
-                            div {
-                                background-color: rgba(var(--b38,219,219,219),1);
-                                width: 176.59px;
-                                height: 1px;
-                                position: relative;
-                                top: .45em;
-                            }
-                            span{
-                                color: rgba(var(--f52,142,142,142),1);
-                                flex-grow: 0;
-                                flex-shrink: 0;
-                                font-size: 13px;
-                                font-weight: 600;
-                                line-height: 15px;
-                                margin: 0 18px;
-                                text-transform: uppercase;
+                            .makeOr {
+                                display: flex;
+                                flex-direction: row;
+                                margin-top: 25px;
+                                div {
+                                    background-color: rgba(var(--b38,219,219,219),1);
+                                    width: 176.59px;
+                                    height: 1px;
+                                    position: relative;
+                                    top: .45em;
+                                }
+                                span{
+                                    color: rgba(var(--f52,142,142,142),1);
+                                    flex-grow: 0;
+                                    flex-shrink: 0;
+                                    font-size: 13px;
+                                    font-weight: 600;
+                                    line-height: 15px;
+                                    margin: 0 18px;
+                                    text-transform: uppercase;
+                                }
                             }
                         }
                         .normalSignUp {
-                                    display:flex;
-                                    flex-direction: column;
-                                    justify-content: space-evenly;
+                            margin-top: 40px;
+                            display:flex;
+                            flex-direction: column;
                                     .infoTitle {
-                                        font-size: 16px;
+                                        h1 {
+                                            font-size: 16px;
+                                        }
                                     }
-                                    input {
-                                        width: 384px;
-                                        height: 50px;
-                                    }
-                                    .female {
-                                        width: 100%;
-                                        line-height: 1;
-                                        color: #9b9b9b;
-                                        background-color: #f4f4f4;
-                                        border: 1px solid #e5e5e5;
+                                    .allInput {
+                                        display: flex;
+                                        flex-direction: column;
+                                        span {
+                                            color: #e5e5e5;
+                                            font-size: 12px;
+                                            margin-bottom: 8px;
+                                        }
+                                        input {
+                                            width: 100%;
+                                            height: 50px;
+                                            margin-bottom: 10px;
+                                            border: 1px solid #e5e5e5;
+                                            padding-left: 20px;
+                                        }
                                     }
                             }
                         }
                     
                 }
                 .agreeField {
+                    max-width: 600px;
                     width: 600px;
-                    height: 683.63px;
                     padding: 0px 30px;
+                    height: 623.63px;
                     display: flex;
                     flex-direction: column;
-                    align-content: center;
+                    align-items: center;
+                    .totalAgree {
+                        max-width: 384px;
+                        width: 100%;
+                        .allCheck {
+                            height: 23px;
+                            margin-bottom: 14px;
+                            input{
+                                width: 14px;
+                                height: 14px;
+                            }
+                            .allAgree {
+                                font-size: 16px;
+                                font-weight: 600;
+                                padding: 4px;
+                            }
+                        }
+                        .allAgreeText {
+                            height: 72px;
+                            margin-bottom: 16px;
+                        }
+                        .allAgreeLi {
+                            font-size: 14px;
+                            color: #757575;
+                        }
+                    }
+                    .needAgree {
+                        max-width: 384px;
+                        h1 {
+                            font-size: 16px;
+                            color: #444444;
+                            font-weight: 600;
+                        }
+                        .needCheck {
+                            input {
+                                height: 14px;
+                                width: 14px;
+                            }
+                            span {
+                                font-size: 14px;
+                                padding: 4px;
+                                color: #757575;
+                            }
+                        }
+                        .needCheckTwo {
+                            input {
+                                height: 14px;
+                                width: 14px;
+                            }
+                            span {
+                                font-size: 14px;
+                                padding: 4px;
+                                color: #757575;
+                            }
+                        }
+                    }
+                    .selectAgree {
+                        width: 384px;
+                        h2 {
+                            font-size: 16px;
+                            color: #444444;
+                            margin-top: 30px;
+                            font-weight: 600;
+                        }
+                        p {
+                            font-size: 14px;
+                            color: #00c3d7;
+                            
+                        }
+                        .selectCheck {
+                            input {
+                                height: 14px;
+                                width: 14px;
+                            }
+                            span {
+                                font-size: 14px;
+                                color: #757575;
+                                padding: 4px;
+                            }
+                        }
+                        .selectCheckTwo {
+                            input {
+                                height: 14px;
+                                width: 14px;
+                            }
+                            span {
+                                font-size: 14px;
+                                color: #757575;
+                                padding: 4px;
+                            }
+                        }
+                    }.finalSignUp {
+                        width: 384px;
+                        button{
+                            width: 100%;
+                            height: 52px;
+                            background-color: black;
+                            color: white;
+                            padding: 16px;
+                            margin-top: 30px;
+                            cursor: pointer;
+                            &:hover {
+                                background-color: white;
+                                color: black;
+                                transition-duration: 0.5s;
+                            }
+                        }
+                    }
                 }
             }
         }

@@ -28,65 +28,88 @@ class SignUp extends React.Component {
                       </svg>
                       카카오 계정으로 1초 회원가입
                     </button>
-                    <div></div>
-                    <span>OR</span>
-                    <div></div>
+                    <div className="makeOr">
+                      <div></div>
+                      <span>OR</span>
+                      <div></div>
+                    </div>
                   </div>
                   <div className="normalSignUp">
                     <div className="infoTitle">
                       <h1>필수정보</h1>
                     </div>
-                    <input
-                      className="email"
-                      type="email"
-                      placeholder="이메일 형태로 입력해주세요.(필수)"
-                    ></input>
-                    <input
-                      className="password"
-                      type="password"
-                      placeholder="비밀번호 (영문/숫자/특수문자 조합 8자 이상)"
-                    ></input>
-                    <input
-                      className="rePassword"
-                      type="password"
-                      placeholder="비밀번호 입력 확인"
-                    ></input>
-                    <input
-                      className="name"
-                      type="text"
-                      placeholder="이름을 입력해주세요.(필수)"
-                    ></input>
-                    <input
-                      className="phoneNum"
-                      type="text"
-                      placeholder="휴대폰 번호 '-'표 없이 입력해주세요.(필수)"
-                    ></input>
-                    <input
-                      className="birth"
-                      type="text"
-                      placeholder="생년월일을 입력해 주세요. (19990101)"
-                    ></input>
-                    <input
-                      className="female"
-                      type="radio"
-                      id="female"
-                      value="female"
-                    ></input>
-                    <label for="female">여성</label>
-                    <input className="male" type="radio"></input>
+                    <div className="allInput">
+                      <input
+                        className="email"
+                        type="email"
+                        placeholder="이메일 형태로 입력해주세요.(필수)"
+                      ></input>
+                      <input
+                        className="password"
+                        type="password"
+                        placeholder="비밀번호 (영문/숫자/특수문자 조합 8자 이상)"
+                      ></input>
+                      <input
+                        className="rePassword"
+                        type="password"
+                        placeholder="비밀번호 입력 확인"
+                      ></input>
+                      <input
+                        className="name"
+                        type="text"
+                        placeholder="이름을 입력해주세요.(필수)"
+                      ></input>
+                      <input
+                        className="phoneNum"
+                        type="text"
+                        placeholder="휴대폰 번호 '-'표 없이 입력해주세요.(필수)"
+                      ></input>
+                      <span>*생일/성별은 가입 후 수정이 불가합니다.</span>
+                      <input
+                        className="birth"
+                        type="text"
+                        placeholder="생년월일을 입력해 주세요. (19990101)"
+                      ></input>
+                      <div
+                        className="btn-group btn-group-toggle"
+                        data-toggle="buttons"
+                      >
+                        <label class="btn btn-secondary">
+                          <input
+                            className="femaleBtn"
+                            type="radio"
+                            name="options"
+                            id="option1"
+                            autocomplete="off"
+                          ></input>
+                          여성
+                        </label>
+                        <label class="btn btn-secondary">
+                          <input
+                            type="radio"
+                            name="options"
+                            id="option2"
+                            autocomplete="off"
+                          ></input>
+                          남성
+                        </label>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
               <div className="agreeField">
                 <div className="totalAgree">
-                  <input type="checkbox"></input>
-                  <span>모든 약관 동의</span>
-                  <p>
+                  <div className="allCheck">
+                    <input type="checkbox"></input>
+                    <span className="allAgree">모든 약관 동의</span>
+                  </div>
+                  <p className="allAgreeText">
                     아래 모든 약관(필수),개인정보 수집 및 이용에 대한 동의(필수)
                     및 광고성 정보수신 동의(선택) 내용을 확인하고 전체
                     동의합니다.
                   </p>
-                  <ul>
+                  <ul className="allAgreeLi">
                     <li>
                       - 필수 정보의 수집 및 이용에 관한 동의를 거부하실 수
                       있으나, 다만 이 경우 회원 가입 및 관련 서비스 이용은
@@ -100,22 +123,30 @@ class SignUp extends React.Component {
                   </ul>
                 </div>
                 <div className="needAgree">
-                  <h2>
+                  <h1>
                     컨버스 공식 온라인 스토어 회원 약관 및 개인정보 수집•이용에
                     대한 동의
-                  </h2>
-                  <input type="checkbox"></input>
-                  <span>(필수)이용 약관에 대한 동의</span>
-                  <input type="checkbox"></input>
-                  <span>(필수)개인정보 수집 및 이용에 대한 동의</span>
+                  </h1>
+                  <div className="needCheck">
+                    <input type="checkbox"></input>
+                    <span>(필수)이용 약관에 대한 동의</span>
+                  </div>
+                  <div className="needCheckTwo">
+                    <input type="checkbox"></input>
+                    <span>(필수)개인정보 수집 및 이용에 대한 동의</span>
+                  </div>
                 </div>
                 <div className="selectAgree">
                   <h2>광고성 정보 수신 동의</h2>
                   <p>(회원 전용 다양한 이벤트 소식을 받아보세요)</p>
-                  <input type="checkbox"></input>
-                  <span>(선택)이메일 수신 동의</span>
-                  <input type="checkbox"></input>
-                  <span>(선택)문자 수신동의</span>
+                  <div className="selectCheck">
+                    <input type="checkbox"></input>
+                    <span>(선택)이메일 수신 동의</span>
+                  </div>
+                  <div className="selectCheckTwo">
+                    <input type="checkbox"></input>
+                    <span>(선택)문자 수신동의</span>
+                  </div>
                 </div>
                 <div className="finalSignUp">
                   <button type="submit">회원가입하기(만 14세 이상)</button>
