@@ -1,7 +1,7 @@
 import React from "react";
-import "./ShoesIcons.scss";
+import "./ShoesIconList.scss";
 
-class ShoesIcons extends React.Component {
+class ShoesIconList extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -46,4 +46,4 @@ class ShoesIcons extends React.Component {
   }
 }
 
-export default ShoesIcons;
+export default ShoesIconList;

@@ -1,4 +1,5 @@
 import React from "react";
+import ProductInfo from "./ProductInfo";
 import "./DashBoard2.scss";
 
 class DashBoard2 extends React.Component {
@@ -18,13 +19,26 @@ class DashBoard2 extends React.Component {
         </div>
         <a href="/main" className="productSub">
           <div className="top">
-            <div className="topOverlay">
-              <h2>척 70 빈티지 캔버스 러쉬블루</h2>
-            </div>
+            <h2>척 70 빈티지 캔버스 러쉬블루</h2>
+            <div className="buyBtn">구매하기</div>
+            <div className="topOverlay"></div>
           </div>
           <div className="bottom">
-            <div className="bottomLeft"></div>
-            <div className="bottomRight"></div>
+            <a href="/main" className="bottomLeft">
+              <ProductInfo
+                newArrival={"NEW ARRIVAL"}
+                name={"척 70 시즈널 컬러"}
+                price={"95,000 원"}
+              />
+            </a>
+            <a href="/main" className="bottomRight">
+              <ProductInfo
+                bestSeller={"BEST SELLER"}
+                newArrival={"NEW ARRIVAL"}
+                name={"척 70 빈티지 캔버스"}
+                price={"89,000 원"}
+              />
+            </a>
           </div>
         </a>
       </section>

@@ -41,11 +41,6 @@
       @include background-default-setting;
       padding: 30px 0 0 30px;
 
-      .status {
-        font-size: 16px;
-        margin-bottom: 20px;
-      }
-
       h1 {
         @include main-h1-default;
         margin-bottom: 14px;
@@ -103,8 +98,41 @@
   }
 
   .productMain {
+    position: relative;
     width: 720px;
     height: 900px;
+    text-align: center;
     background-image: url("https://image.converse.co.kr/cmsstatic/structured-content/18184/01_Home_01_Template_1440x1800_2.jpg?gallery");
+    &:hover {
+      .desc {
+        opacity: 1;
+      }
+
+      .overLay {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: #000000;
+        opacity: 0.7;
+      }
+    }
+
+    .desc {
+      display: inline-block;
+      position: absolute;
+      top: 830px;
+      left: 0;
+      z-index: 1;
+      width: 100%;
+      font-size: 46px;
+      font-weight: 500;
+      color: #ffffff;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .overLay {
+      transition: opacity 0.6s, background-color 0.6s;
+    }
   }
 }

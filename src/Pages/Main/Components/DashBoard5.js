@@ -1,4 +1,5 @@
 import React from "react";
+import ProductInfo from "./ProductInfo";
 import "./DashBoard5.scss";
 
 class DashBoard5 extends React.Component {
@@ -16,12 +17,37 @@ class DashBoard5 extends React.Component {
         </div>
         <a href="/main" className="productSub">
           <div className="top">
-            <div className="topLeft"></div>
-            <div className="topRight"></div>
+            <div className="topLeft">
+              <ProductInfo
+                newArrival={"NEW ARRIVAL"}
+                name={"컨버스 셰입스 트라이앵글 후디"}
+                price={"85,000 원"}
+              />
+            </div>
+            <div className="topRight">
+              <ProductInfo
+                newArrival={"NEW ARRIVAL"}
+                name={"컨버스 셰입스 버블 크루"}
+                price={"79,000 원"}
+              />
+            </div>
           </div>
           <div className="bottom">
-            <div className="bottomLeft"></div>
-            <div className="bottomRight"></div>
+            <div className="bottomLeft">
+              <ProductInfo
+                newArrival={"NEW ARRIVAL"}
+                name={"컨버스 셰입스 트라이앵글 래글런티"}
+                price={"29,000 원"}
+              />
+            </div>
+            <div className="bottomRight">
+              <ProductInfo
+                bestSeller={"BEST SELLER"}
+                newArrival={"NEW ARRIVAL"}
+                name={"컨버스 셰입스 트라이앵글 프론트 치노 팬츠"}
+                price={"79,000 원"}
+              />
+            </div>
           </div>
         </a>
       </section>
