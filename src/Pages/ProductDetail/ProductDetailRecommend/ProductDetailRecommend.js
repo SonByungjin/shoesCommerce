@@ -32,16 +32,27 @@ class ProductDetailRecommend extends React.Component {
             {recommendProductList.map((product, index) => {
               return (
                 <li key={index}>
-                  <img
-                    className="picBeforeHover"
-                    alt="product before hover"
-                    src={product.picture}
-                  />
-                  <img
-                    className="picAfterHover"
-                    alt="product after hover"
-                    src={product.pictureHover}
-                  />
+                  <div className="picContainer">
+                    <img
+                      className="picBeforeHover"
+                      alt="product before hover"
+                      src={product.picture}
+                    />
+                    <img
+                      className="picAfterHover"
+                      alt="product after hover"
+                      src={product.pictureHover}
+                    />
+                    <span
+                      className={
+                        product.isBestSeller
+                          ? "isBestSeller"
+                          : "isNotBestSeller"
+                      }
+                    >
+                      BEST SELLER
+                    </span>
+                  </div>
                 </li>
               );
             })}

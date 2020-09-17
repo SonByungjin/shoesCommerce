@@ -5,11 +5,25 @@ class ProductRightSize extends React.Component {
   constructor() {
     super();
     this.state = {
-      isLogined: true,
+      isLogined: false,
+      sizes: [],
+      current: 0,
     };
   }
 
+  componentDidMount() {
+    this.setState({
+      sizes: ["240", "250", "260", "270"],
+    });
+  }
+
+  handleClick = (index) => {
+    this.setState({ current: index });
+  };
+
   render() {
+    const { sizes } = this.state;
+
     return (
       <section className="ProductRightSize">
         <div className="first">
@@ -18,13 +32,22 @@ class ProductRightSize extends React.Component {
         </div>
         <div className="second">
           <div className="size">
-            <span>250</span>
-            <span>260</span>
-            <span>270</span>
-            <span>280</span>
+            {sizes.map((size, index) => (
+              <span
+                key={index}
+                className={
+                  this.state.current === index ? "Focused" : "NotFocused"
+                }
+                onClick={() => {
+                  this.handleClick(index);
+                }}
+              >
+                {size}
+              </span>
+            ))}
           </div>
           <div className="quantity">
-            <input className="quantitySelect" value="1"></input>
+            <input className="quantitySelect" defaultValue="0"></input>
             <button className="decrease">-</button>
             <button className="increase">+</button>
           </div>
@@ -38,7 +61,9 @@ class ProductRightSize extends React.Component {
             <div className="isLogin">
               <span className="cart">장바구니</span>
               <span className="buy">바로구매</span>
-              <span className="heart">♥</span>
+              <span className="heart">
+                <p>♥</p>
+              </span>
             </div>
           )}
         </div>

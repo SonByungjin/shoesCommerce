@@ -2,11 +2,46 @@ import React from "react";
 import "./ProductInfo.scss";
 
 class ProductInfo extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      isClicked: true,
+    };
+  }
+
+  handleClick = (e) => {
+    this.setState({
+      isClicked: !this.state.isClicked,
+    });
+  };
+
   render() {
+    const { isClicked } = this.state;
+
     return (
       <section className="ProductInfo">
-        <h1>상품정보</h1>
-        <section className="detailInfo">
+        <div className="ProductInfoTitle">
+          <h1>상품정보</h1>
+          <span className="expandToggle" onClick={this.handleClick}>
+            <img
+              className="minusIcon"
+              alt=""
+              src={
+                isClicked
+                  ? "/images/productDetail/minus_icon.png"
+                  : "/images/productDetail/plus_icon.png"
+              }
+            />
+            {/* <img
+              className="plusIcon"
+              alt=""
+              src="/images/productDetail/plus_icon.png"
+            /> */}
+          </span>
+        </div>
+        <section
+          className={`ProductInfoDetail ${isClicked ? "active" : "deactive"}`}
+        >
           <dl>
             <dt>Model</dt>
             <dd>168635C</dd>

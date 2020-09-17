@@ -45,7 +45,7 @@ class ProductCommunity extends React.Component {
                     <div className="hovered">
                       <div className="hoveredProfile">
                         <div className="hoveredProfileTop">
-                          <img src={product.profilePic} />
+                          <img alt="profileTopImg" src={product.profilePic} />
                           <div className="hoveredProfileRight">
                             <span>{product.profileName}</span>
                             <span>{product.uploadTime}</span>

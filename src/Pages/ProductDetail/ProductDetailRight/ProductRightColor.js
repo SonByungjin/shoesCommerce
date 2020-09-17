@@ -26,8 +26,14 @@ class ProductRightColor extends React.Component {
         <div className="ProductColorPic">
           <ul>
             <li>
-              <img src="https://image.converse.co.kr/cmsstatic/product/168635C_168635C_pdp-option.jpg?browse=" />
-              <img src="https://image.converse.co.kr/cmsstatic/product/168636C_168636C_pdp-option.jpg?browse=" />
+              <img
+                alt="ProductColorPic"
+                src="https://image.converse.co.kr/cmsstatic/product/168635C_168635C_pdp-option.jpg?browse="
+              />
+              <img
+                alt="ProductColorPic"
+                src="https://image.converse.co.kr/cmsstatic/product/168636C_168636C_pdp-option.jpg?browse="
+              />
             </li>
           </ul>
         </div>

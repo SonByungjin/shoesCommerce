@@ -10,7 +10,7 @@
       "id": 2,
       "picture": "https://image.converse.co.kr/cmsstatic/product/M9160_M9160_primary.jpg?browse",
       "pictureHover": "https://image.converse.co.kr/cmsstatic/product/M9160_M9160_hover.jpg?browse",
-      "isBestSeller": true
+      "isBestSeller": false
     },
     {
       "id": 3,
@@ -22,13 +22,13 @@
       "id": 4,
       "picture": "https://image.converse.co.kr/cmsstatic/product/M9160_M9160_primary.jpg?browse",
       "pictureHover": "https://image.converse.co.kr/cmsstatic/product/M9160_M9160_hover.jpg?browse",
-      "isBestSeller": true
+      "isBestSeller": false
     },
     {
       "id": 5,
       "picture": "https://image.converse.co.kr/cmsstatic/product/M9160_M9160_primary.jpg?browse",
       "pictureHover": "https://image.converse.co.kr/cmsstatic/product/M9160_M9160_hover.jpg?browse",
-      "isBestSeller": true
+      "isBestSeller": false
     },
     {
       "id": 6,

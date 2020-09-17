@@ -7,10 +7,16 @@ import ProductInfo from "./ProductInfo";
 import "./ProductDetailFeed.scss";
 
 class ProductDetailFeed extends React.Component {
+  constructor(props) {
+    super();
+  }
+
   render() {
+    const { productInfo } = this.props;
+
     return (
       <div className="ProductDetailFeed">
-        <ProductMainImg />
+        <ProductMainImg productMainImage={productInfo.mainPic} />
         <ProductDetailImg />
         <ProductReview />
         <ProductCommunity />
