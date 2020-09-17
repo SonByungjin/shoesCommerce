@@ -4,77 +4,47 @@
 
 .ProductList {
   .FilterVerticalBar {
-    // border: 1px solid black;
-    width: 276px;
-    margin: 20px;
-  }
-  .hideBar {
-    padding: 20px 0;
-    // border: 1px solid red;
-    margin-top: 20px;
-    border-top: 1px solid var(--FilterColor);
-    font-size: 16px;
-    font-weight: 600;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    img {
-      width: 15px;
-    }
-  }
-  .filterGender {
-    .kindsOfGender {
-      a {
-        display: block;
-        margin-bottom: 5px;
-        color: #757575;
-      }
-    }
-  }
-  .filterType {
-    .kindsOfType {
-      a {
-        display: block;
-        margin-bottom: 5px;
-        color: #757575;
-      }
-    }
-  }
-  .filterColor {
-    .typeOfColor {
-      height: 100%;
+    .hideBar {
+      overflow: hidden;
+      cursor: pointer;
+      padding: 20px 0;
+      margin-top: 20px;
+      border-top: 1px solid var(--FilterColor);
+      font-size: 16px;
+      font-weight: 600;
       display: flex;
-      flex-wrap: wrap;
-      .colorCircle {
-        // border: 1px solid black;
-        width: 18px;
-        height: 18px;
-        border-radius: 50%;
-        margin: 10px;
+      justify-content: space-between;
+      align-items: center;
+      .filterImage {
+        position: relative;
+        display: flex;
+        align-items: center;
+        .minusImage {
+          width: 15px;
+          position: absolute;
+          right: 0;
+        }
+        .plusImage {
+          visibility: hidden;
+          width: 15px;
+          position: absolute;
+          right: 0;
+        }
       }
-    }
-  }
-  .filterSize {
-    .typeOfSize {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      .sizeSquare {
-        border: 1px solid var(--FilterColor);
-        text-align: center;
-
-        padding-top: 10px;
-        // width: 45px;
-        height: 45px;
-      }
-    }
-  }
-  .filterSilluet {
-    .typeOfSilluet {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      .silluetSquare {
-        text-align: center;
-        border: 1px solid var(--FilterColor);
+      .hideFilterImage {
+        position: relative;
+        display: flex;
+        align-items: center;
+        .minusImage {
+          width: 15px;
+          position: absolute;
+          right: 0;
+        }
+        .plusImage {
+          width: 15px;
+          position: absolute;
+          right: 0;
+        }
       }
     }
   }

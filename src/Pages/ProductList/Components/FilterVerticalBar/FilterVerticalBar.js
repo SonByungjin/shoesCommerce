@@ -1,130 +1,83 @@
 import React, { Component } from "react";
+import { productColor, productSize, productSilluet } from "./filterContents";
+import FilterGender from "./FilterComponents/FilterGender/FilterGender";
+import FilterType from "./FilterComponents/FilterType/FilterType";
 import "./FilterVerticalBar.scss";
-// import Img from "./img";
+import FilterColor from "./FilterComponents/FilterColor/FilterColor";
+import FilterSize from "./FilterComponents/FilterSize/FilterSize";
+import FilterSilluet from "./FilterComponents/FilterSilluet/FilterSilluet";
 
 export class FilterVerticalBar extends Component {
   constructor() {
     super();
     this.state = {
-      productColor: [
-        "black",
-        "blue",
-        "green",
-        "navy",
-        "purple",
-        "brown",
-        "gray",
-        "gold",
-        "beige",
-        "red",
-        "orange",
-        "pink",
-        "yellow",
+      productColor: [],
+      productSize: [],
+      productSilluet: [],
+      filterImage: [
+        "data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg'  viewBox='0 0 40 5'%3E%3Cpath fill='%23000' d='M0 0h40v4.5H0z' /%3E%3C/svg%3E",
+        "data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg'  viewBox='0 0 40 40'%3E%3Cpath fill='%23000' d='M40 17.857H22.143V0h-4.286v17.857H0v4.286h17.857V40h4.286V22.143H40z' /%3E%3C/svg%3E",
       ],
-      productSize: [
-        "220",
-        "225",
-        "230",
-        "235",
-        "240",
-        "245",
-        "250",
-        "255",
-        "260",
-        "265",
-        "270",
-        "275",
-        "280",
-        "285",
-        "290",
-        "295",
-        "300",
-      ],
-      productSilluet: [
-        {
-          img: "",
-          name: "하이",
-        },
-        {
-          img: "",
-          name: "로우",
-        },
-        {
-          img: "",
-          name: "미드",
-        },
-        {
-          img: "",
-          name: "플랫폼",
-        },
-        {
-          img: "",
-          name: "슬립",
-        },
-      ],
+      hideFilterImage: [false, false, false, false, false],
     };
   }
 
+  componentDidMount() {
+    this.setState({
+      productColor: productColor,
+      productSize: productSize,
+      productSilluet: productSilluet,
+    });
+  }
+
+  hideFilter = (e) => {
+    this.setState({
+      hideFilterImage: [
+        ...this.state.hideFilterImage.slice(0, e),
+        !this.state.hideFilterImage[e],
+        ...this.state.hideFilterImage.slice(e + 1),
+      ],
+    });
+  };
+
   render() {
+    const {
+      productColor,
+      productSize,
+      productSilluet,
+      filterImage,
+      hideFilterImage,
+    } = this.state;
     return (
       <div className="FilterVerticalBar">
-        <div className="filterGender">
-          <div className="hideBar">
-            <span>구분</span>
-            <img src="data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg'  viewBox='0 0 40 5'%3E%3Cpath fill='%23000' d='M0 0h40v4.5H0z' /%3E%3C/svg%3E" />
-          </div>
-          <div className="kindsOfGender">
-            <a>남성</a>
-            <a>여성</a>
-          </div>
-        </div>
-        <div className="filterType">
-          <div className="hideBar">
-            <span>제품 타입</span>
-            <img src="data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg'  viewBox='0 0 40 5'%3E%3Cpath fill='%23000' d='M0 0h40v4.5H0z' /%3E%3C/svg%3E" />
-          </div>
-          <div className="kindsOfType">
-            <a>뮬</a>
-            <a>샌들&뮬</a>
-            <a>스니커즈</a>
-          </div>
-        </div>
-        <div className="filterColor">
-          <div className="hideBar">
-            <span>색상</span>
-            <img src="data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg'  viewBox='0 0 40 5'%3E%3Cpath fill='%23000' d='M0 0h40v4.5H0z' /%3E%3C/svg%3E" />
-          </div>
-          <div className="typeOfColor">
-            {this.state.productColor.map((el) => (
-              <div
-                style={{ backgroundColor: el }}
-                className="colorCircle"
-              ></div>
-            ))}
-          </div>
-        </div>
-        <div className="filterSize">
-          <div className="hideBar">
-            <span>사이즈</span>
-            <img src="data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg'  viewBox='0 0 40 5'%3E%3Cpath fill='%23000' d='M0 0h40v4.5H0z' /%3E%3C/svg%3E" />
-          </div>
-          <div className="typeOfSize">
-            {this.state.productSize.map((el) => (
-              <div className="sizeSquare">{el}</div>
-            ))}
-          </div>
-        </div>
-        <div className="filterSilluet">
-          <div className="hideBar">
-            <span>실루엣</span>
-            <img src="data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg'  viewBox='0 0 40 5'%3E%3Cpath fill='%23000' d='M0 0h40v4.5H0z' /%3E%3C/svg%3E" />
-          </div>
-          <div className="typeOfSilluet">
-            {this.state.productSilluet.map((el) => (
-              <div className="silluetSquare">{el.name}</div>
-            ))}
-          </div>
-        </div>
+        <FilterGender
+          hideFilter={this.hideFilter}
+          hideFilterImage={hideFilterImage}
+          filterImage={filterImage}
+        />
+        <FilterType
+          hideFilter={this.hideFilter}
+          hideFilterImage={hideFilterImage}
+          filterImage={filterImage}
+        />
+        <FilterColor
+          hideFilter={this.hideFilter}
+          hideFilterImage={hideFilterImage}
+          filterImage={filterImage}
+          productColor={productColor}
+        />
+        <FilterSize
+          hideFilter={this.hideFilter}
+          hideFilterImage={hideFilterImage}
+          filterImage={filterImage}
+          productSize={productSize}
+        />
+        <FilterSilluet
+          hideFilter={this.hideFilter}
+          hideFilterImage={hideFilterImage}
+          filterImage={filterImage}
+          productSilluet={productSilluet}
+        />
       </div>
     );
   }

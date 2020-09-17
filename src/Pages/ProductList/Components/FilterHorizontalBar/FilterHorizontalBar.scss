@@ -8,47 +8,84 @@
     height: 60px;
     border-top: 1px solid var(--FilterColor);
     border-bottom: 1px solid var(--FilterColor);
+
     .filterContainer {
       max-width: 1400px;
       width: 100%;
       display: flex;
       justify-content: space-between;
       align-items: center;
+
       .hideFilter {
-        // max-width: 338px;
-        padding-right: 50px;
-        // width: 100%;
+        position: relative;
+        cursor: pointer;
+        padding-right: 20px;
         width: 350px;
         height: 100%;
         color: #757575;
         display: flex;
-        justify-content: space-between;
         align-items: center;
+        transition: width 0.5s ease-out;
+        span {
+          position: absolute;
+          min-width: 100px;
+          opacity: 1;
+          transition: opacity 0.2s ease-out;
+        }
         img {
+          position: absolute;
+          right: 15%;
           width: 15px;
         }
       }
+
+      .hideFilterVaild {
+        position: relative;
+        cursor: pointer;
+        width: 30px;
+        height: 100%;
+        color: #757575;
+        display: flex;
+        align-items: center;
+        transition: width 0.5s ease-out;
+        span {
+          position: absolute;
+          min-width: 100px;
+          opacity: 0;
+          transition: opacity 0.2s ease-out;
+        }
+        img {
+          position: absolute;
+          right: 15%;
+          width: 15px;
+        }
+      }
+
       .numberingProduct {
-        // max-width: 700px;
-        // width: 100%;
-        width: 50%;
+        width: 60%;
         height: 100%;
         border-left: 1px solid var(--FilterColor);
         padding: 15px;
         font-weight: 600;
       }
+
       .arrayProduct {
-        // max-width: 300px;
-        // width: 100%;
-        width: 300px;
-        height: 100%;
-        padding-left: 15px;
         border-left: 1px solid var(--FilterColor);
         display: flex;
         justify-content: space-between;
         align-items: center;
-        img {
-          width: 15px;
+        select {
+          width: 300px;
+          height: 60px;
+          padding-left: 15px;
+          border: 0;
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          appearance: none;
+          background-color: rgba(255, 255, 255, 0);
+          background: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 46.7 36'%3E%3Cpath fill='%23000' d='M23.5 33.333L47 0H0z'/%3E%3C/svg%3E")
+            no-repeat 95%;
+          background-size: 5%;
         }
       }
     }

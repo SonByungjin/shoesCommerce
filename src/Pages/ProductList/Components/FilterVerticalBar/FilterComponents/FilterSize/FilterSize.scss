@@ -1,0 +1,34 @@
+.FilterSize {
+  width: 276px;
+  overflow: hidden;
+  .typeOfSize {
+    opacity: 1;
+    height: 180px;
+    transition: opacity 0.2s ease-out;
+    transition: height 0.2s ease-out;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+
+    .sizeSquare {
+      border: 1px solid var(--FilterColor);
+      text-align: center;
+      padding-top: 10px;
+      height: 45px;
+    }
+  }
+  .hideTypeOfSize {
+    opacity: 0;
+    height: 0px;
+    transition: opacity 0.2s ease-out;
+    transition: height 0.2s ease-out;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+
+    .sizeSquare {
+      border: 1px solid var(--FilterColor);
+      text-align: center;
+      padding-top: 10px;
+      height: 45px;
+    }
+  }
+}
