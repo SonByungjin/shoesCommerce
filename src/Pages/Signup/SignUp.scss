@@ -1,0 +1,130 @@
+.registerMain {
+    .signUpContainer {
+        .signUpHeader {
+            width: 1777px;
+            height: 260px;
+            background-repeat:no-repeat;
+            background-position: 50% 50%;
+            background-size: cover;
+            background-image: url(https://image.converse.co.kr/cmsstatic/bg-register-top-pc.jpg);
+            .headerInner {
+                display:flex;
+                margin: 0 atuo;
+                max-width: 1440px;
+                height: 100%;
+                margin-left: 168.5px;
+                .headerDisplay {
+                    display: flex;
+                    margin-left:607px;
+                    height: 260px;
+                    width: 833px;
+                    align-items: center;
+                    justify-content: center;
+                    flex-direction: column;
+                    h1 {
+                        font-size:40px;
+                        font-weight: 600;
+                        line-height: 1; 
+                        color: white;
+                    }
+                    p {
+                        margin: 20px 0px 0px;
+                        color: white;
+                        text-align: center;
+                    }
+                }
+            }
+        }
+    
+        .signUpBody {
+            border: 1px solid red;
+            .signUpForm{
+                display:flex;
+                justify-content: center; 
+                border: 1px solid green;
+                .entryField {
+                    width: 683.63px;
+                    height: 839.98px;
+                    border: 1px solid blue;
+                    padding: 0px 30px 30px;
+                    display:flex;
+                    justify-content: center;
+                    .signUpInfo {
+                        border: 1px solid purple;
+                        .socialSignUp {
+                            // height: 89.625px;
+                            // width: 384px;
+                            display: flex;
+                            flex-direction: column;
+                           
+                            button{
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                width: 384px;
+                                height: 50.63px;
+                                padding: 16px;
+                                text-decoration: none;
+                                background-color: #f5ca0f;
+                                font-size: 14px;
+                                font-weight: 600;
+                                text-align: center;
+                                #icon-kakao {
+                                    height: 20px;
+                                    width: 21.82px;
+                                    margin-right: 10px;
+
+                                }
+                            }
+                            div {
+                                background-color: rgba(var(--b38,219,219,219),1);
+                                width: 176.59px;
+                                height: 1px;
+                                position: relative;
+                                top: .45em;
+                            }
+                            span{
+                                color: rgba(var(--f52,142,142,142),1);
+                                flex-grow: 0;
+                                flex-shrink: 0;
+                                font-size: 13px;
+                                font-weight: 600;
+                                line-height: 15px;
+                                margin: 0 18px;
+                                text-transform: uppercase;
+                            }
+                        }
+                        .normalSignUp {
+                                    display:flex;
+                                    flex-direction: column;
+                                    justify-content: space-evenly;
+                                    .infoTitle {
+                                        font-size: 16px;
+                                    }
+                                    input {
+                                        width: 384px;
+                                        height: 50px;
+                                    }
+                                    .female {
+                                        width: 100%;
+                                        line-height: 1;
+                                        color: #9b9b9b;
+                                        background-color: #f4f4f4;
+                                        border: 1px solid #e5e5e5;
+                                    }
+                            }
+                        }
+                    
+                }
+                .agreeField {
+                    width: 600px;
+                    height: 683.63px;
+                    padding: 0px 30px;
+                    display: flex;
+                    flex-direction: column;
+                    align-content: center;
+                }
+            }
+        }
+    }
+}
