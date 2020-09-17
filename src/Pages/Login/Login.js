@@ -12,13 +12,38 @@ class Login extends React.Component {
       passwordError: "",
     };
   }
-  handleClick = () => {
+
+  handleClick = (e) => {
     const { idValue, passwordValue } = this.state;
     if (idValue.length < 1 && passwordValue.length < 1) {
       this.setState({
         idError: "필수 입력 항목입니다",
         passwordError: "필수 입력 항목입니다",
       });
+    }
+  };
+  //   fetch("http://3.34.133.239:8000/account/signin", {
+  //     method: "POST",
+  //     body: JSON.stringify({
+  //       email: idValue,
+  //       password: passValue,
+  //     }),
+  //   })
+  //     .then((response) => response.json())
+  //     .then((result) => {
+  //       if (result.Authorization) {
+  //         localStorage.setItem("token", result.Authorization);
+  //         alert("로그인 성공");
+  //         this.props.history.push("/main");
+  //       } else if (result.message === "UNAUTHORIZED") {
+  //         this.setState({ idError: "아이디와 비밀번호를 확인해주세요." });
+  //       }
+  //     });
+  // };
+
+  handleEnterValue = (e) => {
+    if (e.key === "Enter") {
+      this.handleClick();
     }
   };
 
@@ -71,7 +96,7 @@ class Login extends React.Component {
           <div className="loginBody">
             <div className="loginHeader">로그인</div>
             <div className="loginContent">
-              <div className="loginForm">
+              <div className="loginForm" onKeyPress={this.handleEnterValue}>
                 <input
                   className="inputLoginId"
                   value={idValue}
