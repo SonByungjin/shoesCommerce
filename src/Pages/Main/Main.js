@@ -15,7 +15,7 @@ class Main extends React.Component {
   render() {
     return (
       <>
-        <article className="container">
+        <article className="main">
           <MediaTile1 />
           <ShoesIconList />
           <MediaTile2 />
