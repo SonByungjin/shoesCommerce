@@ -2,6 +2,11 @@ import React from "react";
 import "./SignUp.scss";
 
 class SignUp extends React.Component {
+  // const onChangeTerm = (e) => {
+  //   //체크박스 초기화
+  //   setTermError(false);
+  //   setTerm(e.target.checked);
+  // }
   render() {
     return (
       <section className="registerMain">
@@ -70,27 +75,13 @@ class SignUp extends React.Component {
                         type="text"
                         placeholder="생년월일을 입력해 주세요. (19990101)"
                       ></input>
-                      <div
-                        className="btn-group btn-group-toggle"
-                        data-toggle="buttons"
-                      >
-                        <label class="btn btn-secondary">
-                          <input
-                            className="femaleBtn"
-                            type="radio"
-                            name="options"
-                            id="option1"
-                            autocomplete="off"
-                          ></input>
+                      <div className="gender">
+                        <label class="female">
+                          <input type="checkbox"></input>
                           여성
                         </label>
-                        <label class="btn btn-secondary">
-                          <input
-                            type="radio"
-                            name="options"
-                            id="option2"
-                            autocomplete="off"
-                          ></input>
+                        <label class="male">
+                          <input type="checkbox"></input>
                           남성
                         </label>
                       </div>
@@ -101,8 +92,14 @@ class SignUp extends React.Component {
               <div className="agreeField">
                 <div className="totalAgree">
                   <div className="allCheck">
-                    <input type="checkbox"></input>
-                    <span className="allAgree">모든 약관 동의</span>
+                    <input
+                      type="checkbox"
+                      id="check_all"
+                      // onChange={onChangeTerm}
+                    ></input>
+                    <label for="check all" className="allAgree">
+                      모든 약관 동의
+                    </label>
                   </div>
                   <p className="allAgreeText">
                     아래 모든 약관(필수),개인정보 수집 및 이용에 대한 동의(필수)
@@ -128,24 +125,26 @@ class SignUp extends React.Component {
                     대한 동의
                   </h1>
                   <div className="needCheck">
-                    <input type="checkbox"></input>
-                    <span>(필수)이용 약관에 대한 동의</span>
+                    <input type="checkbox" id="checkOne"></input>
+                    <label for="checkOne">(필수)이용 약관에 대한 동의</label>
                   </div>
                   <div className="needCheckTwo">
-                    <input type="checkbox"></input>
-                    <span>(필수)개인정보 수집 및 이용에 대한 동의</span>
+                    <input type="checkbox" id="checkTwo"></input>
+                    <label for="checkTwo">
+                      (필수)개인정보 수집 및 이용에 대한 동의
+                    </label>
                   </div>
                 </div>
                 <div className="selectAgree">
                   <h2>광고성 정보 수신 동의</h2>
                   <p>(회원 전용 다양한 이벤트 소식을 받아보세요)</p>
                   <div className="selectCheck">
-                    <input type="checkbox"></input>
-                    <span>(선택)이메일 수신 동의</span>
+                    <input type="checkbox" id="checkThree"></input>
+                    <label for="checkThree">(선택)이메일 수신 동의</label>
                   </div>
                   <div className="selectCheckTwo">
-                    <input type="checkbox"></input>
-                    <span>(선택)문자 수신동의</span>
+                    <input type="checkbox" id="checkFour"></input>
+                    <label for="checkFour">(선택)문자 수신동의</label>
                   </div>
                 </div>
                 <div className="finalSignUp">
