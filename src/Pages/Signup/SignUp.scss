@@ -1,6 +1,8 @@
 .registerMain {
     font-family: "proxima nova", "proxima-nova", "Nanum Gothic", Helvetica, Arial, sans-serif;
+    
     .signUpContainer {
+        
         .signUpHeader {
             width: 100%;
             height: 260px;
@@ -8,12 +10,14 @@
             background-position: 50% 50%;
             background-size: cover;
             background-image: url(https://image.converse.co.kr/cmsstatic/bg-register-top-pc.jpg);
+            
             .headerInner {
                 display:flex;
                 margin: 0 atuo;
                 max-width: 1440px;
                 height: 100%;
                 margin-left: 168.5px;
+                
                 .headerDisplay {
                     display: flex;
                     margin-left:607px;
@@ -38,11 +42,13 @@
         }
         
         .signUpBody {
+            
             .signUpForm{
                 margin-top: 50px;
                 margin-bottom: 100px;
                 display:flex;
                 justify-content: center; 
+                
                 .entryField {
                     border-right: 1px solid #e5e5e5;
                     height: 624px;
@@ -50,10 +56,12 @@
                     padding: 0px 30px 30px;
                     display:flex;
                     justify-content: center;
+                    
                     .signUpInfo {
                         max-width: 384px;
                         width: 100%;
                         margin: 0 auto;
+                        
                         .socialSignUp {
                             // height: 89.625px;
                             // width: 384px;
@@ -108,6 +116,7 @@
                                 }
                             }
                         }
+                        
                         .normalSignUp {
                             margin-top: 40px;
                             display:flex;
@@ -117,6 +126,7 @@
                                             font-size: 16px;
                                         }
                                     }
+                                    
                                     .allInput {
                                         display: flex;
                                         flex-direction: column;
@@ -132,6 +142,7 @@
                                             border: 1px solid #e5e5e5;
                                             padding-left: 20px;
                                         }
+                                        
                                         .gender {
                                             display: flex;
                                             justify-content: space-evenly;
@@ -146,6 +157,7 @@
                         }
                     
                 }
+                
                 .agreeField {
                     max-width: 600px;
                     width: 600px;
@@ -154,9 +166,11 @@
                     display: flex;
                     flex-direction: column;
                     align-items: center;
+                    
                     .totalAgree {
                         max-width: 384px;
                         width: 100%;
+                        
                         .allCheck {
                             height: 23px;
                             margin-bottom: 14px;
@@ -164,21 +178,25 @@
                                 width: 14px;
                                 height: 14px;
                             }
+                            
                             .allAgree {
                                 font-size: 16px;
                                 font-weight: 600;
                                 padding: 4px;
                             }
                         }
+                        
                         .allAgreeText {
                             height: 72px;
                             margin-bottom: 16px;
                         }
+                        
                         .allAgreeLi {
                             font-size: 14px;
                             color: #757575;
                         }
                     }
+                    
                     .needAgree {
                         max-width: 384px;
                         h1 {
@@ -186,6 +204,7 @@
                             color: #444444;
                             font-weight: 600;
                         }
+                        
                         .needCheck {
                             input {
                                 height: 14px;
@@ -197,6 +216,7 @@
                                 color: #757575;
                             }
                         }
+                        
                         .needCheckTwo {
                             input {
                                 height: 14px;
@@ -222,6 +242,7 @@
                             color: #00c3d7;
                             
                         }
+                        
                         .selectCheck {
                             input {
                                 height: 14px;
@@ -233,6 +254,7 @@
                                 padding: 4px;
                             }
                         }
+                        
                         .selectCheckTwo {
                             input {
                                 height: 14px;
@@ -244,7 +266,8 @@
                                 padding: 4px;
                             }
                         }
-                    }.finalSignUp {
+                    }
+                    .finalSignUp {
                         width: 384px;
                         button{
                             width: 100%;
