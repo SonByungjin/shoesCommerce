@@ -1,4 +1,5 @@
 import React from "react";
+import SizeGuide from "../../../Components/SizeGuideModal/SizeGuide";
 import "./ProductRightSize.scss";
 
 class ProductRightSize extends React.Component {
@@ -7,7 +8,8 @@ class ProductRightSize extends React.Component {
     this.state = {
       isLogined: false,
       sizes: [],
-      current: 0,
+      current: "",
+      isModalOpen: false,
     };
   }
 
@@ -21,14 +23,23 @@ class ProductRightSize extends React.Component {
     this.setState({ current: index });
   };
 
+  toggleModal = () => {
+    this.setState({ isModalOpen: !this.state.isModalOpen });
+  };
+
   render() {
     const { sizes } = this.state;
 
     return (
       <section className="ProductRightSize">
         <div className="first">
-          <div>사이즈가 고민되면 클릭하세요!</div>
-          <span>사이즈 가이드</span>
+          <div className="sizeClick">사이즈가 고민되면 클릭하세요!</div>
+          <span className="sizeGuideBtn" onClick={this.toggleModal}>
+            사이즈 가이드
+          </span>
+          {this.state.isModalOpen && (
+            <SizeGuide toggleModal={this.toggleModal} />
+          )}
         </div>
         <div className="second">
           <div className="size">

@@ -26,6 +26,16 @@
   }
 
   .ProductInfoDetail {
+    .active {
+      height: 350px;
+      overflow: hidden;
+      transition: height 0.25s ease-out;
+    }
+    .deactive {
+      height: 0px;
+      overflow: hidden;
+      transition: height 0.25s ease-out;
+    }
     .productInfoTable {
       dt {
         float: left;
@@ -37,18 +47,6 @@
         margin: 0 0 0 80px;
         padding: 0 0 0.8em 0;
       }
-    }
-    .active {
-      margin: 0;
-      height: 350px;
-      overflow: hidden;
-      transition: height 0.25s ease-out;
-    }
-    .deactive {
-      margin: 0;
-      height: 0px;
-      overflow: hidden;
-      transition: height 0.25s ease-out;
     }
   }
 }
