@@ -12,7 +12,7 @@
       display: flex;
       justify-content: center;
       li {
-        .container {
+        .imgContainer {
           height: 100%;
           position: relative;
           .profileMainPic {
@@ -64,10 +64,10 @@
             }
           }
         }
-        .container:hover .profileMainPic {
+        .imgContainer:hover .profileMainPic {
           opacity: 1;
         }
-        .container:hover .hovered {
+        .imgContainer:hover .hovered {
           opacity: 0.7;
         }
       }

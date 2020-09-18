@@ -4,6 +4,7 @@ import "./ProductInfo.scss";
 class ProductInfo extends React.Component {
   constructor() {
     super();
+
     this.state = {
       isClicked: true,
     };
@@ -32,17 +33,34 @@ class ProductInfo extends React.Component {
                   : "/images/productDetail/plus_icon.png"
               }
             />
-            {/* <img
-              className="plusIcon"
-              alt=""
-              src="/images/productDetail/plus_icon.png"
-            /> */}
           </span>
         </div>
-        <section
-          className={`ProductInfoDetail ${isClicked ? "active" : "deactive"}`}
-        >
-          <dl>
+        <section className="ProductInfoDetail">
+          <div className={isClicked ? "active" : "deactive"}>
+            <dl className="productInfoTable">
+              <dt>Model</dt>
+              <dd>168635C</dd>
+              <dt>제품소개</dt>
+              <dd>168635C</dd>
+              <dt>색상</dt>
+              <dd>168635C</dd>
+              <dt>치수</dt>
+              <dd>168635C</dd>
+              <dt>제조자</dt>
+              <dd>168635C</dd>
+              <dt>제조국</dt>
+              <dd>168635C</dd>
+              <dt>취급시 주의사항</dt>
+              <dd>168635C</dd>
+              <dt>퓸질보증기준</dt>
+              <dd>168635C</dd>
+              <dt>A/S 책임자와 전화번호</dt>
+              <dd>168635C</dd>
+              <dt>제조연월</dt>
+              <dd>168635C</dd>
+            </dl>
+          </div>
+          {/* <dl className="productInfoTable">
             <dt>Model</dt>
             <dd>168635C</dd>
             <dt>제품소개</dt>
@@ -63,7 +81,7 @@ class ProductInfo extends React.Component {
             <dd>168635C</dd>
             <dt>제조연월</dt>
             <dd>168635C</dd>
-          </dl>
+          </dl> */}
         </section>
       </section>
     );

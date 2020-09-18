@@ -36,7 +36,7 @@ class ProductCommunity extends React.Component {
             {communityProductList.map((product, index) => {
               return (
                 <li key={index}>
-                  <div className="container">
+                  <div className="imgContainer">
                     <img
                       className="profileMainPic"
                       alt="product before hover"
