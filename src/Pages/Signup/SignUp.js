@@ -2,12 +2,102 @@ import React from "react";
 import "./SignUp.scss";
 
 class SignUp extends React.Component {
-  // const onChangeTerm = (e) => {
-  //   //체크박스 초기화
-  //   setTermError(false);
-  //   setTerm(e.target.checked);
-  // }
+  constructor() {
+    super();
+
+    this.state = {
+      emailValue: "",
+      emailError: "",
+      passwordValue: "",
+      passwordError: "",
+      rePasswordValue: "",
+      rePasswordError: "",
+      nameValue: "",
+      nameError: "",
+      phoneValue: "",
+      phoneError: "",
+      birthValue: "",
+      birthError: "",
+      isFemale: "",
+      isMale: "", // isMale 만 true false 값으로
+    };
+  }
+
+  handleEmailValue = (e) => {
+    const { value } = e.target;
+    this.setState({ emailValue: value });
+  };
+
+  handlePasswordValue = (e) => {
+    const { value } = e.target;
+    this.setState({ passwordValue: value });
+  };
+
+  handlerePasswordValue = (e) => {
+    const { value } = e.target;
+    this.setState({ rePasswordValue: value });
+  };
+
+  handleNameValue = (e) => {
+    const { value } = e.target;
+    this.setState({ nameValue: value });
+  };
+
+  handlePhoneValue = (e) => {
+    const { value } = e.target;
+    this.setState({ phoneValue: value });
+  };
+
+  handleBirthValue = (e) => {
+    const { value } = e.target;
+    this.setState({ birthValue: value });
+  };
+
+  handleClick = () => {
+    const {
+      emailValue,
+      passwordValue,
+      rePasswordValue,
+      phoneValue,
+      birthValue,
+      nameValue,
+    } = this.state;
+
+    fetch("http://10.58.5.117:8000/account/signup", {
+      method: "POST",
+      body: JSON.stringify({
+        email: emailValue,
+        password: passwordValue,
+        re_password: rePasswordValue,
+        phone_number: phoneValue,
+        date_of_birth: birthValue,
+        name: nameValue,
+        is_male: true,
+      }),
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        if (result.Authorization) {
+          localStorage.setItem("token", result.Authorization);
+          alert("로그인성공");
+        } else if (result.message === "UNAUTHORIZED") {
+          alert("비밀번호 확인해주세요");
+        }
+      });
+  };
+
   render() {
+    const {
+      emailValue,
+      passwordValue,
+      rePasswordValue,
+      nameValue,
+      birthValue,
+      phoneValue,
+      isFemale,
+      isMale,
+    } = this.state;
+
     return (
       <section className="registerMain">
         <div className="signUpContainer">
@@ -47,43 +137,63 @@ class SignUp extends React.Component {
                       <input
                         className="email"
                         type="email"
+                        onChange={this.handleEmailValue}
+                        value={emailValue}
                         placeholder="이메일 형태로 입력해주세요.(필수)"
                       ></input>
+                      <span>{this.state.emailError}</span>
                       <input
                         className="password"
                         type="password"
+                        onChange={this.handlePasswordValue}
+                        value={passwordValue}
                         placeholder="비밀번호 (영문/숫자/특수문자 조합 8자 이상)"
                       ></input>
                       <input
                         className="rePassword"
                         type="password"
+                        onChange={this.handlerePasswordValue}
+                        value={rePasswordValue}
                         placeholder="비밀번호 입력 확인"
                       ></input>
                       <input
                         className="name"
                         type="text"
+                        onChange={this.handleNameValue}
+                        value={nameValue}
                         placeholder="이름을 입력해주세요.(필수)"
                       ></input>
                       <input
                         className="phoneNum"
                         type="text"
+                        onChange={this.handlePhoneValue}
+                        value={phoneValue}
                         placeholder="휴대폰 번호 '-'표 없이 입력해주세요.(필수)"
                       ></input>
                       <span>*생일/성별은 가입 후 수정이 불가합니다.</span>
                       <input
                         className="birth"
                         type="text"
+                        onChange={this.handleBirthValue}
+                        value={birthValue}
                         placeholder="생년월일을 입력해 주세요. (19990101)"
                       ></input>
                       <div className="gender">
-                        <label class="female">
-                          <input type="checkbox"></input>
-                          여성
-                        </label>
-                        <label class="male">
-                          <input type="checkbox"></input>
-                          남성
-                        </label>
+                        <input
+                          type="radio"
+                          id="genderType0"
+                          name="genderType"
+                          value={isFemale}
+                        ></input>
+                        <label htmlFor="genderType0">여성</label>
+
+                        <input
+                          type="radio"
+                          id="genderType1"
+                          name="genderType"
+                          value={isMale}
+                        ></input>
+                        <label htmlFor="genderType1">남성</label>
                       </div>
                     </div>
                   </div>
@@ -148,7 +258,9 @@ class SignUp extends React.Component {
                   </div>
                 </div>
                 <div className="finalSignUp">
-                  <button type="submit">회원가입하기(만 14세 이상)</button>
+                  <button type="submit" onClick={this.handleClick}>
+                    회원가입하기(만 14세 이상)
+                  </button>
                 </div>
               </div>
             </div>
