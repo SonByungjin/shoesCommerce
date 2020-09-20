@@ -1,4 +1,5 @@
 import React from "react";
+import PromoBanner from "../../Components/PromoBanner/PromoBanner";
 import MediaTile1 from "./Components/MediaTile1";
 import MediaTile2 from "./Components/MediaTile2";
 import MediaTile3 from "./Components/MediaTile3";
@@ -16,6 +17,7 @@ class Main extends React.Component {
   render() {
     return (
       <>
+        <PromoBanner />
         <article className="main">
           <MediaTile1 />
           <ShoesIconList />
