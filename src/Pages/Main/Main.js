@@ -9,6 +9,7 @@ import DashBoard4 from "./Components/DashBoard4";
 import DashBoard5 from "./Components/DashBoard5";
 import ShoesIconList from "./Components/ShoesIconList";
 import MarketingTile from "./Components/MarketingTile";
+import Footer from "../../Components/Footer/Footer";
 import "./Main.scss";
 
 class Main extends React.Component {
@@ -27,6 +28,7 @@ class Main extends React.Component {
           <MediaTile3 />
         </article>
         <MarketingTile />
+        <Footer />
       </>
     );
   }
