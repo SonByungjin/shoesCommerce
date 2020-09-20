@@ -2,6 +2,45 @@ import React, { Component } from "react";
 import "./FilterSize.scss";
 
 class FilterSize extends Component {
+  constructor() {
+    super();
+    this.state = {
+      selectSize: [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+      ],
+    };
+  }
+  handleSize = (idx) => {
+    this.setState(
+      {
+        selectSize: [
+          ...this.state.selectSize.slice(0, idx),
+          !this.state.selectSize[idx],
+          ...this.state.selectSize.slice(idx + 1),
+        ],
+      },
+      () => {
+        console.log(this.state.selectSize);
+      }
+    );
+  };
+
   render() {
     const {
       hideFilter,
@@ -9,6 +48,7 @@ class FilterSize extends Component {
       filterImage,
       productSize,
     } = this.props;
+    const { selectSize } = this.state;
 
     return (
       <div className="FilterSize">
@@ -22,8 +62,13 @@ class FilterSize extends Component {
           </div>
         </div>
         <div className={hideFilterImage[3] ? "hideTypeOfSize" : "typeOfSize"}>
-          {productSize.map((el) => (
-            <div className="sizeSquare">{el}</div>
+          {productSize.map((el, idx) => (
+            <div
+              className={selectSize[idx] ? "selectSizeSquare" : "sizeSquare"}
+              onClick={() => this.handleSize(idx)}
+            >
+              {el}
+            </div>
           ))}
         </div>
       </div>

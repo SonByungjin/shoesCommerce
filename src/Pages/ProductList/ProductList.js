@@ -1,8 +1,9 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
 import FilterVerticalBar from "./Components/FilterVerticalBar/FilterVerticalBar";
 import ProductContainer from "./Components/ProductContainer/ProductContainer";
-import "./ProductList.scss";
 import FilterHorizontalBar from "./Components/FilterHorizontalBar/FilterHorizontalBar";
+import "./ProductList.scss";
 
 export class ProductList extends React.Component {
   constructor() {
@@ -13,6 +14,7 @@ export class ProductList extends React.Component {
       preItems: 0,
       items: 14,
       loadingStatus: false,
+      ProductMainImage: { MainImg: [] },
     };
   }
 
@@ -33,62 +35,84 @@ export class ProductList extends React.Component {
     );
     let clientHeight = document.documentElement.clientHeight;
 
-    if (scrollTop + clientHeight === scrollHeight) {
+    if (scrollTop + clientHeight >= scrollHeight) {
       this.setState({
         preItems: this.state.items,
         items: this.state.items + 14,
       });
-      this.componentDidMount();
+      this.handleItemCount();
     }
   };
 
+  handleItemCount = () => {
+    if (this.state.preItems === this.state.products.length) {
+      this.setState(
+        {
+          loadingStatus: !this.state.loadingStatus,
+        },
+        () => {
+          fetch("/data/ProductList/Products.json")
+            // fetch("http://10.58.3.39:8000/product/shose")
+            .then((res) => res.json())
+            .then((res) => {
+              // 무한스크롤 기능 확인을 위한 임의 함수
+              // let result = res.products.slice(
+              //   this.state.preItems,
+              //   this.state.items
+              // );
+
+              let result = res.products;
+              setTimeout(
+                () =>
+                  this.setState(
+                    {
+                      loadingStatus: !this.state.loadingStatus,
+                    },
+                    () => {
+                      this.setState({
+                        products: [...this.state.products, ...result],
+                      });
+                    }
+                  ),
+                1000
+              );
+              window.addEventListener("scroll", this.infiniteScroll);
+            });
+        }
+      );
+    }
+  };
+
+  fixedImage = (colorEl, pdIdx) => {
+    let updateProductMainImage = this.state.ProductMainImage;
+    updateProductMainImage.MainImg[pdIdx].id = colorEl.id;
+    updateProductMainImage.MainImg[pdIdx].ImgUrl = colorEl.image_url;
+    this.setState({
+      ProductMainImage: updateProductMainImage,
+    });
+  };
+
+  DynamicRouting = () => {
+    console.log(this.props.history);
+    console.log(this.props.location);
+    console.log(this.props.match);
+  };
+
   componentDidMount() {
-    this.setState(
-      {
-        loadingStatus: !this.state.loadingStatus,
-      },
-      () => {
-        fetch("/data/ProductList/Products.json")
-          .then((res) => res.json())
-          .then((res) => {
-            // 무한스크롤 기능 확인을 위한 임의 함수
-            let result = res.products.slice(
-              this.state.preItems,
-              this.state.items
-            );
-
-            setTimeout(
-              () =>
-                this.setState(
-                  {
-                    loadingStatus: !this.state.loadingStatus,
-                  },
-                  () => {
-                    this.setState({
-                      products: this.state.products.concat(result),
-                    });
-                  }
-                ),
-              1000
-            );
-
-            // 실제 데이터 받아오는 함수
-            // this.setState({
-            //   products: this.state.products.concat(res.products)
-            // })
-
-            window.addEventListener("scroll", this.infiniteScroll);
-          });
-      }
-    );
+    this.handleItemCount();
   }
 
   render() {
-    const { products, hideFilterVaild, loadingStatus } = this.state;
+    const {
+      products,
+      hideFilterVaild,
+      loadingStatus,
+      ProductMainImage,
+    } = this.state;
+    console.log(ProductMainImage);
     return (
       <div className="ProductList">
         <div
-          // className="loadingImage"
           className={
             loadingStatus ? "loadingImageValid" : "loadingImageUnvalid"
           }
@@ -112,7 +136,6 @@ export class ProductList extends React.Component {
         />
         <div className="bottomOfPage">
           <div
-            // className="hideVerticalFilterUnvalid"
             className={
               hideFilterVaild
                 ? "hideVerticalFilterValild"
@@ -122,23 +145,38 @@ export class ProductList extends React.Component {
             <FilterVerticalBar />
           </div>
           <main
-            className="ProductListMain"
             className={
               hideFilterVaild ? "HideProductListMain" : "ProductListMain"
             }
           >
-            {products.map((product) => {
-              const { id, src, name, price } = product;
-              return (
-                <ProductContainer
-                  hideFilterValid={hideFilterVaild}
-                  id={id}
-                  src={src}
-                  name={name}
-                  price={price}
-                />
-              );
-            })}
+            {products.length > 0 &&
+              products.map((product, pdIdx) => {
+                const {
+                  id,
+                  image_url,
+                  series_name,
+                  price,
+                } = product.main_image;
+                const { color_image } = product;
+                ProductMainImage.MainImg.push({
+                  idx: pdIdx,
+                  id: id,
+                  ImgUrl: image_url,
+                });
+                console.log(ProductMainImage);
+                return (
+                  <ProductContainer
+                    hideFilterValid={hideFilterVaild}
+                    id={id}
+                    imgUrl={ProductMainImage.MainImg[pdIdx].ImgUrl}
+                    name={series_name}
+                    price={price}
+                    colorList={color_image}
+                    fixedImage={(colorEl) => this.fixedImage(colorEl, pdIdx)}
+                    DynamicRouting={this.DynamicRouting}
+                  />
+                );
+              })}
           </main>
         </div>
         <footer>footer 컴포넌트 예정</footer>
@@ -147,4 +185,4 @@ export class ProductList extends React.Component {
   }
 }
 
-export default ProductList;
+export default withRouter(ProductList);

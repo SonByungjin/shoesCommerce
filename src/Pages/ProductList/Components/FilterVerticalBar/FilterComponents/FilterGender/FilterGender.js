@@ -17,7 +17,6 @@ class FilterGender extends Component {
           </div>
         </div>
         <div
-          // className="kindsOfGender"
           className={hideFilterImage[0] ? "hideKindsOfGender" : "kindsOfGender"}
         >
           <a>남성</a>
