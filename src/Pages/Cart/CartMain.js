@@ -1,5 +1,6 @@
 import React from "react";
 import "./CartMain.scss";
+import ProductDetailRecommend from "../ProductDetail/ProductDetailRecommend/ProductDetailRecommend";
 
 class CartMain extends React.Component {
   constructor() {
@@ -21,6 +22,8 @@ class CartMain extends React.Component {
             (*5만원 이상 결제 시)
           </span>
         </div>
+        <section className="CartMainItems"></section>
+        <ProductDetailRecommend />
       </section>
     );
   }

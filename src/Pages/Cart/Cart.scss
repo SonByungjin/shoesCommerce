@@ -1,4 +1,12 @@
 .Cart {
   display: flex;
-  padding: 60px 160px;
+  justify-content: center;
+  .CartContainer {
+    display: flex;
+    padding-top: 50px;
+    padding-left: 20px;
+    padding-right: 20px;
+    min-width: 900px;
+    max-width: 1154px;
+  }
 }

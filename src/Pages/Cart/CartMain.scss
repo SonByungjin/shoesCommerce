@@ -1,0 +1,24 @@
+.CartMain {
+  display: flex;
+  flex-direction: column;
+  max-width: 72%;
+  padding-right: 30px;
+  .CartMainTitle {
+    width: 100%;
+    h1 {
+      color: #757575;
+      font-size: 18px;
+      line-height: 1;
+    }
+  }
+  .CartMainMessage {
+    margin: 10px 0;
+    padding: 20px 0;
+    text-align: center;
+    background: #f4f4f4;
+    span {
+      font-size: 14px;
+      font-weight: 300;
+    }
+  }
+}
