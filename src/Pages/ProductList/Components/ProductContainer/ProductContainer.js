@@ -3,8 +3,8 @@ import ProductColors from "./ProductColors/ProductColors";
 import "./ProductContainer.scss";
 
 class ProductContainer extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       heartImg: [
         "https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/heart.png",
@@ -13,7 +13,7 @@ class ProductContainer extends Component {
       heartBoolean: false,
       showColorShoesImage: null,
       colorListValid: false,
-      selectColorValid: null,
+      selectColorValid: props.mainId,
     };
   }
 
@@ -35,10 +35,10 @@ class ProductContainer extends Component {
     });
   };
 
-  fixedImageAndSelectColor = (colorEl, idx) => {
+  fixedImageAndSelectColor = (colorEl, id) => {
     this.props.fixedImage(colorEl);
     this.setState({
-      selectColorValid: idx,
+      selectColorValid: id,
     });
   };
 
@@ -49,7 +49,7 @@ class ProductContainer extends Component {
       colorListValid,
       selectColorValid,
     } = this.state;
-    const { id, imgUrl, name, price, colorList, DynamicRouting } = this.props;
+    const { imgUrl, name, price, colorList, DynamicRouting } = this.props;
     const [frontImg, backImg] = imgUrl;
 
     return (
@@ -84,7 +84,7 @@ class ProductContainer extends Component {
               const { id, image_url } = colorEl;
               return (
                 <div
-                  key={id}
+                  pdSerialNumber={id}
                   className={
                     this.state.showColorShoesImage === idx
                       ? "showColorShoesImage"
@@ -102,10 +102,9 @@ class ProductContainer extends Component {
         <p className="productPrice">{Number(price).toLocaleString("en")}원</p>
         <ProductColors
           colorList={colorList}
-          id={id}
           changeImage={this.changeImage}
-          fixedImageAndSelectColor={(colorEl, idx) =>
-            this.fixedImageAndSelectColor(colorEl, idx)
+          fixedImageAndSelectColor={(colorEl, id) =>
+            this.fixedImageAndSelectColor(colorEl, id)
           }
           colorListValid={colorListValid}
           selectColorValid={selectColorValid}

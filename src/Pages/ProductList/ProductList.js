@@ -85,7 +85,7 @@ export class ProductList extends React.Component {
 
   fixedImage = (colorEl, pdIdx) => {
     let updateProductMainImage = this.state.ProductMainImage;
-    updateProductMainImage.MainImg[pdIdx].id = colorEl.id;
+    updateProductMainImage.MainImg[pdIdx].mainId = colorEl.id;
     updateProductMainImage.MainImg[pdIdx].ImgUrl = colorEl.image_url;
     this.setState({
       ProductMainImage: updateProductMainImage,
@@ -160,14 +160,14 @@ export class ProductList extends React.Component {
                 const { color_image } = product;
                 ProductMainImage.MainImg.push({
                   idx: pdIdx,
-                  id: id,
+                  mainId: id,
                   ImgUrl: image_url,
                 });
                 console.log(ProductMainImage);
                 return (
                   <ProductContainer
                     hideFilterValid={hideFilterVaild}
-                    id={id}
+                    mainId={id}
                     imgUrl={ProductMainImage.MainImg[pdIdx].ImgUrl}
                     name={series_name}
                     price={price}

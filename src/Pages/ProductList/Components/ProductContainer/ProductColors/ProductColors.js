@@ -4,7 +4,6 @@ import "./ProductColors.scss";
 class ProductColors extends Component {
   render() {
     const {
-      id,
       colorList,
       changeImage,
       fixedImageAndSelectColor,
@@ -18,19 +17,19 @@ class ProductColors extends Component {
         </div>
         <div className={colorListValid ? "colorListValid" : "colorListUnvalid"}>
           {colorList.map((colorEl, idx) => {
-            const { color } = colorEl;
+            const { color, id } = colorEl;
             return (
               <div
-                key={id}
+                pdSerialNumber={id}
                 style={{ backgroundColor: color }}
                 className="colorCircle"
-                onClick={() => fixedImageAndSelectColor(colorEl, idx)}
+                onClick={() => fixedImageAndSelectColor(colorEl, id)}
                 onMouseOver={() => changeImage(idx)}
                 onMouseOut={() => changeImage(null)}
               >
                 <div
                   className={
-                    selectColorValid === idx
+                    selectColorValid === id
                       ? "selectColorValid"
                       : "selectColorUnvalid"
                   }
