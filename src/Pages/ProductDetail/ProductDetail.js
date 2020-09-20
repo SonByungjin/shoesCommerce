@@ -12,7 +12,6 @@ class ProductDetail extends React.Component {
   }
 
   componentDidMount() {
-    console.log("asdf");
     //추후 백엔드 데이터에 맞게 수정 (json 파일 뒤에 /productID 형식으로 받아올 예정)
     fetch(`http://localhost:3000/data/ProductDetail/ProductDetailMOCK.json`)
       .then((res) => res.json())
