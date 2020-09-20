@@ -27,11 +27,12 @@
   fill: #ffffff;
 }
 
-.container {
+.main {
   font-family: "proxima nova", "proxima-nova", "Nanum Gothic", Helvetica, Arial,
     sans-serif;
   font: normal 14px / 20px "Helvetica Neue", Helvetica, Arial, sans-serif;
-  width: 1440px;
+  max-width: 1440px;
+  overflow: hidden;
   height: auto;
   margin: 0 auto;
 }

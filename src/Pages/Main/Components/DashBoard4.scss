@@ -31,7 +31,7 @@
   @include flex-center;
 
   .productSub {
-    width: 720px;
+    width: 50%;
     height: 900px;
 
     .top {
@@ -99,7 +99,7 @@
 
   .productMain {
     position: relative;
-    width: 720px;
+    width: 50%;
     height: 900px;
     text-align: center;
     background-image: url("https://image.converse.co.kr/cmsstatic/structured-content/18184/01_Home_01_Template_1440x1800_2.jpg?gallery");
