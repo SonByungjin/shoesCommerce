@@ -4,18 +4,11 @@ import CartMainItem from "./CartMainItem";
 import ProductDetailRecommend from "../ProductDetail/ProductDetailRecommend/ProductDetailRecommend";
 
 class CartMain extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      itemCount: 3,
-    };
-  }
-
   render() {
     return (
       <section className="CartMain">
         <div className="CartMainTitle">
-          <h1>{`장바구니 (${this.state.itemCount})`}</h1>
+          <h1>{`장바구니 (${this.props.itemCount})`}</h1>
         </div>
         <div className="CartMainMessage">
           <span>
@@ -25,7 +18,13 @@ class CartMain extends React.Component {
         </div>
         <section className="CartMainItems">
           <div className="CartMainItemsContainer">
-            <CartMainItem />
+            {/* {cartItems.map((item) => {
+              return <CartMainItem cartItems={this.props.cartItems}/>;
+            })} */}
+            <CartMainItem
+              cartItems={this.props.cartItems}
+              originalPrice={this.props.originalPrice}
+            />
           </div>
           <div className="CartMainItemsDeleteContainer">
             <button className="CartMainItemsDeleteBtn">장바구니 비우기</button>

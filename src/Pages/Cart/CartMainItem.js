@@ -3,6 +3,7 @@ import "./CartMainItem.scss";
 
 class CartMainItem extends React.Component {
   render() {
+    console.log(this.props.cartItems);
     return (
       <section className="CartMainItem">
         <div className="CartMainItemPic">
@@ -25,7 +26,9 @@ class CartMainItem extends React.Component {
           </div>
           <div className="CartMainItemPrice">
             <div className="CartMainItemPriceContainerOne">
-              <span className="OriginalPrice">85,000 원</span>
+              <span className="OriginalPrice">
+                {this.props.originalPrice} 원
+              </span>
               <span className="DiscountPrice">59,500 원</span>
               <span className="DiscountRatio">30%</span>
             </div>

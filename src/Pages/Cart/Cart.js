@@ -7,6 +7,21 @@ import Nav from "../../Components/Nav/Nav";
 import Footer from "../../Components/Footer/Footer";
 
 class Cart extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      itemCount: 1,
+      cartItems: [],
+      originalPrice: "80,000",
+    };
+  }
+
+  componentDidMount() {
+    this.setState({
+      cartItems: [],
+    });
+  }
+
   render() {
     return (
       <>
@@ -14,8 +29,12 @@ class Cart extends React.Component {
         <Nav />
         <section className="Cart">
           <section className="CartContainer">
-            <CartMain />
-            <CartRight />
+            <CartMain
+              itemCount={this.state.itemCount}
+              cartItems={this.state.cartItems}
+              originalPrice={this.state.originalPrice}
+            />
+            <CartRight cartItems={this.state.cartItems} />
           </section>
         </section>
         <Footer />
