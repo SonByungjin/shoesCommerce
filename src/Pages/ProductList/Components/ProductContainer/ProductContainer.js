@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import ProductColors from "./ProductColors/ProductColors";
 import "./ProductContainer.scss";
 
@@ -23,10 +24,21 @@ class ProductContainer extends Component {
     });
   };
 
-  handleHeart = (e) => {
+  handleHeart = (mainId) => {
     this.setState({
       heartBoolean: !this.state.heartBoolean,
     });
+    fetch("http://10.58.5.117:8000/false_account/wishlist", {
+      method: "POST",
+      body: JSON.stringify({
+        serial_number: mainId,
+      }),
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        // console.log(result);
+      });
+    // console.log(mainId);
   };
 
   changeImage = (idx) => {
@@ -49,7 +61,14 @@ class ProductContainer extends Component {
       colorListValid,
       selectColorValid,
     } = this.state;
-    const { imgUrl, name, price, colorList, DynamicRouting } = this.props;
+    const {
+      mainId,
+      imgUrl,
+      name,
+      price,
+      colorList,
+      DynamicRouting,
+    } = this.props;
     const [frontImg, backImg] = imgUrl;
 
     return (
@@ -62,7 +81,7 @@ class ProductContainer extends Component {
           <div className="heartImgContainer">
             <img
               alt="heartImg"
-              onClick={this.handleHeart}
+              onClick={() => this.handleHeart(mainId)}
               className="heartImgEmpty"
               src={heartImg[0]}
             />
@@ -75,10 +94,16 @@ class ProductContainer extends Component {
               src={heartImg[1]}
             />
           </div>
-          <div className="mainShoesImage" onClick={DynamicRouting}>
-            <img alt="frontShoesImg" className="frontShoesImg" src={frontImg} />
-            <img alt="backShoesImg" className="backShoesImg" src={backImg} />
-          </div>
+          <Link to="/productDetail/1">
+            <div className="mainShoesImage" onClick={DynamicRouting}>
+              <img
+                alt="frontShoesImg"
+                className="frontShoesImg"
+                src={frontImg}
+              />
+              <img alt="backShoesImg" className="backShoesImg" src={backImg} />
+            </div>
+          </Link>
           <div className="shoesImageByColor">
             {colorList.map((colorEl, idx) => {
               const { id, image_url } = colorEl;
