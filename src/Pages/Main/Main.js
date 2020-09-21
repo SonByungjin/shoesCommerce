@@ -1,5 +1,6 @@
 import React from "react";
 import PromoBanner from "../../Components/PromoBanner/PromoBanner";
+import Nav from "../../Components/Nav/Nav";
 import MediaTile1 from "./Components/MediaTile1";
 import MediaTile2 from "./Components/MediaTile2";
 import MediaTile3 from "./Components/MediaTile3";
@@ -18,6 +19,7 @@ class Main extends React.Component {
     return (
       <>
         <PromoBanner />
+        <Nav />
         <article className="main">
           <MediaTile1 />
           <ShoesIconList />
