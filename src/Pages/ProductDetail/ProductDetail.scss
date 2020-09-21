@@ -1,0 +1,10 @@
+.ProductDetail {
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  .ProductMain {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
