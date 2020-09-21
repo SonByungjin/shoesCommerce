@@ -113,6 +113,7 @@
                 .infoTitle {
                   h1 {
                     font-size: 16px;
+                    margin-bottom: 15px;
                   }
                 }
                 .allInput {
@@ -133,6 +134,11 @@
                     margin-bottom: 10px;
                     border: 1px solid #e5e5e5;
                     padding-left: 20px;
+                  }
+                  label {
+                      color: gray;
+                      font-size: 12px;
+                      margin-bottom: 10px;
                   }
                   .gender {
                     display: flex;
@@ -172,12 +178,15 @@
                 }
               }
               .allAgreeText {
-                height: 72px;
-                margin-bottom: 16px;
+                  line-height: 1.5;
+                  height: 72px;
+                  margin-bottom: 16px;
               }
               .allAgreeLi {
+                  line-height: 2.0;
                 font-size: 14px;
                 color: #757575;
+                padding-bottom: 30px;
               }
             }
             .needAgree {
@@ -186,8 +195,12 @@
                 font-size: 16px;
                 color: #444444;
                 font-weight: 600;
+                padding-bottom: 20px;
               }
               .needCheck {
+                font-size: 14px;
+                color: #757575;
+                  padding-bottom: 8px;
                 input {
                   height: 14px;
                   width: 14px;
@@ -199,6 +212,8 @@
                 }
               }
               .needCheckTwo {
+                font-size: 14px;
+                color: #757575;
                 input {
                   height: 14px;
                   width: 14px;
@@ -221,8 +236,12 @@
               p {
                 font-size: 14px;
                 color: #00c3d7;
+                padding-bottom: 20px;
               }
               .selectCheck {
+                font-size: 14px;
+                color: #757575;
+                  padding-bottom: 8px;
                 input {
                   height: 14px;
                   width: 14px;
@@ -234,6 +253,8 @@
                 }
               }
               .selectCheckTwo {
+                font-size: 14px;
+                color: #757575;
                 input {
                   height: 14px;
                   width: 14px;
