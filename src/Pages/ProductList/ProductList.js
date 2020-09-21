@@ -3,6 +3,9 @@ import { withRouter } from "react-router-dom";
 import FilterVerticalBar from "./Components/FilterVerticalBar/FilterVerticalBar";
 import ProductContainer from "./Components/ProductContainer/ProductContainer";
 import FilterHorizontalBar from "./Components/FilterHorizontalBar/FilterHorizontalBar";
+import Footer from "../../Components/Footer/Footer";
+import PromoBanner from "../../Components/PromoBanner/PromoBanner";
+import Nav from "../../Components/Nav/Nav";
 import "./ProductList.scss";
 
 export class ProductList extends React.Component {
@@ -51,8 +54,8 @@ export class ProductList extends React.Component {
           loadingStatus: !this.state.loadingStatus,
         },
         () => {
-          fetch("/data/ProductList/Products.json")
-            // fetch("http://10.58.5.68:8000/product/chuck70")
+          // fetch("/data/ProductList/Products.json")
+          fetch("http://10.58.5.68:8000/product/chuck70")
             .then((res) => res.json())
             .then((res) => {
               // 무한스크롤 기능 확인을 위한 임의 함수
@@ -120,8 +123,10 @@ export class ProductList extends React.Component {
           <img src="/images/productList/preloader.gif" />
         </div>
 
-        <div className="PromoBanner">banner 컴포넌트 예정</div>
-        <nav className="Nav">nav 컴포넌트 예정</nav>
+        {/* <div className="PromoBanner">banner 컴포넌트 예정</div> */}
+        <PromoBanner />
+        {/* <nav className="Nav">nav 컴포넌트 예정</nav> */}
+        <Nav />
         <header>
           <span className="shoesTitle">SHOES</span>
           <img
@@ -179,7 +184,8 @@ export class ProductList extends React.Component {
               })}
           </main>
         </div>
-        <footer>footer 컴포넌트 예정</footer>
+        {/* <footer>footer 컴포넌트 예정</footer> */}
+        <Footer />
       </div>
     );
   }
