@@ -2,6 +2,7 @@
   border-top: 1px solid black;
   margin-top: 40px;
   padding: 75px 0;
+  min-width: 980px;
 
   h1 {
     font-size: 30px;
@@ -10,7 +11,7 @@
   }
 
   .ProductRecommend {
-    padding: 0 50px 60px 50px;
+    margin: 0 50px;
     display: flex;
     justify-content: center;
     ul {

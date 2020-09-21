@@ -2,6 +2,7 @@ import React from "react";
 import ProductDetailFeed from "./ProductDetailFeed/ProductDetailFeed";
 import ProductDetailRight from "./ProductDetailRight/ProductDetailRight";
 import ProductDetailRecommend from "./ProductDetailRecommend/ProductDetailRecommend";
+import Footer from "../../Components/Footer/Footer";
 import "./ProductDetail.scss";
 
 class ProductDetail extends React.Component {
@@ -37,6 +38,7 @@ class ProductDetail extends React.Component {
           <ProductDetailRight productInfo={productInfo} />
         </section>
         <ProductDetailRecommend productInfo={productInfo} />
+        <Footer />
       </div>
     );
   }
