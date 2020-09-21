@@ -1,0 +1,94 @@
+{
+  "products": [
+    {
+      "main_image": {
+        "id": "pd_1",
+        "image_url": [
+          "https://image.converse.co.kr/cmsstatic/product/168635C_168635C_primary.jpg?browse",
+          "https://image.converse.co.kr/cmsstatic/product/168635C_168635C_hover.jpg?browse"
+        ],
+        "series_name": "신발이름_1",
+        "price": "85000"
+      },
+
+      "color_image": [
+        {
+          "id": "pd_1",
+          "image_url": [
+            "https://image.converse.co.kr/cmsstatic/product/168635C_168635C_primary.jpg?browse",
+            "https://image.converse.co.kr/cmsstatic/product/168635C_168635C_hover.jpg?browse"
+          ],
+          "color": "black"
+        },
+        {
+          "id": "pd_2",
+          "image_url": [
+            "https://image.converse.co.kr/cmsstatic/product/168636C_168636C_primary.jpg?browse",
+            "https://image.converse.co.kr/cmsstatic/product/168636C_168636C_hover.jpg?browse"
+          ],
+          "color": "red"
+        }
+      ]
+    },
+    {
+      "main_image": {
+        "id": "pd_2",
+        "image_url": [
+          "https://image.converse.co.kr/cmsstatic/product/168636C_168636C_primary.jpg?browse",
+          "https://image.converse.co.kr/cmsstatic/product/168636C_168636C_hover.jpg?browse"
+        ],
+        "series_name": "신발이름_1",
+        "price": "85000"
+      },
+
+      "color_image": [
+        {
+          "id": "pd_1",
+          "image_url": [
+            "https://image.converse.co.kr/cmsstatic/product/168635C_168635C_primary.jpg?browse",
+            "https://image.converse.co.kr/cmsstatic/product/168635C_168635C_hover.jpg?browse"
+          ],
+          "color": "black"
+        },
+        {
+          "id": "pd_2",
+          "image_url": [
+            "https://image.converse.co.kr/cmsstatic/product/168636C_168636C_primary.jpg?browse",
+            "https://image.converse.co.kr/cmsstatic/product/168636C_168636C_hover.jpg?browse"
+          ],
+          "color": "red"
+        }
+      ]
+    },
+    {
+      "main_image": {
+        "id": "pd_3",
+        "image_url": [
+          "https://image.converse.co.kr/cmsstatic/product/168677C_168677C_primary.jpg?browse",
+          "https://image.converse.co.kr/cmsstatic/product/168677C_168677C_hover.jpg?browse"
+        ],
+        "series_name": "신발이름_1",
+        "price": "85000"
+      },
+
+      "color_image": [
+        {
+          "id": "pd_3",
+          "image_url": [
+            "https://image.converse.co.kr/cmsstatic/product/168677C_168677C_primary.jpg?browse",
+            "https://image.converse.co.kr/cmsstatic/product/168677C_168677C_hover.jpg?browse"
+          ],
+          "color": "black"
+        },
+        {
+          "id": "pd_4",
+          "image_url": [
+            "https://image.converse.co.kr/cmsstatic/product/168859C_168859C_primary.jpg?browse",
+            "https://image.converse.co.kr/cmsstatic/product/168859C_168859C_hover.jpg?browse"
+          ],
+          "color": "red"
+        }
+      ]
+    }
+  ]
+}
