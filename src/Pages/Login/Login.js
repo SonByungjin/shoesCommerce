@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import PromoBanner from "../../Components/PromoBanner/PromoBanner";
 import Nav from "../../Components/Nav/Nav";
 import Footer from "../../Components/Footer/Footer";
@@ -18,31 +19,31 @@ class Login extends React.Component {
 
   handleClick = (e) => {
     const { idValue, passwordValue } = this.state;
-    if (idValue.length < 1 && passwordValue.length < 1) {
-      this.setState({
-        idError: "필수 입력 항목입니다",
-        passwordError: "필수 입력 항목입니다",
+    //   if (idValue.length < 1 && passwordValue.length < 1) {
+    //     this.setState({
+    //       idError: "필수 입력 항목입니다",
+    //       passwordError: "필수 입력 항목입니다",
+    //     });
+    //   }
+    // };
+    fetch("http://10.58.5.117:8000/false_account/signin", {
+      method: "POST",
+      body: JSON.stringify({
+        email: idValue,
+        password: passwordValue,
+      }),
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        if (result.Authorization) {
+          localStorage.setItem("token", result.Authorization);
+          alert("로그인 성공");
+          this.props.history.push("/main");
+        } else if (result.message === "UNAUTHORIZED") {
+          this.setState({ idError: "아이디와 비밀번호를 확인해주세요." });
+        }
       });
-    }
   };
-  //   fetch("http://3.34.133.239:8000/account/signin", {
-  //     method: "POST",
-  //     body: JSON.stringify({
-  //       email: idValue,
-  //       password: passValue,
-  //     }),
-  //   })
-  //     .then((response) => response.json())
-  //     .then((result) => {
-  //       if (result.Authorization) {
-  //         localStorage.setItem("token", result.Authorization);
-  //         alert("로그인 성공");
-  //         this.props.history.push("/main");
-  //       } else if (result.message === "UNAUTHORIZED") {
-  //         this.setState({ idError: "아이디와 비밀번호를 확인해주세요." });
-  //       }
-  //     });
-  // };
 
   handleEnterValue = (e) => {
     if (e.key === "Enter") {
@@ -168,9 +169,7 @@ class Login extends React.Component {
                   </button>
                 </div>
                 <div className="register">
-                  <a href="ddd" className="linkToRegister">
-                    회원가입
-                  </a>
+                  <Link to="/signup">회원가입</Link>
                   <a href="ddd" className="unRegistered">
                     비회원 주문조회
                   </a>
