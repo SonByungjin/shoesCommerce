@@ -137,7 +137,7 @@ class SignUp extends React.Component {
       nameValue,
     } = this.state;
 
-    fetch("http://10.58.5.117:8000/account/signup", {
+    fetch("http://10.58.5.117:8000/false_account/signup", {
       method: "POST",
       body: JSON.stringify({
         email: emailValue,
