@@ -4,7 +4,7 @@
   max-width: 28%;
   background-color: #f4f4f4;
   text-align: center;
-  height: 573px;
+  height: fit-content;
   padding: 20px;
   .Order {
     span {
@@ -12,6 +12,17 @@
         margin-bottom: 20px;
         font-size: 18px;
         text-align: center;
+      }
+    }
+    .OrderPrice {
+      background-color: white;
+      border: 1px solid #e5e5e5;
+      padding: 20px;
+      font-size: 14px;
+      div {
+        display: flex;
+        justify-content: space-between;
+        margin: 10px 0;
       }
     }
     .OrderBtnContainer {

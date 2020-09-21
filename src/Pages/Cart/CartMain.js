@@ -1,5 +1,6 @@
 import React from "react";
 import "./CartMain.scss";
+import CartMainItem from "./CartMainItem";
 import ProductDetailRecommend from "../ProductDetail/ProductDetailRecommend/ProductDetailRecommend";
 
 class CartMain extends React.Component {
@@ -22,8 +23,17 @@ class CartMain extends React.Component {
             (*5만원 이상 결제 시)
           </span>
         </div>
-        <section className="CartMainItems"></section>
-        <ProductDetailRecommend />
+        <section className="CartMainItems">
+          <div className="CartMainItemsContainer">
+            <CartMainItem />
+          </div>
+          <div className="CartMainItemsDeleteContainer">
+            <button className="CartMainItemsDeleteBtn">장바구니 비우기</button>
+          </div>
+        </section>
+        <section className="CartProductRecommend">
+          <ProductDetailRecommend />
+        </section>
       </section>
     );
   }

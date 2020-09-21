@@ -21,4 +21,28 @@
       font-weight: 300;
     }
   }
+  .CartMainItems {
+    .CartMainItemsDeleteContainer {
+      display: flex;
+      justify-content: flex-end;
+      .CartMainItemsDeleteBtn {
+        width: 120px;
+        font-size: 12px;
+        padding: 10px 15px;
+        background-color: white;
+        border: 1px solid #e5e5e5;
+      }
+    }
+  }
+  .CartProductRecommend {
+    .ProductDetailRecommend {
+      min-width: 100%;
+      .ProductRecommend {
+        margin: 0;
+        ul {
+          column-gap: 30px;
+        }
+      }
+    }
+  }
 }

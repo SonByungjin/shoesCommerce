@@ -9,10 +9,29 @@ class CartRight extends React.Component {
           <span>
             <h1>주문금액</h1>
           </span>
-          <div className="OrderPrice"></div>
-          <div className="OrderBtnContainer">
-            <div className="OrderBtn">주문하기</div>
-          </div>
+          <section className="OrderContainer">
+            <div className="OrderPrice">
+              <div className="OrderPriceItem">
+                <span>상품금액</span>
+                <span>원</span>
+              </div>
+              <div className="OrderPriceShip">
+                <span>배송비</span>
+                <span>원</span>
+              </div>
+              <div className="OrderPriceDiscount">
+                <span>총 할인 금액</span>
+                <span>원</span>
+              </div>
+              <div className="OrderPriceTotal">
+                <span>총 결제 금액</span>
+                <span>원</span>
+              </div>
+            </div>
+            <div className="OrderBtnContainer">
+              <div className="OrderBtn">주문하기</div>
+            </div>
+          </section>
         </section>
         <section className="PromoCodeContainer">
           <div className="PromoCodeMessage">
