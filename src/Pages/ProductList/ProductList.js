@@ -54,8 +54,8 @@ export class ProductList extends React.Component {
           loadingStatus: !this.state.loadingStatus,
         },
         () => {
-          // fetch("/data/ProductList/Products.json")
-          fetch("http://10.58.5.68:8000/product/chuck70")
+          fetch("/data/ProductList/Products.json")
+            // fetch("http://10.58.5.68:8000/product/shose")
             .then((res) => res.json())
             .then((res) => {
               // 무한스크롤 기능 확인을 위한 임의 함수
