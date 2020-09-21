@@ -1,5 +1,5 @@
 import React from "react";
-import "./SignUp.scss";
+import "./SignUpPage.scss";
 
 class SignUp extends React.Component {
   // const onChangeTerm = (e) => {

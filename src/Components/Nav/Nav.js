@@ -53,7 +53,7 @@ class Nav extends React.Component {
               {rightMenuIcons.map((icon, index) => {
                 return (
                   <li key={index}>
-                    <a href="/main">{icon.imgSrc}</a>
+                    <Link to="/signup">{icon.imgSrc}</Link>
                   </li>
                 );
               })}
