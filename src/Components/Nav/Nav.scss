@@ -1,11 +1,10 @@
 .navWrap {
-  position: fixed;
+  position: relative;
   left: 0;
   right: 0;
   height: 60px;
   z-index: 10;
-
-  .nav {
+  nav {
     display: flex;
     justify-content: center;
     max-width: 1440px;
@@ -19,21 +18,38 @@
       width: 845px;
       height: 60px;
       padding-left: 20px;
+      &:hover {
+        li {
+          color: gray;
+        }
+      }
 
       li {
+        line-height: 60px;
         font-size: 15px;
         font-weight: 500;
         padding: 0 11px;
+        &:hover {
+          a {
+            color: #000000;
+          }
+        }
 
         a {
+          display: block;
+          transition: color 0.2s ease-in-out;
           img {
-            padding-top: 4px;
+            padding-top: 22px;
           }
         }
       }
 
       li:nth-child(1) {
         padding-left: 0;
+
+        a {
+          display: inline;
+        }
       }
     }
 
@@ -43,12 +59,25 @@
       align-items: center;
       width: 595px;
       height: 60px;
+      &:hover {
+        li {
+          a {
+            svg {
+              fill: gray;
+            }
+          }
+        }
+      }
 
       li {
         padding: 0 10px;
         a {
           svg {
+            transition: fill 0.2s ease-in-out;
             width: 20px;
+            &:hover {
+              fill: #000000;
+            }
           }
         }
       }
@@ -79,6 +108,7 @@
         .text,
         .icon {
           padding: 0 20px;
+          border-bottom: #000000;
           transition: 0.2s;
         }
 
@@ -119,5 +149,53 @@
 }
 
 .navWrapScrolled {
+  position: fixed;
+  left: 0;
+  top: 0;
   border-bottom: 1px solid #e5e5e5;
+}
+
+.shoesMenuContainer {
+  display: none;
+}
+
+.clothesMenuContainer {
+  display: none;
+}
+
+.kidsMenuContainer {
+  display: none;
+}
+
+.navMenuOn {
+  display: none;
+  position: absolute;
+  width: calc(100% - 200px);
+  background-color: rgba(0, 0, 0, 0.7);
+  top: 60px;
+  left: 200px;
+  font-size: 28px;
+  font-weight: 600;
+  z-index: 999;
+
+  ul {
+    width: 700px;
+    height: 100vh;
+    padding: 70px 0 32px 70px;
+    background-color: #ffffff;
+    li {
+      margin-bottom: 15px;
+    }
+  }
+}
+
+.navMenuOn::before {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  left: -200px;
+  top: 0;
+  background-color: #fff;
+  width: 200px;
+  height: 100vw;
 }

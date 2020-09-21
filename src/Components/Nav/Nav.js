@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./Nav.scss";
 
 class Nav extends React.Component {
@@ -11,7 +12,7 @@ class Nav extends React.Component {
 
   componentDidMount() {
     window.addEventListener("scroll", () => {
-      const isScrolled = window.scrollY > 200;
+      const isScrolled = window.scrollY > 68;
       if (!isScrolled) {
         this.setState({
           scrolled: false,
@@ -25,57 +26,95 @@ class Nav extends React.Component {
   }
 
   componentWillUnmount() {
-    window.removeEventListener("scroll");
+    window.removeEventListener("scroll", null);
   }
 
   render() {
     const { scrolled } = this.state;
     return (
-      <div className={scrolled ? "navWrap navWrapScrolled" : "navWrap"}>
-        <div className="nav">
-          <ul className="leftMenu">
-            <li>
-              <a href="/main">
-                <img alt="navLogo" src="images/Nav/navLogo.png" />
-              </a>
-            </li>
-            {leftMenuList.map((menu, index) => {
-              return (
-                <li key={index}>
-                  <a href="/main">{menu}</a>
-                </li>
-              );
-            })}
-          </ul>
-          <ul className="rightMenu">
-            {rightMenuIcons.map((icon, index) => {
-              return (
-                <li key={index}>
-                  <a href="/main">{icon.imgSrc}</a>
-                </li>
-              );
-            })}
-            <li className={scrolled ? "searchBarScrolled" : "searchBar"}>
-              <div className="text">검색</div>
-              <div className="icon">
-                <img
-                  alt="searchIcon"
-                  src="https://www.tenforums.com/geek/gars/images/2/types/thumb_Search_Taskbar.jpg"
-                />
-              </div>
-            </li>
-          </ul>
+      <>
+        <div className={scrolled ? "navWrap navWrapScrolled" : "navWrap"}>
+          <nav>
+            <ul className="leftMenu">
+              <li>
+                <a href="/main">
+                  <img alt="navLogo" src="images/Nav/navLogo.png" />
+                </a>
+              </li>
+              {leftMenuList.map((menu, index) => {
+                return (
+                  <li key={index}>
+                    <Link to="/productList">{menu}</Link>
+                  </li>
+                );
+              })}
+            </ul>
+            <ul className="rightMenu">
+              {rightMenuIcons.map((icon, index) => {
+                return (
+                  <li key={index}>
+                    <a href="/main">{icon.imgSrc}</a>
+                  </li>
+                );
+              })}
+              <li className={scrolled ? "searchBarScrolled" : "searchBar"}>
+                <div className="text">검색</div>
+                <div className="icon">
+                  <img
+                    alt="searchIcon"
+                    src="https://www.tenforums.com/geek/gars/images/2/types/thumb_Search_Taskbar.jpg"
+                  />
+                </div>
+              </li>
+            </ul>
+            <div className="shoesMenuContainer navMenuOn">
+              <ul>
+                {shoesMenuList.map((menu, index) => {
+                  return <li key={index}>{menu}</li>;
+                })}
+              </ul>
+            </div>
+            <div className="clothesMenuContainer">
+              <ul>
+                {clothesMenuList.map((menu, index) => {
+                  return <li key={index}>{menu}</li>;
+                })}
+              </ul>
+            </div>
+            <div className="kidsMenuContainer">
+              <ul>
+                {kidsMenuList.map((menu, index) => {
+                  return <li key={index}>{menu}</li>;
+                })}
+              </ul>
+            </div>
+          </nav>
         </div>
-      </div>
+      </>
     );
   }
 }
 
 export default Nav;
 
-export const leftMenuList = ["신발", "의류", "아동", "런칭캘린더", "회원전용"];
+const leftMenuList = ["신발", "의류", "아동", "런칭캘린더", "회원전용"];
 
-export const rightMenuIcons = [
+const shoesMenuList = [
+  "전체보기",
+  "베스트셀러",
+  "척테일러 올스타",
+  "척 70",
+  "원스타",
+  "잭퍼셀",
+  "프로레더",
+  "회원전용",
+];
+
+const clothesMenuList = ["전체보기", "상의", "하의", "용품"];
+
+const kidsMenuList = ["전체보기", "유아(165mm이하)", "어린이(215mm이하)"];
+
+const rightMenuIcons = [
   {
     imgSrc: (
       <svg id="nav-profile" viewBox="0 0 32 30">

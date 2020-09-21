@@ -18,8 +18,8 @@ class Main extends React.Component {
   render() {
     return (
       <>
-        <Nav />
         <PromoBanner />
+        <Nav />
         <article className="main">
           <MediaTile1 />
           <ShoesIconList />
