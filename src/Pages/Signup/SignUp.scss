@@ -124,14 +124,20 @@
                                     .infoTitle {
                                         h1 {
                                             font-size: 16px;
+                                            margin-bottom: 20px;
                                         }
                                     }
                                     
                                     .allInput {
                                         display: flex;
                                         flex-direction: column;
-                                        span {
+                                        label {
                                             color: #e5e5e5;
+                                            font-size: 12px;
+                                            margin-bottom: 8px;
+                                        }
+                                        span {
+                                            color: red;
                                             font-size: 12px;
                                             margin-bottom: 8px;
                                         }
@@ -174,6 +180,12 @@
                         .allCheck {
                             height: 23px;
                             margin-bottom: 14px;
+                            .toggleOff{
+                                background-color: red;
+                            }
+                            .toggleOn{
+                                background-color: blue;
+                            }
                             input{
                                 width: 14px;
                                 height: 14px;
@@ -220,6 +232,12 @@
                                 font-size: 14px;
                                 padding: 4px;
                                 color: #757575;
+                            }
+                            .toggleOff {
+                                background-color: blue;
+                            }
+                            .toggleOn {
+                                background-color: red;
                             }
                         }
                         

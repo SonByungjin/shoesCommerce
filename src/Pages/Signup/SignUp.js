@@ -1,4 +1,5 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
 import "./SignUp.scss";
 
 class SignUp extends React.Component {
@@ -20,22 +21,76 @@ class SignUp extends React.Component {
       birthError: "",
       isFemale: "",
       isMale: "", // isMale 만 true false 값으로
+      checkAll: false,
+      checkOne: false,
+      checkTwo: false,
+      checkThree: false,
+      checkFour: false,
     };
   }
 
+  handleCheckAll = () => {
+    this.setState({ checkAll: !this.state.checkAll });
+    if (this.state.checkAll === false) {
+      this.setState({
+        checkOne: true,
+        checkTwo: true,
+        checkThree: true,
+        checkFour: true,
+      });
+    } else if (this.state.checkAll === true) {
+      this.setState({
+        checkOne: false,
+        checkTwo: false,
+        checkThree: false,
+        checkFour: false,
+      });
+    }
+  };
+
   handleEmailValue = (e) => {
     const { value } = e.target;
-    this.setState({ emailValue: value });
+    this.setState({ emailValue: value }, () => {
+      if (value.includes("@") && value.includes(".")) {
+        this.setState({ emailError: "" });
+      } else if (this.state.emailValue.length === 0) {
+        this.setState({ emailError: "필수 입력 항목입니다 " });
+      } else {
+        this.setState({ emailError: "이메일 형태로 입력해주세요" });
+      }
+    });
   };
 
   handlePasswordValue = (e) => {
     const { value } = e.target;
-    this.setState({ passwordValue: value });
+    const passwordRegExp = /^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#$%]).{8,16}$/;
+    this.setState({ passwordValue: value }, () => {
+      if (value.match(passwordRegExp)) {
+        this.setState({ passwordError: "" });
+      } else if (this.state.passwordValue.length === 0) {
+        this.setState({ passwordError: "필수 입력 항목입니다" });
+      } else {
+        this.setState({
+          passwordError: "영문/숫자/특수문자 조합 8~16자 조합으로 입력해주세요",
+        });
+      }
+    });
   };
 
   handlerePasswordValue = (e) => {
-    const { value } = e.target;
-    this.setState({ rePasswordValue: value });
+    const { name, value } = e.target;
+    this.setState({ [name]: value }, () => {
+      const { passwordValue, rePasswordValue } = this.state;
+      if (rePasswordValue.length === 0) {
+        this.setState({
+          rePasswordError: "필수 입력 항목입니다.",
+        });
+      } else if (passwordValue === rePasswordValue) {
+        this.setState({ rePasswordError: "" });
+      } else {
+        this.setState({ rePasswordError: " 입력값이 일치하지 않습니다. " });
+      }
+    });
   };
 
   handleNameValue = (e) => {
@@ -45,12 +100,28 @@ class SignUp extends React.Component {
 
   handlePhoneValue = (e) => {
     const { value } = e.target;
-    this.setState({ phoneValue: value });
+    const phoneNum = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/;
+    this.setState({ phoneValue: value }, () => {
+      if (value.match(phoneNum)) {
+        this.setState({ phoneError: "" });
+      } else {
+        this.setState({ phoneError: "올바른 휴대폰 번호를 입력해주세요." });
+      }
+    });
   };
 
   handleBirthValue = (e) => {
+    const onlyNum = /^[0-9]*$/;
     const { value } = e.target;
-    this.setState({ birthValue: value });
+    this.setState({ birthValue: value }, () => {
+      if (value.match(onlyNum)) {
+        this.setState({ birthError: "" });
+      } else {
+        this.setState({
+          birthError: "생년월일(YYYYMMDD)은 숫자로만 입력 가능합니다.",
+        });
+      }
+    });
   };
 
   handleClick = () => {
@@ -77,11 +148,11 @@ class SignUp extends React.Component {
     })
       .then((response) => response.json())
       .then((result) => {
-        if (result.Authorization) {
-          localStorage.setItem("token", result.Authorization);
-          alert("로그인성공");
-        } else if (result.message === "UNAUTHORIZED") {
-          alert("비밀번호 확인해주세요");
+        if (result.message === "SUCCESS") {
+          alert("회원가입을 축하드립니다!");
+          this.props.history.push("/login");
+        } else {
+          alert("입력된 정보를 다시 확인해주세요.");
         }
       });
   };
@@ -136,6 +207,7 @@ class SignUp extends React.Component {
                     <div className="allInput">
                       <input
                         className="email"
+                        name="emailValue"
                         type="email"
                         onChange={this.handleEmailValue}
                         value={emailValue}
@@ -144,40 +216,50 @@ class SignUp extends React.Component {
                       <span>{this.state.emailError}</span>
                       <input
                         className="password"
+                        name="passwordValue"
                         type="password"
                         onChange={this.handlePasswordValue}
                         value={passwordValue}
                         placeholder="비밀번호 (영문/숫자/특수문자 조합 8자 이상)"
                       ></input>
+                      <span>{this.state.passwordError}</span>
                       <input
                         className="rePassword"
+                        name="rePasswordValue"
                         type="password"
                         onChange={this.handlerePasswordValue}
                         value={rePasswordValue}
                         placeholder="비밀번호 입력 확인"
                       ></input>
+                      <span>{this.state.rePasswordError}</span>
                       <input
                         className="name"
+                        name="nameValue"
                         type="text"
                         onChange={this.handleNameValue}
                         value={nameValue}
                         placeholder="이름을 입력해주세요.(필수)"
                       ></input>
+                      <span>{this.state.nameError}</span>
                       <input
                         className="phoneNum"
+                        name="phoneValue"
                         type="text"
                         onChange={this.handlePhoneValue}
                         value={phoneValue}
                         placeholder="휴대폰 번호 '-'표 없이 입력해주세요.(필수)"
                       ></input>
-                      <span>*생일/성별은 가입 후 수정이 불가합니다.</span>
+                      <span>{this.state.phoneError}</span>
+                      <label>*생일/성별은 가입 후 수정이 불가합니다.</label>
                       <input
                         className="birth"
+                        name="birthValue"
                         type="text"
                         onChange={this.handleBirthValue}
                         value={birthValue}
                         placeholder="생년월일을 입력해 주세요. (19990101)"
                       ></input>
+                      <span>{this.state.birthError}</span>
                       <div className="gender">
                         <input
                           type="radio"
@@ -204,10 +286,10 @@ class SignUp extends React.Component {
                   <div className="allCheck">
                     <input
                       type="checkbox"
-                      id="check_all"
-                      // onChange={onChangeTerm}
+                      onClick={this.handleCheckAll}
+                      checked={this.state.checkAll}
                     ></input>
-                    <label for="check all" className="allAgree">
+                    <label for="checkAll" className="allAgree">
                       모든 약관 동의
                     </label>
                   </div>
@@ -234,12 +316,28 @@ class SignUp extends React.Component {
                     컨버스 공식 온라인 스토어 회원 약관 및 개인정보 수집•이용에
                     대한 동의
                   </h1>
-                  <div className="needCheck">
-                    <input type="checkbox" id="checkOne"></input>
+                  <div
+                    className="needCheck"
+                    onClick={() =>
+                      this.setState({ checkOne: !this.state.checkOne })
+                    }
+                  >
+                    <input
+                      type="checkbox"
+                      checked={this.state.checkOne}
+                    ></input>
                     <label for="checkOne">(필수)이용 약관에 대한 동의</label>
                   </div>
-                  <div className="needCheckTwo">
-                    <input type="checkbox" id="checkTwo"></input>
+                  <div
+                    className="needCheckTwo"
+                    onClick={() =>
+                      this.setState({ checkTwo: !this.state.checkTwo })
+                    }
+                  >
+                    <input
+                      type="checkbox"
+                      checked={this.state.checkTwo}
+                    ></input>
                     <label for="checkTwo">
                       (필수)개인정보 수집 및 이용에 대한 동의
                     </label>
@@ -248,12 +346,28 @@ class SignUp extends React.Component {
                 <div className="selectAgree">
                   <h2>광고성 정보 수신 동의</h2>
                   <p>(회원 전용 다양한 이벤트 소식을 받아보세요)</p>
-                  <div className="selectCheck">
-                    <input type="checkbox" id="checkThree"></input>
+                  <div
+                    className="selectCheck"
+                    onClick={() =>
+                      this.setState({ checkThree: !this.state.checkThree })
+                    }
+                  >
+                    <input
+                      type="checkbox"
+                      checked={this.state.checkThree}
+                    ></input>
                     <label for="checkThree">(선택)이메일 수신 동의</label>
                   </div>
-                  <div className="selectCheckTwo">
-                    <input type="checkbox" id="checkFour"></input>
+                  <div
+                    className="selectCheckTwo"
+                    onClick={() =>
+                      this.setState({ checkFour: !this.state.checkFour })
+                    }
+                  >
+                    <input
+                      type="checkbox"
+                      checked={this.state.checkFour}
+                    ></input>
                     <label for="checkFour">(선택)문자 수신동의</label>
                   </div>
                 </div>
@@ -271,4 +385,4 @@ class SignUp extends React.Component {
   }
 }
 
-export default SignUp;
+export default withRouter(SignUp);
