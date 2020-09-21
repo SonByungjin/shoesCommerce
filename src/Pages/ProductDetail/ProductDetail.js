@@ -1,4 +1,6 @@
 import React from "react";
+import PromoBanner from "../../Components/PromoBanner/PromoBanner";
+import Nav from "../../Components/Nav/Nav";
 import ProductDetailFeed from "./ProductDetailFeed/ProductDetailFeed";
 import ProductDetailRight from "./ProductDetailRight/ProductDetailRight";
 import ProductDetailRecommend from "./ProductDetailRecommend/ProductDetailRecommend";
@@ -31,15 +33,21 @@ class ProductDetail extends React.Component {
     const { productInfo } = this.state;
 
     return (
-      <div className="ProductDetail">
-        <nav></nav>
-        <section className="ProductMain">
-          <ProductDetailFeed productInfo={productInfo} />
-          <ProductDetailRight productInfo={productInfo} />
+      <>
+        <PromoBanner />
+        <Nav />
+        <section className="ProductDetailContainer">
+          <div className="ProductDetail">
+            <nav></nav>
+            <section className="ProductMain">
+              <ProductDetailFeed productInfo={productInfo} />
+              <ProductDetailRight productInfo={productInfo} />
+            </section>
+            <ProductDetailRecommend productInfo={productInfo} />
+          </div>
         </section>
-        <ProductDetailRecommend productInfo={productInfo} />
         <Footer />
-      </div>
+      </>
     );
   }
 }
