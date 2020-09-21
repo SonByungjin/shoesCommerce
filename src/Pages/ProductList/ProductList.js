@@ -52,7 +52,7 @@ export class ProductList extends React.Component {
         },
         () => {
           fetch("/data/ProductList/Products.json")
-            // fetch("http://10.58.3.39:8000/product/shose")
+            // fetch("http://10.58.5.68:8000/product/chuck70")
             .then((res) => res.json())
             .then((res) => {
               // 무한스크롤 기능 확인을 위한 임의 함수

@@ -65,7 +65,7 @@
       background-color: white;
       padding: 34px;
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(4, 25%);
       grid-gap: 10px;
       grid-auto-rows: minmax(100px, auto);
     }

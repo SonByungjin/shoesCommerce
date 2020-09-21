@@ -33,7 +33,12 @@ class ProductColors extends Component {
                       ? "selectColorValid"
                       : "selectColorUnvalid"
                   }
-                ></div>
+                >
+                  <div
+                    style={{ backgroundColor: color }}
+                    className="selectInnerCirlce"
+                  ></div>
+                </div>
               </div>
             );
           })}
