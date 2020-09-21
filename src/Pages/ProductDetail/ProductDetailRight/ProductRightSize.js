@@ -12,12 +12,15 @@ class ProductRightSize extends React.Component {
       current: "",
       isSizeFindOpen: false,
       isSizeGuideOpen: false,
+      quantity: "",
+      quantityOverFive: false,
     };
   }
 
   componentDidMount() {
     this.setState({
       sizes: ["240", "250", "260", "270"],
+      quantity: 1,
     });
   }
 
@@ -35,6 +38,25 @@ class ProductRightSize extends React.Component {
     this.setState({
       isSizeGuideOpen: !this.state.isSizeGuideOpen,
     });
+  };
+
+  decreaseQuantity = () => {
+    if (this.state.quantity > 1) {
+      this.setState({
+        quantity: this.state.quantity - 1,
+        quantityOverFive: false,
+      });
+    }
+  };
+
+  increaseQuantity = () => {
+    if (this.state.quantity < 5) {
+      this.setState({
+        quantity: this.state.quantity + 1,
+      });
+    } else {
+      this.setState({ quantityOverFive: true });
+    }
   };
 
   render() {
@@ -73,13 +95,24 @@ class ProductRightSize extends React.Component {
             ))}
           </div>
           <div className="quantity">
-            <input className="quantitySelect" defaultValue="0"></input>
-            <button className="decrease">-</button>
-            <button className="increase">+</button>
+            <div className="quantityOne">
+              <span className="quantitySelect">{this.state.quantity}</span>
+              <button className="decrease" onClick={this.decreaseQuantity}>
+                -
+              </button>
+              <button className="increase" onClick={this.increaseQuantity}>
+                +
+              </button>
+            </div>
+            {this.state.quantityOverFive && (
+              <div className="quantityTwo">
+                <span>5개 까지 구매가능 합니다</span>
+              </div>
+            )}
           </div>
         </div>
         <div className="third">
-          {this.state.isLogined ? (
+          {!this.state.isLogined ? (
             <div className="isLogout">
               <div className="loginBtn">로그인</div>
             </div>
