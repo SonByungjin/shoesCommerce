@@ -5,6 +5,7 @@ import ProductContainer from "./Components/ProductContainer/ProductContainer";
 import FilterHorizontalBar from "./Components/FilterHorizontalBar/FilterHorizontalBar";
 import Footer from "../../Components/Footer/Footer";
 import PromoBanner from "../../Components/PromoBanner/PromoBanner";
+import Nav from "../../Components/Nav/Nav";
 import "./ProductList.scss";
 
 export class ProductList extends React.Component {
@@ -124,7 +125,8 @@ export class ProductList extends React.Component {
 
         {/* <div className="PromoBanner">banner 컴포넌트 예정</div> */}
         <PromoBanner />
-        <nav className="Nav">nav 컴포넌트 예정</nav>
+        {/* <nav className="Nav">nav 컴포넌트 예정</nav> */}
+        <Nav />
         <header>
           <span className="shoesTitle">SHOES</span>
           <img
