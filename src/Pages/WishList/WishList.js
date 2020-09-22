@@ -4,6 +4,8 @@ import PromoBanner from "../../Components/PromoBanner/PromoBanner";
 import Nav from "../../Components/Nav/Nav";
 import WishProduct from "./WishProduct/WishProduct";
 import ProfileImg from "./ProfileImg";
+import ProductDetailRight from "../ProductDetail/ProductDetailRight/ProductDetailRight";
+import ProductDetailFeed from "../ProductDetail/ProductDetailFeed/ProductDetailFeed";
 import "./WishList.scss";
 
 class WishList extends Component {
@@ -11,8 +13,15 @@ class WishList extends Component {
     super();
     this.state = {
       wishlist: [],
+      productModal: false,
     };
   }
+
+  productModalToggle = () => {
+    this.setState({
+      productModal: !this.state.productModal,
+    });
+  };
 
   componentDidMount() {
     fetch(
@@ -34,42 +43,69 @@ class WishList extends Component {
   }
 
   render() {
-    const { wishlist } = this.state;
+    const { wishlist, productModal } = this.state;
     return (
       <div className="WishList">
         <PromoBanner />
         <Nav />
+        <div
+          // className="productModalWrapper"
+          className={
+            productModal ? "productModalWrapper" : "closeProductModalWrapper"
+          }
+        >
+          <div className="productPopup">
+            <div className="productModal">
+              <div className="productImgContainer">
+                {/* <ProductDetailFeed /> */}
+                <img
+                  alt="heartImg"
+                  className="heartImg"
+                  src="/images/productList/heart_fill.png"
+                />
+                <img
+                  alt="productImg"
+                  className="productImg"
+                  src="https://image.converse.co.kr/cmsstatic/product/168636C_168636C_pdp-primary.jpg?gallery="
+                />
+              </div>
+              <div className="productInfo">
+                <ProductDetailRight />
+              </div>
+              <div className="closeModal">
+                <span onClick={this.productModalToggle}>x</span>
+              </div>
+            </div>
+          </div>
+        </div>
         <div className="wishlistMain">
           <div className="userInfo">
             <div className="userName">
-              {/* <svg className="userIcon" id="nav-profile" viewBox="0 0 32 30">
-                <path d="M16 3.8c3.6 0 6.6 3 6.6 6.6S19.6 17 16 17s-6.6-3-6.6-6.6 3-6.6 6.6-6.6M6 10.4c0 3.7 2.1 6.9 5.1 8.6-4.9 1.6-9 5.4-10.7 10.5h3.7c2.1-4.7 6.7-7.9 11.9-7.9s9.9 3.1 11.9 7.9h3.7c-1.7-5.1-5.7-8.9-10.7-10.5 3-1.7 5.1-4.9 5.1-8.6 0-5.5-4.5-10-10-10S6 4.9 6 10.4"></path>
-              </svg> */}
               <ProfileImg className="UserIcon" />
               <span>아무개 고객님</span>
             </div>
-            <div className="shoppingInfo">
-              <p className="subTitle">쇼핑 정보</p>
-              <p>주문/배송 조회</p>
-              <p>교환/반품 신청</p>
-              <p>교환/반품 조회</p>
-              <p>입고 알림 신청 내역</p>
-            </div>
-            <div className="activityInfo">
-              <p className="subTitle">활동 정보</p>
-              <p>드로우 내역</p>
-              <p>프로모션 코드 조회</p>
-              <p>상품 리뷰</p>
-              <p>위시리스트</p>
-              <p>1:1 문의</p>
-            </div>
-            <div className="privateInfo">
-              <p className="subTitle">나의 정보</p>
-              <p>배송지 관리</p>
-              <p>회원 정보 수정</p>
-              <p>비밀번호 변경</p>
-              <p>회원 탈퇴</p>
-            </div>
+            <ul className="shoppingInfo">
+              <li className="subTitle">쇼핑 정보</li>
+              <li>주문/배송 조회</li>
+              <li>교환/반품 신청</li>
+              <li>교환/반품 조회</li>
+              <li>입고 알림 신청 내역</li>
+            </ul>
+            <ul className="activityInfo">
+              <li className="subTitle">활동 정보</li>
+              <li>드로우 내역</li>
+              <li>프로모션 코드 조회</li>
+              <li>상품 리뷰</li>
+              <li>위시리스트</li>
+              <li>1:1 문의</li>
+            </ul>
+            <ul className="privateInfo">
+              <li className="subTitle">나의 정보</li>
+              <li>배송지 관리</li>
+              <li>회원 정보 수정</li>
+              <li>비밀번호 변경</li>
+              <li>회원 탈퇴</li>
+            </ul>
             <div className="logout">
               <span>로그아웃</span>
             </div>
@@ -90,6 +126,7 @@ class WishList extends Component {
                     price={price}
                     id={serial_number}
                     name={series_name}
+                    productModal={this.productModalToggle}
                   />
                 );
               })}

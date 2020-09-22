@@ -3,7 +3,7 @@ import "./WishProduct.scss";
 
 class WishProduct extends Component {
   render() {
-    const { imgUrl, price, id, name } = this.props;
+    const { imgUrl, price, id, name, productModal } = this.props;
     return (
       <div className="WishProduct">
         <div className="wishProductImg">
@@ -17,7 +17,7 @@ class WishProduct extends Component {
           <span>{Number(price).toLocaleString("en")}원</span>
         </div>
         <div className="wishProductBuy">
-          <span>바로구매하기</span>
+          <span onClick={productModal}>바로구매하기</span>
         </div>
       </div>
     );
