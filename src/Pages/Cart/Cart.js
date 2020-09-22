@@ -12,7 +12,7 @@ class Cart extends React.Component {
     this.state = {
       itemCount: 1,
       cartItems: [],
-      originalPrice: "80,000",
+      originalPrice: 80000,
     };
   }
 
