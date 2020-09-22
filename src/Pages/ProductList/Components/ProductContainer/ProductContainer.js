@@ -31,7 +31,7 @@ class ProductContainer extends Component {
     fetch("http://10.58.5.117:8000/false_account/wishlist", {
       method: "POST",
       headers: JSON.stringify({
-        account_id: localStorage.getItem("token"),
+        id: localStorage.getItem("token"),
       }),
       body: JSON.stringify({
         serial_number: mainId,

@@ -62,6 +62,7 @@ class FilterColor extends Component {
         <div className={hideFilterImage[2] ? "hideTypeOfColor" : "typeOfColor"}>
           {productColor.map((Color, idx) => (
             <div
+              key={idx}
               onClick={() => this.handleColor(idx)}
               style={{ backgroundColor: Color }}
               className="colorCircle"

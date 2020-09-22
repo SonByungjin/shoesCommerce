@@ -12,10 +12,9 @@ export class ProductList extends React.Component {
   constructor() {
     super();
     this.state = {
+      wholeProducts: [],
       products: [],
       hideFilterVaild: false,
-      preItems: 0,
-      items: 14,
       loadingStatus: false,
       ProductMainImage: { MainImg: [] },
     };
@@ -38,52 +37,79 @@ export class ProductList extends React.Component {
     );
     let clientHeight = document.documentElement.clientHeight;
 
-    if (scrollTop + clientHeight >= scrollHeight) {
-      this.setState({
-        preItems: this.state.items,
-        items: this.state.items + 14,
-      });
-      this.handleItemCount();
+    if (scrollTop + clientHeight === scrollHeight) {
+      this.pagination();
     }
   };
 
-  handleItemCount = () => {
-    if (this.state.preItems === this.state.products.length) {
+  pagination = () => {
+    if (this.state.wholeProducts.length > this.state.products.length) {
       this.setState(
         {
           loadingStatus: !this.state.loadingStatus,
         },
         () => {
-          fetch("/data/ProductList/Products.json")
-            // fetch("http://10.58.5.68:8000/product/shose")
-            .then((res) => res.json())
-            .then((res) => {
-              // 무한스크롤 기능 확인을 위한 임의 함수
-              // let result = res.products.slice(
-              //   this.state.preItems,
-              //   this.state.items
-              // );
+          let result = this.state.wholeProducts.slice(
+            this.state.products.length,
+            this.state.products.length + 14
+          );
 
-              let result = res.products;
-              setTimeout(
-                () =>
-                  this.setState(
-                    {
-                      loadingStatus: !this.state.loadingStatus,
-                    },
-                    () => {
-                      this.setState({
-                        products: [...this.state.products, ...result],
-                      });
-                    }
-                  ),
-                1000
-              );
-              window.addEventListener("scroll", this.infiniteScroll);
-            });
+          setTimeout(
+            () =>
+              this.setState(
+                {
+                  loadingStatus: !this.state.loadingStatus,
+                },
+                () => {
+                  this.setState({
+                    products: [...this.state.products, ...result],
+                  });
+                }
+              ),
+            1000
+          );
+          window.addEventListener("scroll", this.infiniteScroll);
         }
       );
     }
+  };
+
+  handleItemCount = () => {
+    this.setState(
+      {
+        loadingStatus: !this.state.loadingStatus,
+      },
+      () => {
+        fetch("/data/ProductList/Products.json")
+          // fetch("http://10.58.5.68:8000/products")
+          .then((res) => res.json())
+          .then((res) => {
+            // 무한스크롤 기능 확인을 위한 임의 함수
+            let result = res.products.slice(
+              this.state.products.length,
+              this.state.products.length + 14
+            );
+
+            // let result = res.products;
+            setTimeout(
+              () =>
+                this.setState(
+                  {
+                    loadingStatus: !this.state.loadingStatus,
+                  },
+                  () => {
+                    this.setState({
+                      wholeProducts: res.products,
+                      products: [...this.state.products, ...result],
+                    });
+                  }
+                ),
+              1000
+            );
+            window.addEventListener("scroll", this.infiniteScroll);
+          });
+      }
+    );
   };
 
   fixedImage = (colorEl, pdIdx) => {
@@ -102,17 +128,20 @@ export class ProductList extends React.Component {
   };
 
   componentDidMount() {
+    window.onbeforeunload = () => {
+      window.scrollTo(0, 0);
+    };
     this.handleItemCount();
   }
 
   render() {
     const {
+      wholeProducts,
       products,
       hideFilterVaild,
       loadingStatus,
       ProductMainImage,
     } = this.state;
-    console.log(ProductMainImage);
     return (
       <div className="ProductList">
         <div
@@ -122,10 +151,7 @@ export class ProductList extends React.Component {
         >
           <img alt="loadingImg" src="/images/productList/preloader.gif" />
         </div>
-
-        {/* <div className="PromoBanner">banner 컴포넌트 예정</div> */}
         <PromoBanner />
-        {/* <nav className="Nav">nav 컴포넌트 예정</nav> */}
         <Nav />
         <header>
           <span className="shoesTitle">SHOES</span>
@@ -137,7 +163,7 @@ export class ProductList extends React.Component {
         <FilterHorizontalBar
           hideFilterValid={hideFilterVaild}
           handleFilter={this.handleFilter}
-          cnt={products.length}
+          cnt={wholeProducts.length}
         />
         <div className="bottomOfPage">
           <div
@@ -168,7 +194,6 @@ export class ProductList extends React.Component {
                   mainId: id,
                   ImgUrl: image_url,
                 });
-                console.log(ProductMainImage);
                 return (
                   <ProductContainer
                     key={pdIdx}

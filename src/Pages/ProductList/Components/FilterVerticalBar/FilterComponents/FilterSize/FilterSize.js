@@ -64,6 +64,7 @@ class FilterSize extends Component {
         <div className={hideFilterImage[3] ? "hideTypeOfSize" : "typeOfSize"}>
           {productSize.map((el, idx) => (
             <div
+              key={idx}
               className={selectSize[idx] ? "selectSizeSquare" : "sizeSquare"}
               onClick={() => this.handleSize(idx)}
             >

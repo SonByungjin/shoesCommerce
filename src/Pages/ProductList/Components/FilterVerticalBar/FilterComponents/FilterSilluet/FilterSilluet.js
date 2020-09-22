@@ -44,6 +44,7 @@ class FilterSilluet extends Component {
         >
           {productSilluet.map((el, idx) => (
             <div
+              key={idx}
               className={
                 selectSilluet[idx] ? "selectSilluetSquare" : "silluetSquare"
               }
