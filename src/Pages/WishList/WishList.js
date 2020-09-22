@@ -14,8 +14,13 @@ class WishList extends Component {
   }
 
   componentDidMount() {
-    fetch("/data/ProductList/wishlist.json")
-      // fetch("http://10.58.5.117:8000/false_account/wishlist")
+    // fetch("/data/ProductList/wishlist.json")
+    fetch("http://10.58.5.117:8000/false_account/wishlist", {
+      method: "GET",
+      headers: {
+        Authorization: localStorage.getItem("token"),
+      },
+    })
       .then((res) => res.json())
       .then((res) => {
         this.setState({

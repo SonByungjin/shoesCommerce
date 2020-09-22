@@ -32,9 +32,7 @@ class ProductContainer extends Component {
     fetch("http://10.58.5.117:8000/false_account/wishlist", {
       method: "POST",
       headers: {
-        // account_id: localStorage.getItem("token"),
-        account_id:
-          "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NvdW50X2lkIjo3fQ.DPBJBLuNgQRQi4RLCrZ4hVkQv0_XEslMfzlSwjC66XQ",
+        Authorization: localStorage.getItem("token"),
       },
       body: JSON.stringify({
         product_id: mainId,
