@@ -10,31 +10,48 @@ class Cart extends React.Component {
   constructor() {
     super();
     this.state = {
-      itemCount: 1,
+      itemCount: 3,
       cartItems: [],
-      originalPrice: 80000,
+      totalPrice: "",
+      totalDiscountPrice: "",
     };
   }
 
   componentDidMount() {
-    this.setState({
-      cartItems: [],
-    });
+    let totalPrice = 0;
+    let totalDiscountPrice = 0;
+
+    fetch(`http://localhost:3000/data/ProductDetail/CartItemsMOCK.json`)
+      .then((res) => res.json())
+      .then((res) => {
+        for (let i = 0; i < res.cartItem.length; i++) {
+          totalPrice += res.cartItem[i].originalPrice;
+          totalDiscountPrice +=
+            res.cartItem[i].originalPrice *
+            (res.cartItem[i].discount_rate / 100);
+        }
+        this.setState({
+          cartItems: res.cartItem,
+          totalPrice: totalPrice,
+          totalDiscountPrice,
+        });
+      });
   }
 
   render() {
+    const { itemCount, cartItems, totalPrice, totalDiscountPrice } = this.state;
+
     return (
       <>
         <PromoBanner />
         <Nav />
         <section className="Cart">
           <section className="CartContainer">
-            <CartMain
-              itemCount={this.state.itemCount}
-              cartItems={this.state.cartItems}
-              originalPrice={this.state.originalPrice}
+            <CartMain itemCount={itemCount} cartItems={cartItems} />
+            <CartRight
+              totalPrice={totalPrice}
+              totalDiscountPrice={totalDiscountPrice}
             />
-            <CartRight cartItems={this.state.cartItems} />
           </section>
         </section>
         <Footer />

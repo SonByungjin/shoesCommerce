@@ -22,6 +22,9 @@
     }
   }
   .CartMainItems {
+    .CartMainItemsContainer {
+      margin: 20px 0;
+    }
     .CartMainItemsDeleteContainer {
       display: flex;
       justify-content: flex-end;

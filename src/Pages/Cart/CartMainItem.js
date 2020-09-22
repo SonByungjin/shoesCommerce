@@ -3,21 +3,22 @@ import "./CartMainItem.scss";
 
 class CartMainItem extends React.Component {
   render() {
-    console.log(this.props.cartItems);
+    const { cartItem } = this.props;
+    console.log(cartItem);
+
     return (
       <section className="CartMainItem">
         <div className="CartMainItemPic">
-          <img
-            alt="CartMainItemPic"
-            src="https://image.converse.co.kr/cmsstatic/product/M9160_M9160_primary.jpg?browse"
-          ></img>
+          <img alt="CartMainItemPic" src={cartItem.mainPic}></img>
         </div>
         <div className="CartMainItemInfoContainer">
           <div className="CartMainItemInfo">
-            <div className="CartMainItemName">언타이틀드 라이벌</div>
+            <div className="CartMainItemName">{cartItem.series_name}</div>
             <div className="CartMainItemDetailContainer">
-              <span>화이트 / 270</span>
-              <span>수량 : 2</span>
+              <span>
+                {cartItem.color} / {cartItem.size}
+              </span>
+              <span>수량 : {cartItem.quantity}</span>
             </div>
             <div className="CartMainItemDetailContainerTwo">
               <span className="WishListDelete">위시리스트 삭제</span>
@@ -27,10 +28,12 @@ class CartMainItem extends React.Component {
           <div className="CartMainItemPrice">
             <div className="CartMainItemPriceContainerOne">
               <span className="OriginalPrice">
-                {this.props.originalPrice} 원
+                {cartItem.originalPrice.toLocaleString()} 원
               </span>
-              <span className="DiscountPrice">59,500 원</span>
-              <span className="DiscountRatio">30%</span>
+              <span className="DiscountPrice">
+                {cartItem.originalPrice * (cartItem.discount_rate / 100)} 원
+              </span>
+              <span className="DiscountRatio">{cartItem.discount_rate}%</span>
             </div>
             <div className="CartMainItemPriceContainerTwo"></div>
             <div className="CartMainItemPriceContainerThree">
