@@ -2,7 +2,7 @@
   "products": [
     {
       "main_image": {
-        "id": "pd_1",
+        "id": "1",
         "image_url": [
           "https://image.converse.co.kr/cmsstatic/product/168635C_168635C_primary.jpg?browse",
           "https://image.converse.co.kr/cmsstatic/product/168635C_168635C_hover.jpg?browse"
@@ -13,7 +13,7 @@
 
       "color_image": [
         {
-          "id": "pd_1",
+          "id": "1",
           "image_url": [
             "https://image.converse.co.kr/cmsstatic/product/168635C_168635C_primary.jpg?browse",
             "https://image.converse.co.kr/cmsstatic/product/168635C_168635C_hover.jpg?browse"
@@ -21,7 +21,7 @@
           "color": "black"
         },
         {
-          "id": "pd_2",
+          "id": "2",
           "image_url": [
             "https://image.converse.co.kr/cmsstatic/product/168636C_168636C_primary.jpg?browse",
             "https://image.converse.co.kr/cmsstatic/product/168636C_168636C_hover.jpg?browse"
@@ -32,7 +32,7 @@
     },
     {
       "main_image": {
-        "id": "pd_2",
+        "id": "2",
         "image_url": [
           "https://image.converse.co.kr/cmsstatic/product/168636C_168636C_primary.jpg?browse",
           "https://image.converse.co.kr/cmsstatic/product/168636C_168636C_hover.jpg?browse"
@@ -43,7 +43,7 @@
 
       "color_image": [
         {
-          "id": "pd_1",
+          "id": "1",
           "image_url": [
             "https://image.converse.co.kr/cmsstatic/product/168635C_168635C_primary.jpg?browse",
             "https://image.converse.co.kr/cmsstatic/product/168635C_168635C_hover.jpg?browse"
@@ -51,7 +51,7 @@
           "color": "black"
         },
         {
-          "id": "pd_2",
+          "id": "2",
           "image_url": [
             "https://image.converse.co.kr/cmsstatic/product/168636C_168636C_primary.jpg?browse",
             "https://image.converse.co.kr/cmsstatic/product/168636C_168636C_hover.jpg?browse"
@@ -62,7 +62,7 @@
     },
     {
       "main_image": {
-        "id": "pd_3",
+        "id": "3",
         "image_url": [
           "https://image.converse.co.kr/cmsstatic/product/168677C_168677C_primary.jpg?browse",
           "https://image.converse.co.kr/cmsstatic/product/168677C_168677C_hover.jpg?browse"
@@ -73,7 +73,7 @@
 
       "color_image": [
         {
-          "id": "pd_3",
+          "id": "3",
           "image_url": [
             "https://image.converse.co.kr/cmsstatic/product/168677C_168677C_primary.jpg?browse",
             "https://image.converse.co.kr/cmsstatic/product/168677C_168677C_hover.jpg?browse"
@@ -81,7 +81,7 @@
           "color": "black"
         },
         {
-          "id": "pd_4",
+          "id": "4",
           "image_url": [
             "https://image.converse.co.kr/cmsstatic/product/168859C_168859C_primary.jpg?browse",
             "https://image.converse.co.kr/cmsstatic/product/168859C_168859C_hover.jpg?browse"

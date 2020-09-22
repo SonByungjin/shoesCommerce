@@ -120,7 +120,7 @@ export class ProductList extends React.Component {
             loadingStatus ? "loadingImageValid" : "loadingImageUnvalid"
           }
         >
-          <img src="/images/productList/preloader.gif" />
+          <img alt="loadingImg" src="/images/productList/preloader.gif" />
         </div>
 
         {/* <div className="PromoBanner">banner 컴포넌트 예정</div> */}
@@ -171,6 +171,7 @@ export class ProductList extends React.Component {
                 console.log(ProductMainImage);
                 return (
                   <ProductContainer
+                    key={pdIdx}
                     hideFilterValid={hideFilterVaild}
                     mainId={id}
                     imgUrl={ProductMainImage.MainImg[pdIdx].ImgUrl}

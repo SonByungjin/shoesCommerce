@@ -97,7 +97,7 @@ class ProductContainer extends Component {
               src={heartImg[1]}
             />
           </div>
-          <Link to="/productDetail/1">
+          <Link to={`/productDetail/${mainId}`}>
             <div className="mainShoesImage" onClick={DynamicRouting}>
               <img
                 alt="frontShoesImg"
@@ -112,6 +112,7 @@ class ProductContainer extends Component {
               const { id, image_url } = colorEl;
               return (
                 <div
+                  key={id}
                   pdSerialNumber={id}
                   className={
                     this.state.showColorShoesImage === idx
@@ -119,8 +120,16 @@ class ProductContainer extends Component {
                       : "colorShoesImage"
                   }
                 >
-                  <img src={image_url[0]} className="colorShoesImageFront" />
-                  <img src={image_url[1]} className="colorShoesImageBack" />
+                  <img
+                    alt="colorShoesImageFront"
+                    src={image_url[0]}
+                    className="colorShoesImageFront"
+                  />
+                  <img
+                    alt="colorShoesImageBack"
+                    src={image_url[1]}
+                    className="colorShoesImageBack"
+                  />
                 </div>
               );
             })}

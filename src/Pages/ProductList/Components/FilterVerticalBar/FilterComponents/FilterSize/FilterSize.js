@@ -57,8 +57,8 @@ class FilterSize extends Component {
           <div
             className={hideFilterImage[3] ? "hideFilterImage" : "filterImage"}
           >
-            <img className="minusImage" src={filterImage[0]} />
-            <img className="plusImage" src={filterImage[1]} />
+            <img alt="minusImage" className="minusImage" src={filterImage[0]} />
+            <img alt="plusImage" className="plusImage" src={filterImage[1]} />
           </div>
         </div>
         <div className={hideFilterImage[3] ? "hideTypeOfSize" : "typeOfSize"}>

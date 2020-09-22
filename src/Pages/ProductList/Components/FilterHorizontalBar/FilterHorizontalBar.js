@@ -12,7 +12,10 @@ class FilterHorizontalBar extends Component {
             onClick={handleFilter}
           >
             <span>필터 숨기기</span>
-            <img src="http://localhost:3000/images/productList/filter.png" />
+            <img
+              alt="filterImg"
+              src="http://localhost:3000/images/productList/filter.png"
+            />
           </div>
           <div className="numberingProduct">
             <span>총 {this.props.cnt}개의 상품</span>
