@@ -41,7 +41,6 @@ class ProductDetail extends React.Component {
 
   render() {
     const { productInfo } = this.state;
-    console.log(productInfo);
 
     return (
       <>
