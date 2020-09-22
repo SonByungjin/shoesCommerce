@@ -6,17 +6,17 @@ class WishProduct extends Component {
     const { imgUrl, price, id, name } = this.props;
     return (
       <div className="WishProduct">
-        <div className="WishProductImg">
+        <div className="wishProductImg">
           <div className="heartImgContainer">
-            <img src="/images/WishList/heart_fill.png" />
+            <img alt="heartImg" src="/images/WishList/heart_fill.png" />
           </div>
           <img src={imgUrl} />
         </div>
-        <div className="WishProductInfo">
-          <p>{name}</p>
-          <p>{Number(price).toLocaleString("en")}원</p>
+        <div className="wishProductInfo">
+          <span>{name}</span>
+          <span>{Number(price).toLocaleString("en")}원</span>
         </div>
-        <div className="WishProductBuy">
+        <div className="wishProductBuy">
           <span>바로구매하기</span>
         </div>
       </div>

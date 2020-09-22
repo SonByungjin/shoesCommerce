@@ -2,7 +2,7 @@
   .WishProduct {
     margin-right: 20px;
     margin-bottom: 20px;
-    .WishProductImg {
+    .wishProductImg {
       position: relative;
       & > img {
         max-width: 250px;
@@ -23,13 +23,14 @@
         }
       }
     }
-    .WishProductInfo {
-      & > p {
+    .wishProductInfo {
+      & > span {
+        display: block;
         margin-bottom: 5px;
       }
     }
   }
-  .WishProductBuy {
+  .wishProductBuy {
     cursor: pointer;
     display: flex;
     justify-content: center;

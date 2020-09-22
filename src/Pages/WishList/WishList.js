@@ -3,6 +3,7 @@ import Footer from "../../Components/Footer/Footer";
 import PromoBanner from "../../Components/PromoBanner/PromoBanner";
 import Nav from "../../Components/Nav/Nav";
 import WishProduct from "./WishProduct/WishProduct";
+import ProfileImg from "./ProfileImg";
 import "./WishList.scss";
 
 class WishList extends Component {
@@ -14,13 +15,16 @@ class WishList extends Component {
   }
 
   componentDidMount() {
-    // fetch("/data/ProductList/wishlist.json")
-    fetch("http://10.58.5.117:8000/false_account/wishlist", {
-      method: "GET",
-      headers: {
-        Authorization: localStorage.getItem("token"),
-      },
-    })
+    fetch(
+      "/data/ProductList/wishlist.json",
+      // "http://10.58.5.117:8000/false_account/wishlist"
+      {
+        method: "GET",
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      }
+    )
       .then((res) => res.json())
       .then((res) => {
         this.setState({
@@ -38,9 +42,10 @@ class WishList extends Component {
         <div className="wishlistMain">
           <div className="userInfo">
             <div className="userName">
-              <svg className="userIcon" id="nav-profile" viewBox="0 0 32 30">
+              {/* <svg className="userIcon" id="nav-profile" viewBox="0 0 32 30">
                 <path d="M16 3.8c3.6 0 6.6 3 6.6 6.6S19.6 17 16 17s-6.6-3-6.6-6.6 3-6.6 6.6-6.6M6 10.4c0 3.7 2.1 6.9 5.1 8.6-4.9 1.6-9 5.4-10.7 10.5h3.7c2.1-4.7 6.7-7.9 11.9-7.9s9.9 3.1 11.9 7.9h3.7c-1.7-5.1-5.7-8.9-10.7-10.5 3-1.7 5.1-4.9 5.1-8.6 0-5.5-4.5-10-10-10S6 4.9 6 10.4"></path>
-              </svg>
+              </svg> */}
+              <ProfileImg className="UserIcon" />
               <span>아무개 고객님</span>
             </div>
             <div className="shoppingInfo">
