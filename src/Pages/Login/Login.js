@@ -50,8 +50,8 @@ class Login extends React.Component {
   handleIdValue = (e) => {
     const { idValue } = this.state;
     const { value } = e.target;
-    // const isValid = value.includes("@") && value.includes(".");
-    // const isEmpty = !idValue.length;
+    //   const isValid = value.includes("@") && value.includes(".");
+    //   const isEmpty = !idValue.length;
 
     //   const errorMsg = {
     //     1: "이메일 형태로 입력해주세요.",
