@@ -47,46 +47,46 @@ class Login extends React.Component {
     }
   };
 
-  // handleIdValue = (e) => {
-  //   const { idValue } = this.state;
-  //   const { value } = e.target;
-  //   const isValid = value.includes("@") && value.includes(".");
-  //   const isEmpty = !idValue.length;
+  handleIdValue = (e) => {
+    const { idValue } = this.state;
+    const { value } = e.target;
+    const isValid = value.includes("@") && value.includes(".");
+    const isEmpty = !idValue.length;
 
-  //   const errorMsg = {
-  //     1: "이메일 형태로 입력해주세요.",
-  //     2: "필수 항목입니다",
-  //     3: "",
-  //   };
+    //   const errorMsg = {
+    //     1: "이메일 형태로 입력해주세요.",
+    //     2: "필수 항목입니다",
+    //     3: "",
+    //   };
 
-  //   this.setState({
-  //     idError: errorMsg[],
-  //   });
-  // };
+    //   this.setState({
+    //     idError: errorMsg[],
+    //   });
+    // };
 
-  // validate = (조건, condition) => {
+    // validate = (조건, condition) => {
 
-  //   let result = ""
+    //   let result = ""
 
-  //   this.setState({idError: result})
+    //   this.setState({idError: result})
 
-  // }
+    // }
 
-  //   this.setState(
-  //     {
-  //       idValue: value,
-  //     },
-  //     () => {
-  //       if (value.includes("@") && value.includes(".")) {
-  //         this.setState({ idError: "" });
-  //       } else if (this.state.idValue.length === 0) {
-  //         this.setState({ idError: "필수 입력 항목입니다" });
-  //       } else {
-  //         this.setState({ idError: "이메일 형태로 입력해주세요" });
-  //       }
-  //     }
-  //   );
-  // };
+    this.setState(
+      {
+        idValue: value,
+      },
+      () => {
+        if (value.includes("@") && value.includes(".")) {
+          this.setState({ idError: "" });
+        } else if (this.state.idValue.length === 0) {
+          this.setState({ idError: "필수 입력 항목입니다" });
+        } else {
+          this.setState({ idError: "이메일 형태로 입력해주세요" });
+        }
+      }
+    );
+  };
 
   handlePassValue = (e) => {
     const { value } = e.target;
