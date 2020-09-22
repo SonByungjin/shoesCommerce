@@ -28,16 +28,22 @@ class ProductContainer extends Component {
     this.setState({
       heartBoolean: !this.state.heartBoolean,
     });
+    // console.log(localStorage.getItem("token"));
     fetch("http://10.58.5.117:8000/false_account/wishlist", {
       method: "POST",
+      headers: {
+        // account_id: localStorage.getItem("token"),
+        account_id:
+          "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NvdW50X2lkIjo3fQ.DPBJBLuNgQRQi4RLCrZ4hVkQv0_XEslMfzlSwjC66XQ",
+      },
       body: JSON.stringify({
-        serial_number: mainId,
+        product_id: mainId,
       }),
-    })
-      .then((response) => response.json())
-      .then((result) => {
-        // console.log(result);
-      });
+    });
+    // .then((response) => response.json())
+    // .then((result) => {
+    //   console.log(result);
+    // });
     // console.log(mainId);
   };
 
