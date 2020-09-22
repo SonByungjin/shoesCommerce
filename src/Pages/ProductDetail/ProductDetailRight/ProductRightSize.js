@@ -7,7 +7,7 @@ class ProductRightSize extends React.Component {
   constructor() {
     super();
     this.state = {
-      isLogined: false,
+      isLogined: true,
       sizes: [],
       current: "",
       isSizeFindOpen: false,

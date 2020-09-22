@@ -2,23 +2,9 @@ import React from "react";
 import "./ProductMainImg.scss";
 
 class ProductMainImg extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      productSubImgs: [],
-    };
-  }
-
-  componentDidMount() {
-    const { productSubImg } = this.props;
-    this.setState({
-      productSubImgs: productSubImg,
-    });
-  }
-
   render() {
     const { productMainImg } = this.props;
-    const { productSubImgs } = this.state;
+    const { productSubImg } = this.props;
 
     return (
       <div className="ProductMainImg">
@@ -28,9 +14,13 @@ class ProductMainImg extends React.Component {
         <section className="mainImgMore">
           <div className="imgMoreContainer">
             <ul>
-              <li>
-                <img alt="notshowing" src="" />
-              </li>
+              {productSubImg?.map((product, index) => {
+                return (
+                  <li key={index}>
+                    <img alt="productSubImg" src={product.medium_url}></img>
+                  </li>
+                );
+              })}
             </ul>
           </div>
         </section>

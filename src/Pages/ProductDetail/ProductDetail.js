@@ -28,7 +28,7 @@ class ProductDetail extends React.Component {
     //       //에러 페이지로 이동
     //     }
     //   });
-    fetch(`http://10.58.5.117:8000/product/${this.props.match.params.id}`)
+    fetch(`http://10.58.5.117:8000/products/${this.props.match.params.id}`)
       .then((res) => res.json())
       .then((res) => {
         if (res["product_information"]) {
