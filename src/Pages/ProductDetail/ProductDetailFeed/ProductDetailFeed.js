@@ -16,7 +16,10 @@ class ProductDetailFeed extends React.Component {
 
     return (
       <div className="ProductDetailFeed">
-        <ProductMainImg productMainImage={productInfo.mainPic} />
+        <ProductMainImg
+          productMainImage={productInfo.main_image}
+          productSubImages={productInfo.sub_images}
+        />
         <ProductDetailImg />
         <ProductReview />
         <ProductCommunity />

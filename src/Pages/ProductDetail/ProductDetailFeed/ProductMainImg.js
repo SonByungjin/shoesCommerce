@@ -7,14 +7,24 @@ class ProductMainImg extends React.Component {
   }
 
   render() {
+    const { productMainImage } = this.props;
+    const { productSubImages } = this.props;
+
     return (
       <div className="ProductMainImg">
         <section className="mainImg">
-          <img alt="Product Main img" src={this.props.productMainImage} />
+          <img alt="Product Main img" src={productMainImage} />
         </section>
         <section className="mainImgMore">
           <div className="imgMoreContainer">
             <ul>
+              {/* {productSubImages.map((image, index) => {
+                return (
+                  <li key={index}>
+                    <img alt="itemSubImages" src={image.medium_url} />
+                  </li>
+                );
+              })} */}
               <li>
                 <img
                   alt="Product MainDetailImg"
