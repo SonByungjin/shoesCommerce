@@ -14,13 +14,14 @@ class ProductMainImg extends React.Component {
         <section className="mainImgMore">
           <div className="imgMoreContainer">
             <ul>
-              {productSubImg?.map((product, index) => {
-                return (
-                  <li key={index}>
-                    <img alt="productSubImg" src={product.medium_url}></img>
-                  </li>
-                );
-              })}
+              {productSubImg &&
+                productSubImg.map((product, index) => {
+                  return (
+                    <li key={index}>
+                      <img alt="productSubImg" src={product.medium_url}></img>
+                    </li>
+                  );
+                })}
             </ul>
           </div>
         </section>
