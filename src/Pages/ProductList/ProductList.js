@@ -17,7 +17,7 @@ export class ProductList extends React.Component {
       hideFilterVaild: false,
       loadingStatus: false,
       ProductMainImage: { MainImg: [] },
-      filteringColor: "",
+      filteringColor: [],
       filteringSize: [],
       filteringSilluet: [],
     };
@@ -142,13 +142,17 @@ export class ProductList extends React.Component {
   };
 
   getDataInitial = () => {
+    // const pageId = this.props.location.search;
+    // console.log(pageId);
+    // console.log(this.props);
+    const categoryId = this.props.location.search.split("=")[1];
     this.setState(
       {
         loadingStatus: !this.state.loadingStatus,
       },
       () => {
         fetch("/data/ProductList/Products.json")
-          // fetch(`http://10.58.1.173:8000/products?sub_category_id=${this.state.products}`)
+          // fetch(`http://10.58.5.148:8000/products?sub_category_id=${categoryId}`)
           .then((res) => res.json())
           .then((res) => {
             // 무한스크롤 기능 확인을 위한 임의 함수
