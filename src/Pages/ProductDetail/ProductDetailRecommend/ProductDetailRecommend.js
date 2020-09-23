@@ -22,34 +22,33 @@ class ProductDetailRecommend extends React.Component {
         <h1 className="title">추천상품</h1>
         <div className="ProductRecommend">
           <ul>
-            {productInfo.recommended_product &&
-              productInfo.recommended_product.map((product) => {
-                return (
-                  <li key={product.serial_number}>
-                    <div className="picContainer">
-                      <img
-                        className="picBeforeHover"
-                        alt="product before hover"
-                        src={product.main_image}
-                      />
-                      <img
-                        className="picAfterHover"
-                        alt="product after hover"
-                        src={product.hover_image}
-                      />
-                      <span
-                        className={
-                          product.isBestSeller
-                            ? "isBestSeller"
-                            : "isNotBestSeller"
-                        }
-                      >
-                        BEST SELLER
-                      </span>
-                    </div>
-                  </li>
-                );
-              })}
+            {productInfo.recommended_product?.map((product) => {
+              return (
+                <li key={product.serial_number}>
+                  <div className="picContainer">
+                    <img
+                      className="picBeforeHover"
+                      alt="product before hover"
+                      src={product.main_image}
+                    />
+                    <img
+                      className="picAfterHover"
+                      alt="product after hover"
+                      src={product.hover_image}
+                    />
+                    <span
+                      className={
+                        product.isBestSeller
+                          ? "isBestSeller"
+                          : "isNotBestSeller"
+                      }
+                    >
+                      BEST SELLER
+                    </span>
+                  </div>
+                </li>
+              );
+            })}
           </ul>
         </div>
       </section>

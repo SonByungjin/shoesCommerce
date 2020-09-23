@@ -15,6 +15,7 @@
   z-index: 999;
   overflow: hidden;
   padding: 20px;
+
   .sizeContainer {
     position: relative;
     display: flex;
@@ -22,6 +23,7 @@
     align-items: center;
     width: 100%;
     padding: 40px 40px;
+
     .sizeCloseBtn {
       position: absolute;
       top: 20px;
@@ -29,14 +31,17 @@
       font-size: 28px;
       cursor: pointer;
     }
+
     .sizeCloseBtn:hover {
       transform: scale(1.2);
     }
+
     .sizeTitle {
       font-size: 24px;
       color: #757575;
       margin: 20px 0;
     }
+
     .sizeTitleSecond {
       width: 100%;
       margin: 20px 0;
@@ -44,6 +49,7 @@
       display: flex;
       justify-content: space-between;
     }
+
     .sizeTable {
       width: 100%;
       #sizes {

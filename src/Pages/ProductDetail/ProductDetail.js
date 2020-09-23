@@ -18,7 +18,7 @@ class ProductDetail extends React.Component {
     fetch(`http://10.58.5.117:8000/products/${this.props.match.params.id}`)
       .then((res) => res.json())
       .then((res) => {
-        if (res["product_information"]) {
+        if (res.product_information) {
           this.setState({ productInfo: res["product_information"][0] });
         } else {
           console.log("제품 정보 가져오기 실패");
