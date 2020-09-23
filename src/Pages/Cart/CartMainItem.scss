@@ -36,23 +36,48 @@
         }
       }
     }
+
     .cartMainItemPrice {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      text-align: right;
       .cartMainItemPriceContainerOne {
         .originalPrice,
         .discountPrice {
-          margin-right: 10px;
+          margin-right: 5px;
         }
         .originalPrice {
-          color: gray;
-          text-decoration-line: line-through;
+          color: black;
         }
         .discountRatio {
           color: red;
         }
       }
+
+      .cartMainItemPriceContainerTwo {
+        z-index: 999;
+        .quantityOne {
+          display: flex;
+          input,
+          button {
+            font-size: 14px;
+            background-color: white;
+            border: 1px solid #e5e5e5;
+            padding: 15px 24px;
+            cursor: pointer;
+          }
+          .quantitySelect {
+            font-size: 14px;
+            background-color: white;
+            border: 1px solid #e5e5e5;
+            padding: 15px 24px;
+            width: 80px;
+            text-align: center;
+          }
+        }
+      }
+
       .cartMainItemPriceContainerThree {
         display: flex;
         justify-content: flex-end;

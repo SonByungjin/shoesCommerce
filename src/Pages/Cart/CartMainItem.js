@@ -3,12 +3,12 @@ import "./CartMainItem.scss";
 
 class CartMainItem extends React.Component {
   render() {
-    const { cartItem } = this.props;
+    const { cartItem, increaseQuantity, decreaseQuantity } = this.props;
 
     return (
       <section className="cartMainItem">
         <div className="cartMainItemPic">
-          <img alt="cartMainItemPic" src={cartItem.mainPic}></img>
+          <img alt="cartMainItemPic" src={cartItem.main_image}></img>
         </div>
         <div className="cartMainItemInfoContainer">
           <div className="cartMainItemInfo">
@@ -20,21 +20,45 @@ class CartMainItem extends React.Component {
               <span>수량 : {cartItem.quantity}</span>
             </div>
             <div className="cartMainItemDetailContainerTwo">
-              <span className="wishListDelete">위시리스트 삭제</span>
+              <span className="wishListDelete">❤ 위시리스트 삭제</span>
               <span className="buyLater">나중에 구매하기</span>
             </div>
           </div>
           <div className="cartMainItemPrice">
             <div className="cartMainItemPriceContainerOne">
               <span className="originalPrice">
-                {cartItem.originalPrice.toLocaleString()} 원
+                {cartItem.price.toLocaleString()} 원
               </span>
-              <span className="discountPrice">
-                {cartItem.originalPrice * (cartItem.discount_rate / 100)} 원
-              </span>
-              <span className="discountRatio">{cartItem.discount_rate}%</span>
+              {cartItem.discount_rate && (
+                <span className="discountPrice">
+                  {(
+                    cartItem.price *
+                    (cartItem.discount_rate / 100)
+                  ).toLocaleString()}{" "}
+                  원
+                </span>
+              )}
+              {cartItem.discount_rate && (
+                <span className="discountRatio">{cartItem.discount_rate}%</span>
+              )}
             </div>
-            <div className="cartMainItemPriceContainerTwo"></div>
+            <div className="cartMainItemPriceContainerTwo">
+              <div className="quantityOne">
+                <span className="quantitySelect">{cartItem.quantity}</span>
+                <button
+                  className="decrease"
+                  onClick={() => decreaseQuantity(cartItem.cart_id)}
+                >
+                  -
+                </button>
+                <button
+                  className="increase"
+                  onClick={() => increaseQuantity(cartItem.cart_id)}
+                >
+                  +
+                </button>
+              </div>
+            </div>
             <div className="cartMainItemPriceContainerThree">
               <span className="optionChange">옵션변경</span>
               <span className="delete">삭제</span>

@@ -5,12 +5,17 @@ import "./CartMain.scss";
 
 class CartMain extends React.Component {
   render() {
-    const { itemCount, cartItems } = this.props;
+    const {
+      cartItems,
+      recommendItems,
+      increaseQuantity,
+      decreaseQuantity,
+    } = this.props;
 
     return (
       <section className="cartMain">
         <div className="cartMainTitle">
-          <h1>{`장바구니 (${itemCount})`}</h1>
+          <h1>{`장바구니 (${cartItems.length})`}</h1>
         </div>
         <div className="cartMainMessage">
           <span>
@@ -21,7 +26,14 @@ class CartMain extends React.Component {
         <section className="cartMainItems">
           <div className="cartMainItemsContainer">
             {cartItems.map((item, index) => {
-              return <CartMainItem key={index} cartItem={item} />;
+              return (
+                <CartMainItem
+                  key={index}
+                  cartItem={item}
+                  increaseQuantity={increaseQuantity}
+                  decreaseQuantity={decreaseQuantity}
+                />
+              );
             })}
           </div>
           <div className="cartMainItemsDeleteContainer">
@@ -29,7 +41,7 @@ class CartMain extends React.Component {
           </div>
         </section>
         <section className="cartProductRecommend">
-          <ProductDetailRecommend />
+          <ProductDetailRecommend productInfo={recommendItems} />
         </section>
       </section>
     );
