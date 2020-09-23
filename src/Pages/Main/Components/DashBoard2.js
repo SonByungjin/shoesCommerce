@@ -24,21 +24,21 @@ class DashBoard2 extends React.Component {
             <div className="topOverlay"></div>
           </div>
           <div className="bottom">
-            <a href="/main" className="bottomLeft">
+            <div className="bottomLeft">
               <ProductInfo
                 newArrival={"NEW ARRIVAL"}
                 name={"척 70 시즈널 컬러"}
                 price={"95,000 원"}
               />
-            </a>
-            <a href="/main" className="bottomRight">
+            </div>
+            <div className="bottomRight">
               <ProductInfo
                 bestSeller={"BEST SELLER"}
                 newArrival={"NEW ARRIVAL"}
                 name={"척 70 빈티지 캔버스"}
                 price={"89,000 원"}
               />
-            </a>
+            </div>
           </div>
         </a>
       </section>

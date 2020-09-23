@@ -30,17 +30,21 @@
         font-weight: 500;
         padding: 0 11px;
         &:hover {
-          a {
+          div {
             color: #000000;
           }
         }
 
         a {
-          display: block;
-          transition: color 0.2s ease-in-out;
           img {
             padding-top: 22px;
           }
+        }
+
+        div {
+          display: block;
+          cursor: pointer;
+          transition: color 0.2s ease-in-out;
         }
       }
 
@@ -51,6 +55,10 @@
           display: inline;
         }
       }
+    }
+
+    .leftMenuOn {
+      border-bottom: 2px solid #000000;
     }
 
     .rightMenu {
@@ -155,47 +163,8 @@
   border-bottom: 1px solid #e5e5e5;
 }
 
-.shoesMenuContainer {
-  display: none;
-}
-
-.clothesMenuContainer {
-  display: none;
-}
-
-.kidsMenuContainer {
-  display: none;
-}
-
-.navMenuOn {
-  display: none;
-  position: absolute;
-  width: calc(100% - 200px);
-  background-color: rgba(0, 0, 0, 0.7);
-  top: 60px;
-  left: 200px;
-  font-size: 28px;
-  font-weight: 600;
-  z-index: 999;
-
-  ul {
-    width: 700px;
-    height: 100vh;
-    padding: 70px 0 32px 70px;
-    background-color: #ffffff;
-    li {
-      margin-bottom: 15px;
-    }
-  }
-}
-
-.navMenuOn::before {
-  content: "";
-  display: inline-block;
-  position: absolute;
-  left: -200px;
-  top: 0;
-  background-color: #fff;
-  width: 200px;
-  height: 100vw;
-}
+// @keyframes {
+//   0% {
+//     transform: translateX()
+//   }
+// }
