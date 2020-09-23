@@ -1,6 +1,8 @@
 .WishList {
   .productModalWrapper {
     z-index: 200;
+    opacity: 1;
+    transition: opacity 0.2s ease-out;
     position: fixed;
     background-color: rgba(143, 143, 143, 0.576);
     top: 0;
@@ -63,6 +65,8 @@
   }
   .closeProductModalWrapper {
     display: none;
+    opacity: 0;
+    transition: opacity 0.2s ease-out;
   }
 
   .wishlistMain {
