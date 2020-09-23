@@ -1,34 +1,34 @@
 import React from "react";
-import "./CartMain.scss";
 import CartMainItem from "./CartMainItem";
 import ProductDetailRecommend from "../ProductDetail/ProductDetailRecommend/ProductDetailRecommend";
+import "./CartMain.scss";
 
 class CartMain extends React.Component {
   render() {
     const { itemCount, cartItems } = this.props;
 
     return (
-      <section className="CartMain">
-        <div className="CartMainTitle">
+      <section className="cartMain">
+        <div className="cartMainTitle">
           <h1>{`장바구니 (${itemCount})`}</h1>
         </div>
-        <div className="CartMainMessage">
+        <div className="cartMainMessage">
           <span>
             신규 회원 가입 시, 즉시 사용 가능한 1만원 할인 코드 발급해드립니다.
             (*5만원 이상 결제 시)
           </span>
         </div>
-        <section className="CartMainItems">
-          <div className="CartMainItemsContainer">
+        <section className="cartMainItems">
+          <div className="cartMainItemsContainer">
             {cartItems.map((item, index) => {
               return <CartMainItem key={index} cartItem={item} />;
             })}
           </div>
-          <div className="CartMainItemsDeleteContainer">
-            <button className="CartMainItemsDeleteBtn">장바구니 비우기</button>
+          <div className="cartMainItemsDeleteContainer">
+            <button className="cartMainItemsDeleteBtn">장바구니 비우기</button>
           </div>
         </section>
-        <section className="CartProductRecommend">
+        <section className="cartProductRecommend">
           <ProductDetailRecommend />
         </section>
       </section>

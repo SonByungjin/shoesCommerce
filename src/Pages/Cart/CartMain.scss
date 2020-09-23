@@ -1,9 +1,9 @@
-.CartMain {
+.cartMain {
   display: flex;
   flex-direction: column;
   max-width: 72%;
   padding-right: 30px;
-  .CartMainTitle {
+  .cartMainTitle {
     width: 100%;
     h1 {
       color: #757575;
@@ -11,7 +11,7 @@
       line-height: 1;
     }
   }
-  .CartMainMessage {
+  .cartMainMessage {
     margin: 10px 0;
     padding: 20px 0;
     text-align: center;
@@ -21,14 +21,14 @@
       font-weight: 300;
     }
   }
-  .CartMainItems {
-    .CartMainItemsContainer {
+  .cartMainItems {
+    .cartMainItemsContainer {
       margin: 20px 0;
     }
-    .CartMainItemsDeleteContainer {
+    .cartMainItemsDeleteContainer {
       display: flex;
       justify-content: flex-end;
-      .CartMainItemsDeleteBtn {
+      .cartMainItemsDeleteBtn {
         width: 120px;
         font-size: 12px;
         padding: 10px 15px;
@@ -37,10 +37,10 @@
       }
     }
   }
-  .CartProductRecommend {
-    .ProductDetailRecommend {
+  .cartProductRecommend {
+    .productDetailRecommend {
       min-width: 100%;
-      .ProductRecommend {
+      .productRecommend {
         margin: 0;
         ul {
           column-gap: 30px;

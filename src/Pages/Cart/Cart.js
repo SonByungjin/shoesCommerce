@@ -1,10 +1,10 @@
 import React from "react";
-import "./Cart.scss";
 import CartMain from "./CartMain";
 import CartRight from "./CartRight";
 import PromoBanner from "../../Components/PromoBanner/PromoBanner";
 import Nav from "../../Components/Nav/Nav";
 import Footer from "../../Components/Footer/Footer";
+import "./Cart.scss";
 
 class Cart extends React.Component {
   constructor() {
@@ -45,8 +45,8 @@ class Cart extends React.Component {
       <>
         <PromoBanner />
         <Nav />
-        <section className="Cart">
-          <section className="CartContainer">
+        <section className="cart">
+          <section className="cartContainer">
             <CartMain itemCount={itemCount} cartItems={cartItems} />
             <CartRight
               totalPrice={totalPrice}
