@@ -78,6 +78,16 @@ class ProductContainer extends Component {
         onMouseOver={this.colorListValid}
         onMouseOut={this.colorListValid}
       >
+        <div className="loveItContainer">
+          <ul className="loveIttext">
+            <li className="1thLoveIt">LOVE IT</li>
+            <li className="2thLoveIt">LOVE IT</li>
+            <li className="3thLoveIt">LOVE IT</li>
+            <li className="4thLoveIt">LOVE IT</li>
+            <li className="5thLoveIt">LOVE IT</li>
+            <li className="6thLoveIt">LOVE IT</li>
+          </ul>
+        </div>
         <div className="productImage" key={this.props.id}>
           <div className="heartImgContainer">
             <img

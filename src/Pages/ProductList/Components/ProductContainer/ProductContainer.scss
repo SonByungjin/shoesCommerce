@@ -1,8 +1,21 @@
 .ProductList {
   .ProductContainer {
+    position: relative;
+
+    .loveItContainer {
+      z-index: 1000000;
+      position: absolute;
+
+      .loveIttext {
+        & > li {
+          font-size: 230%;
+        }
+      }
+    }
     .productImage {
       position: relative;
       cursor: pointer;
+
       .heartImgContainer {
         .heartImgEmpty {
           z-index: 100;
@@ -42,6 +55,7 @@
           }
         }
       }
+
       .mainShoesImage {
         .frontShoesImg {
           z-index: 50;
@@ -59,6 +73,7 @@
           left: 0px;
         }
       }
+
       .shoesImageByColor {
         .colorShoesImage {
           .colorShoesImageFront {
