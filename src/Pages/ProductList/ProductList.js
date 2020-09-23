@@ -17,6 +17,9 @@ export class ProductList extends React.Component {
       hideFilterVaild: false,
       loadingStatus: false,
       ProductMainImage: { MainImg: [] },
+      filteringColor: "",
+      filteringSize: [],
+      filteringSilluet: [],
     };
   }
 
@@ -74,14 +77,78 @@ export class ProductList extends React.Component {
     }
   };
 
-  handleItemCount = () => {
+  filterQueryString = () => {
+    let filteringQueryStringApi = `http://10.58.1.173:8000/products?${
+      this.state.filteringColor
+        ? this.state.filteringColor
+            .map((color) => {
+              return `color=${color}&`;
+            })
+            .join("")
+        : ""
+    }${
+      this.state.filteringSize
+        ? this.state.filteringSize
+            .map((size) => {
+              return `size=${size}&`;
+            })
+            .join("")
+        : ""
+    }${
+      this.state.filteringSilluet
+        ? this.state.filteringSilluet
+            .map((silluet) => {
+              return `silouette=${silluet}&`;
+            })
+            .join("")
+        : ""
+    }`.slice(0, -1);
+    // this.getfilteringData(filteringQueryStringApi);
+    console.log(filteringQueryStringApi);
+  };
+
+  getfilteringData = (filteringQueryStringApi) => {
     this.setState(
       {
         loadingStatus: !this.state.loadingStatus,
       },
       () => {
-        // fetch("/data/ProductList/Products.json")
-        fetch(`http://10.58.1.173:8000/products?sub_category_id=${1}`)
+        fetch(filteringQueryStringApi)
+          .then((res) => res.json())
+          .then((res) => {
+            let result = res.products.slice(
+              this.state.products.length,
+              this.state.products.length + 14
+            );
+            setTimeout(
+              () =>
+                this.setState(
+                  {
+                    loadingStatus: !this.state.loadingStatus,
+                  },
+                  () => {
+                    this.setState({
+                      wholeProducts: res.products,
+                      products: [...this.state.products, ...result],
+                    });
+                  }
+                ),
+              1000
+            );
+            window.addEventListener("scroll", this.infiniteScroll);
+          });
+      }
+    );
+  };
+
+  getDataInitial = () => {
+    this.setState(
+      {
+        loadingStatus: !this.state.loadingStatus,
+      },
+      () => {
+        fetch("/data/ProductList/Products.json")
+          // fetch(`http://10.58.1.173:8000/products?sub_category_id=${this.state.products}`)
           .then((res) => res.json())
           .then((res) => {
             // 무한스크롤 기능 확인을 위한 임의 함수
@@ -127,11 +194,74 @@ export class ProductList extends React.Component {
     console.log(this.props.match);
   };
 
+  filteringColor = (Color) => {
+    this.state.filteringColor.includes(Color)
+      ? (() => {
+          let colorIdx = this.state.filteringColor.indexOf(Color);
+          const newArray = [...this.state.filteringColor];
+          newArray.splice(colorIdx, 1);
+          this.setState(
+            {
+              filteringColor: newArray,
+            },
+            () => this.filterQueryString()
+          );
+        })()
+      : this.setState(
+          {
+            filteringColor: [...this.state.filteringColor, Color],
+          },
+          () => this.filterQueryString()
+        );
+  };
+
+  filteringSize = (size) => {
+    this.state.filteringSize.includes(size)
+      ? (() => {
+          let colorIdx = this.state.filteringSize.indexOf(size);
+          const newArray = [...this.state.filteringSize];
+          newArray.splice(colorIdx, 1);
+          this.setState(
+            {
+              filteringSize: newArray,
+            },
+            () => this.filterQueryString()
+          );
+        })()
+      : this.setState(
+          {
+            filteringSize: [...this.state.filteringSize, size],
+          },
+          () => this.filterQueryString()
+        );
+  };
+
+  filteringSilluet = (silluetEngName) => {
+    this.state.filteringSilluet.includes(silluetEngName)
+      ? (() => {
+          let colorIdx = this.state.filteringSilluet.indexOf(silluetEngName);
+          const newArray = [...this.state.filteringSilluet];
+          newArray.splice(colorIdx, 1);
+          this.setState(
+            {
+              filteringSilluet: newArray,
+            },
+            () => this.filterQueryString()
+          );
+        })()
+      : this.setState(
+          {
+            filteringSilluet: [...this.state.filteringSilluet, silluetEngName],
+          },
+          () => this.filterQueryString()
+        );
+  };
+
   componentDidMount() {
     window.onbeforeunload = () => {
       window.scrollTo(0, 0);
     };
-    this.handleItemCount();
+    this.getDataInitial();
   }
 
   render() {
@@ -173,7 +303,13 @@ export class ProductList extends React.Component {
                 : "hideVerticalFilterUnvalild"
             }
           >
-            <FilterVerticalBar />
+            <FilterVerticalBar
+              filteringColor={(Color) => this.filteringColor(Color)}
+              filteringSize={(size) => this.filteringSize(size)}
+              filteringSilluet={(silluetEngName) =>
+                this.filteringSilluet(silluetEngName)
+              }
+            />
           </div>
           <main
             className={

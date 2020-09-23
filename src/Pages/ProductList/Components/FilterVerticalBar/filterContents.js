@@ -3,10 +3,10 @@ const productColor = [
   "blue",
   "green",
   "navy",
-  "purple",
+  "violet",
   "brown",
   "gray",
-  "gold",
+  "kakhi",
   "beige",
   "red",
   "orange",
@@ -35,23 +35,23 @@ const productSize = [
 ];
 const productSilluet = [
   {
-    img: "",
+    EngName: "HIGH",
     name: "하이",
   },
   {
-    img: "",
+    EngName: "LOW",
     name: "로우",
   },
   {
-    img: "",
+    EngName: "MID",
     name: "미드",
   },
   {
-    img: "",
+    EngName: "PLATFORM",
     name: "플랫폼",
   },
   {
-    img: "",
+    EngName: "SLIP",
     name: "슬립",
   },
 ];

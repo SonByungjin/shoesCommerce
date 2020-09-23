@@ -9,7 +9,7 @@ class FilterSilluet extends Component {
     };
   }
 
-  handleSilluet = (idx) => {
+  handleSilluet = (idx, silluetEngName) => {
     this.setState({
       selectSilluet: [
         ...this.state.selectSilluet.slice(0, idx),
@@ -17,6 +17,7 @@ class FilterSilluet extends Component {
         ...this.state.selectSilluet.slice(idx + 1),
       ],
     });
+    this.props.filteringSilluet(silluetEngName);
   };
 
   render() {
@@ -42,15 +43,15 @@ class FilterSilluet extends Component {
         <div
           className={hideFilterImage[4] ? "hideTypeOfSilluet" : "typeOfSilluet"}
         >
-          {productSilluet.map((el, idx) => (
+          {productSilluet.map((silluet, idx) => (
             <div
               key={idx}
               className={
                 selectSilluet[idx] ? "selectSilluetSquare" : "silluetSquare"
               }
-              onClick={() => this.handleSilluet(idx)}
+              onClick={() => this.handleSilluet(idx, silluet.EngName)}
             >
-              {el.name}
+              {silluet.name}
             </div>
           ))}
         </div>

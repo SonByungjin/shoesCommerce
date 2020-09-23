@@ -48,6 +48,7 @@ export class FilterVerticalBar extends Component {
       filterImage,
       hideFilterImage,
     } = this.state;
+    const { filteringColor, filteringSize, filteringSilluet } = this.props;
     return (
       <div className="FilterVerticalBar">
         <FilterGender
@@ -65,18 +66,23 @@ export class FilterVerticalBar extends Component {
           hideFilterImage={hideFilterImage}
           filterImage={filterImage}
           productColor={productColor}
+          filteringColor={(Color) => filteringColor(Color)}
         />
         <FilterSize
           hideFilter={this.hideFilter}
           hideFilterImage={hideFilterImage}
           filterImage={filterImage}
           productSize={productSize}
+          filteringSize={(size) => filteringSize(size)}
         />
         <FilterSilluet
           hideFilter={this.hideFilter}
           hideFilterImage={hideFilterImage}
           filterImage={filterImage}
           productSilluet={productSilluet}
+          filteringSilluet={(silluetEngName) =>
+            filteringSilluet(silluetEngName)
+          }
         />
       </div>
     );

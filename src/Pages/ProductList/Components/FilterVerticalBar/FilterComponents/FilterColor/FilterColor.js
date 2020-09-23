@@ -24,19 +24,15 @@ class FilterColor extends Component {
     };
   }
 
-  handleColor = (idx) => {
-    this.setState(
-      {
-        selectColor: [
-          ...this.state.selectColor.slice(0, idx),
-          !this.state.selectColor[idx],
-          ...this.state.selectColor.slice(idx + 1),
-        ],
-      },
-      () => {
-        console.log(this.state.selectColor);
-      }
-    );
+  handleColor = (idx, Color) => {
+    this.setState({
+      selectColor: [
+        ...this.state.selectColor.slice(0, idx),
+        !this.state.selectColor[idx],
+        ...this.state.selectColor.slice(idx + 1),
+      ],
+    });
+    this.props.filteringColor(Color);
   };
 
   render() {
@@ -63,7 +59,7 @@ class FilterColor extends Component {
           {productColor.map((Color, idx) => (
             <div
               key={idx}
-              onClick={() => this.handleColor(idx)}
+              onClick={() => this.handleColor(idx, Color)}
               style={{ backgroundColor: Color }}
               className="colorCircle"
             >
