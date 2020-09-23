@@ -11,10 +11,10 @@ class Footer extends React.Component {
               <div className="subject">FOLLOW US</div>
               <div className="socialIconBox">
                 <div className="iconWrap">
-                  <img alt="facebook" src="images/Footer/facebook.png" />
+                  <img alt="facebook" src="/images/Footer/facebook.png" />
                 </div>
                 <div className="iconWrap">
-                  <img alt="facebook" src="images/Footer/insta.png" />
+                  <img alt="facebook" src="/images/Footer/insta.png" />
                 </div>
               </div>
             </div>
