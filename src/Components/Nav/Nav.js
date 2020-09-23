@@ -58,12 +58,16 @@ class Nav extends React.Component {
           <ul className="leftMenu">
             <li>
               <a href="/main">
-                <img alt="navLogo" src="images/Nav/navLogo.png" />
+                <img alt="navLogo" src="/images/Nav/navLogo.png" />
               </a>
             </li>
             {leftMenuList.map((menu) => {
               return (
-                <li key={menu.id} onClick={() => this.activeMenuList(menu.id)}>
+                <li
+                  key={menu.id}
+                  onClick={() => this.activeMenuList(menu.id)}
+                  className={activeId === menu.id ? "leftMenuOn" : ""}
+                >
                   <div>{menu.name}</div>
                 </li>
               );

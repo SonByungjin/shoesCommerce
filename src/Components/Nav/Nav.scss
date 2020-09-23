@@ -1,3 +1,8 @@
+@mixin add-slide-animation {
+  animation: slide-animation 0.2s 0.2s;
+  animation-fill-mode: both;
+}
+
 .navWrap {
   position: relative;
   left: 0;
@@ -30,6 +35,7 @@
         font-size: 15px;
         font-weight: 500;
         padding: 0 11px;
+        color: black;
         &:hover {
           div {
             color: #000000;
@@ -60,6 +66,12 @@
 
     .leftMenuOn {
       border-bottom: 2px solid #000000;
+      margin-bottom: 2px;
+      height: 58px;
+
+      div {
+        height: 58px;
+      }
     }
 
     .rightMenu {
@@ -163,9 +175,3 @@
   top: 0;
   border-bottom: 1px solid #e5e5e5;
 }
-
-// @keyframes {
-//   0% {
-//     transform: translateX()
-//   }
-// }

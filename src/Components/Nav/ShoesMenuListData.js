@@ -1,15 +1,4 @@
 const ShoesMenuListData = {
-  shoesMenuList: [
-    "전체보기",
-    "베스트셀러",
-    "척테일러 올스타",
-    "척 70",
-    "원스타",
-    "잭퍼셀",
-    "프로레더",
-    "회원전용",
-    "SALE",
-  ],
   recommendItem: [
     {
       name: "빅사이즈",
