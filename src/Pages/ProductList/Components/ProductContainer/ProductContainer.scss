@@ -1,9 +1,64 @@
-@keyframes transparentText {
+@keyframes transparentOne {
   0% {
     opacity: 0;
   }
   50% {
     opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes transparentTwo {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes transparentThree {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes transparentFour {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes transparentFive {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes transparentSix {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.1;
   }
   100% {
     opacity: 0;
@@ -17,16 +72,18 @@
     .loveItContainer {
       z-index: 90;
       position: absolute;
-      // height: 77%;
-      // overflow: hidden;
+      height: 77%;
+      width: 100%;
+      overflow: hidden;
       pointer-events: none;
 
       .loveIttext {
+        text-align: center;
         & > li {
-          font-size: 300%;
+          font-size: 3rem;
           font-weight: 1000;
-          opacity: 1;
-          margin: -5px auto;
+          opacity: 0;
+          margin: -10px 0;
 
           letter-spacing: 5px;
           word-spacing: 10px;
@@ -34,33 +91,39 @@
           -webkit-text-fill-color: transparent;
         }
         .noOneLoveIt {
-          animation-name: transparentText;
+          animation-name: transparentOne;
           animation-duration: 1s;
           animation-timing-function: ease-out;
         }
         .noTwoLoveIt {
-          animation-name: transparentText;
+          animation-name: transparentTwo;
           animation-duration: 1s;
           animation-timing-function: ease-out;
           animation-delay: 0.1s;
         }
         .noThreeLoveIt {
-          animation-name: transparentText;
+          animation-name: transparentThree;
           animation-duration: 1s;
           animation-timing-function: ease-out;
           animation-delay: 0.2s;
         }
         .noFourLoveIt {
-          animation-name: transparentText;
+          animation-name: transparentFour;
           animation-duration: 1s;
           animation-timing-function: ease-out;
           animation-delay: 0.3s;
         }
         .noFiveLoveIt {
-          animation-name: transparentText;
+          animation-name: transparentFive;
           animation-duration: 1s;
           animation-timing-function: ease-out;
           animation-delay: 0.4s;
+        }
+        .noSixLoveIt {
+          animation-name: transparentSix;
+          animation-duration: 1s;
+          animation-timing-function: ease-out;
+          animation-delay: 0.5s;
         }
       }
     }

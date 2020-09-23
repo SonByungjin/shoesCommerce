@@ -95,6 +95,7 @@ class ProductContainer extends Component {
             <li className="noThreeLoveIt">LOVE IT</li>
             <li className="noFourLoveIt">LOVE IT</li>
             <li className="noFiveLoveIt">LOVE IT</li>
+            <li className="noSixLoveIt">LOVE IT</li>
           </ul>
         </div>
         <div className="productImage" key={this.props.id}>

@@ -6,11 +6,12 @@ import FilterHorizontalBar from "./Components/FilterHorizontalBar/FilterHorizont
 import Footer from "../../Components/Footer/Footer";
 import PromoBanner from "../../Components/PromoBanner/PromoBanner";
 import Nav from "../../Components/Nav/Nav";
+import HeaderImg from "./HeaderImg";
 import "./ProductList.scss";
 
 export class ProductList extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       wholeProducts: [],
       products: [],
@@ -20,6 +21,7 @@ export class ProductList extends React.Component {
       filteringColor: [],
       filteringSize: [],
       filteringSilluet: [],
+      queryId: this.props.location.search.split("=")[1],
     };
   }
 
@@ -78,7 +80,8 @@ export class ProductList extends React.Component {
   };
 
   filterQueryString = () => {
-    let filteringQueryStringApi = `http://10.58.1.173:8000/products?${
+    const categoryId = this.props.location.search.split("=")[1];
+    let filteringQueryStringApi = `http://10.58.5.148:8000/products?sub_category_id=${categoryId}&${
       this.state.filteringColor
         ? this.state.filteringColor
             .map((color) => {
@@ -103,7 +106,7 @@ export class ProductList extends React.Component {
             .join("")
         : ""
     }`.slice(0, -1);
-    // this.getfilteringData(filteringQueryStringApi);
+    this.getfilteringData(filteringQueryStringApi);
     console.log(filteringQueryStringApi);
   };
 
@@ -111,11 +114,13 @@ export class ProductList extends React.Component {
     this.setState(
       {
         loadingStatus: !this.state.loadingStatus,
+        products: [],
       },
       () => {
         fetch(filteringQueryStringApi)
           .then((res) => res.json())
           .then((res) => {
+            console.log(res);
             let result = res.products.slice(
               this.state.products.length,
               this.state.products.length + 14
@@ -129,7 +134,7 @@ export class ProductList extends React.Component {
                   () => {
                     this.setState({
                       wholeProducts: res.products,
-                      products: [...this.state.products, ...result],
+                      products: result,
                     });
                   }
                 ),
@@ -142,13 +147,11 @@ export class ProductList extends React.Component {
   };
 
   getDataInitial = () => {
-    // const pageId = this.props.location.search;
-    // console.log(pageId);
-    // console.log(this.props);
     const categoryId = this.props.location.search.split("=")[1];
     this.setState(
       {
         loadingStatus: !this.state.loadingStatus,
+        products: [],
       },
       () => {
         fetch("/data/ProductList/Products.json")
@@ -269,12 +272,15 @@ export class ProductList extends React.Component {
   }
 
   render() {
+    console.log(HeaderImg.HeaderImg);
+    console.log(HeaderImg.HeaderImg[this.state.queryId]);
     const {
       wholeProducts,
       products,
       hideFilterVaild,
       loadingStatus,
       ProductMainImage,
+      queryId,
     } = this.state;
     return (
       <div className="ProductList">
@@ -288,10 +294,12 @@ export class ProductList extends React.Component {
         <PromoBanner />
         <Nav />
         <header>
-          <span className="shoesTitle">SHOES</span>
+          <span className="shoesTitle">
+            {HeaderImg.HeaderImg[queryId - 1].categoryName}
+          </span>
           <img
             alt="headerImges"
-            src="https://image.converse.co.kr/cmsstatic/structured-content/15400/D-Converse-SP20-PWH-Best-Sellers-.jpg"
+            src={HeaderImg.HeaderImg[queryId - 1].imgUrl}
           />
         </header>
         <FilterHorizontalBar

@@ -30,6 +30,7 @@
   }
   header {
     max-width: 1400px;
+    max-height: 200px;
     margin: 0 auto;
     position: relative;
 
@@ -39,9 +40,11 @@
       left: 45%;
       font-size: 40px;
       font-weight: 900;
+      -webkit-text-stroke: 1px white;
     }
     img {
       width: 100%;
+      height: 100%;
     }
   }
 
