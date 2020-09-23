@@ -49,7 +49,6 @@ class WishList extends Component {
         <PromoBanner />
         <Nav />
         <div
-          // className="productModalWrapper"
           className={
             productModal ? "productModalWrapper" : "closeProductModalWrapper"
           }
@@ -57,7 +56,6 @@ class WishList extends Component {
           <div className="productPopup">
             <div className="productModal">
               <div className="productImgContainer">
-                {/* <ProductDetailFeed /> */}
                 <img
                   alt="heartImg"
                   className="heartImg"
