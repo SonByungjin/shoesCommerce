@@ -30,16 +30,16 @@
     }
   }
 
-  .closeList {
-    width: 700px;
-    height: 100vh;
-    padding: 40px 0 32px 70px;
-    background-color: #ffffff;
-    animation: slide-animation-reverse 0.1s 0.1s;
-    li {
-      margin-bottom: 15px;
-    }
-  }
+  // .closeList {
+  //   width: 700px;
+  //   height: 100vh;
+  //   padding: 40px 0 32px 70px;
+  //   background-color: #ffffff;
+  //   animation: slide-animation-reverse 0.1s 0.1s;
+  //   li {
+  //     margin-bottom: 15px;
+  //   }
+  // }
 
   .recommendContainer {
     position: absolute;
@@ -118,17 +118,17 @@
   }
 }
 
-@keyframes slide-animation-reverse {
-  0% {
-    transform: translateX(0px);
-    opacity: 1;
-  }
+// @keyframes slide-animation-reverse {
+//   0% {
+//     transform: translateX(0px);
+//     opacity: 1;
+//   }
 
-  100% {
-    transform: translateX(-1000px);
-    opacity: 0;
-  }
-}
+//   100% {
+//     transform: translateX(-1000px);
+//     opacity: 0;
+//   }
+// }
 
 @keyframes opacity-animation {
   0% {
