@@ -7,6 +7,7 @@ import ProductDetailRight from "./ProductDetailRight/ProductDetailRight";
 import ProductDetailRecommend from "./ProductDetailRecommend/ProductDetailRecommend";
 import Footer from "../../Components/Footer/Footer";
 import "./ProductDetail.scss";
+import { secondAPI } from "../../Config";
 
 class ProductDetail extends React.Component {
   constructor() {
@@ -15,7 +16,7 @@ class ProductDetail extends React.Component {
   }
 
   componentDidMount() {
-    fetch(`http://10.58.5.117:8000/products/${this.props.match.params.id}`)
+    fetch(`${secondAPI}/products/${this.props.match.params.id}`)
       .then((res) => res.json())
       .then((res) => {
         if (res.product_information) {
