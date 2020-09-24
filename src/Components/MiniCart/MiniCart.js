@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { secondAPI } from "../../Config";
 import iconData from "./icon";
 import "./MiniCart.scss";
 
@@ -24,7 +25,7 @@ class MiniCart extends React.Component {
     let totalCost = 0;
     let totalDiscountPrice = 0;
     //추후 백엔드 데이터에 맞게 수정 (json 파일 뒤에 /productID 형식으로 받아올 예정)
-    fetch(`/data/MiniCart/MiniCartProduct.json`)
+    fetch(`${secondAPI}/orders/cart`)
       .then((res) => res.json())
       .then((res) => {
         for (let i = 0; i < res.miniCartData.length; i++) {
