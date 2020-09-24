@@ -285,7 +285,6 @@ export class ProductList extends React.Component {
   }
 
   render() {
-    console.log(this.state.products);
     const {
       wholeProducts,
       products,
@@ -294,6 +293,7 @@ export class ProductList extends React.Component {
       ProductMainImage,
       queryId,
     } = this.state;
+    console.log(products);
     return (
       <div className="ProductList">
         <div
@@ -347,6 +347,8 @@ export class ProductList extends React.Component {
                   image_url,
                   series_name,
                   price,
+                  discount_rate,
+                  wishlist,
                 } = product.main_image;
                 const { color_image } = product;
                 ProductMainImage.MainImg.push({
@@ -364,6 +366,8 @@ export class ProductList extends React.Component {
                     price={price}
                     colorList={color_image}
                     fixedImage={(colorEl) => this.fixedImage(colorEl, pdIdx)}
+                    discount={discount_rate}
+                    wishlist={wishlist}
                   />
                 );
               })}

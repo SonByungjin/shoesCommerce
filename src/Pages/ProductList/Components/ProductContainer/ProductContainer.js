@@ -70,7 +70,15 @@ class ProductContainer extends Component {
       selectColorValid,
       loveItAnimation,
     } = this.state;
-    const { mainId, imgUrl, name, price, colorList } = this.props;
+    const {
+      mainId,
+      imgUrl,
+      name,
+      price,
+      colorList,
+      discount,
+      wishlist,
+    } = this.props;
     const [frontImg, backImg] = imgUrl;
 
     return (
@@ -149,7 +157,15 @@ class ProductContainer extends Component {
           </div>
         </div>
         <p className="productName">{name}</p>
-        <p className="productPrice">{Number(price).toLocaleString("en")}원</p>
+        <div className={discount ? "discountPrice" : "productPrice"}>
+          <span id="price">{Number(price).toLocaleString("en")}원</span>
+          <span id="discountPrice">
+            {`${(Number(price) * (1 - discount / 100)).toLocaleString(
+              "en"
+            )} 원`}
+          </span>
+          <span id="discountRate">{`  ${discount}`}%</span>
+        </div>
         <ProductColors
           colorList={colorList}
           changeImage={this.changeImage}

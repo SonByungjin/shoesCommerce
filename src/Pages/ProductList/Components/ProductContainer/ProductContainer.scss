@@ -234,8 +234,26 @@
         }
       }
     }
+
     .productName {
       cursor: pointer;
+    }
+    .productPrice {
+      #discountPrice {
+        display: none;
+      }
+      #discountRate {
+        display: none;
+      }
+    }
+    .discountPrice {
+      #price {
+        text-decoration: line-through;
+        color: rgb(191, 191, 191);
+      }
+      #discountRate {
+        color: red;
+      }
     }
   }
 }
