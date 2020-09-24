@@ -106,7 +106,7 @@ class Cart extends React.Component {
   };
 
   handleDecrease = (cartId) => {
-    const { userToken, cartItems } = this.state;
+    const { userToken } = this.state;
 
     fetch(`http://10.58.5.250:8000/orders/cart`, {
       method: "PATCH",

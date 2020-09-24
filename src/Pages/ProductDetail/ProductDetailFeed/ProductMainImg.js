@@ -2,6 +2,13 @@ import React from "react";
 import "./ProductMainImg.scss";
 
 class ProductMainImg extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      subImgNewArr: [],
+    };
+  }
+
   render() {
     const { productMainImg } = this.props;
     const { productSubImg } = this.props;
@@ -18,7 +25,17 @@ class ProductMainImg extends React.Component {
                 productSubImg.map((product, index) => {
                   return (
                     <li key={index}>
-                      <img alt="productSubImg" src={product.medium_url}></img>
+                      {product.medium_type === "VIDEO" && (
+                        <video autoPlay loop controls>
+                          <source
+                            src={product.medium_url}
+                            type="video/mp4"
+                          ></source>
+                        </video>
+                      )}
+                      {product.medium_type === "IMAGE" && (
+                        <img alt="productSubImg" src={product.medium_url} />
+                      )}
                     </li>
                   );
                 })}

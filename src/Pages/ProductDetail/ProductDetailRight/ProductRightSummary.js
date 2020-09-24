@@ -10,7 +10,7 @@ class ProductRightSummary extends React.Component {
         <h1 className="productName">{productInfo.series_name}</h1>
         <span
           className={
-            productInfo.discount_rate
+            !productInfo.discount_rate
               ? "productPrice"
               : "productPrice underline"
           }

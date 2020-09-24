@@ -102,6 +102,7 @@
         flex-direction: column;
         width: 202px;
         height: 122.5px;
+        margin-left: 10px;
         .productMiniName {
           font-size: 14px;
           line-height: 20px;
@@ -126,6 +127,9 @@
           .miniCartPrice.underline {
             color: gray;
             text-decoration: line-through;
+          }
+          span {
+            margin-right: 7px;
           }
         }
       }

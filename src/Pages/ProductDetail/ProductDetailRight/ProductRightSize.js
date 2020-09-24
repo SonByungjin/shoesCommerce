@@ -14,14 +14,27 @@ class ProductRightSize extends React.Component {
       isSizeGuideOpen: false,
       quantity: 1,
       quantityOverFive: false,
+      cartItems: [],
+      cartItemsId: [],
       userToken:
         "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NvdW50X2lkIjoyfQ.e2QoqJJ9LKcihDt--hz4VutWxwqsqu2d-tjbT8msc5g",
     };
   }
 
   componentDidMount() {
-    const { productInfo } = this.props;
+    const { userToken } = this.state;
 
+    fetch("http://10.58.5.250:8000/orders/cart", {
+      headers: {
+        Authorization: userToken,
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        this.setState({
+          cartItems: res.cart_list,
+        });
+      });
     // sessionStorage.getItem("access_token")
     //   ? this.setState({ isLogined: true })
     //   : this.setState({ isLogined: false });
@@ -62,10 +75,52 @@ class ProductRightSize extends React.Component {
     }
   };
 
-  addToCart = (id, quantity, size) => {
+  updateItems = () => {
     const { userToken } = this.state;
+
+    fetch("http://10.58.5.250:8000/orders/cart", {
+      headers: {
+        Authorization: userToken,
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        this.setState({
+          cartItems: res.cart_list,
+        });
+      });
+  };
+
+  addToCart = (id, quantity, size) => {
+    const { cartItems, userToken } = this.state;
     const { showMiniCart } = this.props;
 
+    console.log(cartItems);
+    for (let i = 0; i < cartItems.length; i++) {
+      if (cartItems[i].id === Number(id) && cartItems[i].size == size) {
+        fetch(`http://10.58.5.250:8000/orders/cart`, {
+          method: "PATCH",
+          headers: {
+            Authorization: userToken,
+          },
+          body: JSON.stringify({
+            cart_id: cartItems[i].cart_id,
+            quantity_change: +quantity,
+          }),
+        })
+          .then((res) => res.json())
+          .then((res) => {
+            if (res.message === "MODIFIED") {
+              console.log("success");
+              showMiniCart();
+              this.updateItems();
+            } else {
+              console.log(res.message);
+            }
+          });
+        return;
+      }
+    }
     fetch(`http://10.58.5.250:8000/orders/cart`, {
       method: "POST",
       headers: {
@@ -80,11 +135,12 @@ class ProductRightSize extends React.Component {
       .then((res) => res.json())
       .then((res) => {
         showMiniCart();
+        this.updateItems();
       });
   };
 
   render() {
-    const { productId, productInfo, showMiniCart } = this.props;
+    const { productId, productInfo } = this.props;
 
     return (
       <section className="ProductRightSize">

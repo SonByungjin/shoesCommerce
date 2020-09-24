@@ -12,7 +12,7 @@ class ProductDetailRight extends React.Component {
     return (
       <section className="ProductDetailRight">
         <ProductRightSummary productInfo={productInfo} />
-        <ProductRightColor productInfo={productInfo} />
+        <ProductRightColor productId={productId} productInfo={productInfo} />
         <ProductRightSize
           productId={productId}
           productInfo={productInfo}

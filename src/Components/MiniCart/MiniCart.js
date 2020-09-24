@@ -145,8 +145,8 @@ class MiniCart extends React.Component {
                       <div className="productMiniPrice">
                         {
                           <span
-                            class={
-                              product.discount_rate
+                            className={
+                              !product.discount_rate
                                 ? "miniCartPrice"
                                 : "miniCartPrice underline"
                             }

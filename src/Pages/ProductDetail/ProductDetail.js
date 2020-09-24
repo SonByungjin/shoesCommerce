@@ -63,7 +63,10 @@ class ProductDetail extends React.Component {
                 showMiniCart={this.showMiniCart}
               />
             </section>
-            <ProductDetailRecommend productInfo={productInfo} />
+            <ProductDetailRecommend
+              productId={productId}
+              productInfo={productInfo}
+            />
           </div>
           {isMiniCartDrop && <MiniCart showMiniCart={this.showMiniCart} />}
         </section>
