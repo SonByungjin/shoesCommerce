@@ -42,7 +42,7 @@ class CartMain extends React.Component {
           <div className="cartMainItemsDeleteContainer">
             <button
               className="cartMainItemsDeleteBtn"
-              onClick={() => handleAllDelete()}
+              onClick={() => handleAllDelete}
             >
               장바구니 비우기
             </button>

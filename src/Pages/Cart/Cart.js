@@ -55,14 +55,26 @@ class Cart extends React.Component {
     const { userToken } = this.state;
     const { cartItems } = this.state;
 
-    this.setState({
-      cartItems: cartItems.map((cartItem) => {
-        if (cartItem.cart_id === cartId && cartItem.quantity < 5) {
-          return { ...cartItem, quantity: cartItem.quantity + 1 };
-        }
-        return cartItem;
-      }),
-    });
+    this.setState(
+      {
+        cartItems: cartItems.map((cartItem) => {
+          if (cartItem.cart_id === cartId && cartItem.quantity < 5) {
+            return {
+              ...cartItem,
+              quantity: cartItem.quantity + 1,
+            };
+          }
+          return cartItem;
+        }),
+      },
+      () => {
+        this.setState({
+          totalPrice: cartItems.reduce((totalPrice, cartItem) => {
+            totalPrice = totalPrice + cartItem.price * cartItem.quantity;
+          }, 0),
+        });
+      }
+    );
 
     fetch(`http://10.58.5.250:8000/orders/cart`, {
       method: "PATCH",
@@ -121,39 +133,48 @@ class Cart extends React.Component {
     const { userToken } = this.state;
     const { cartItems } = this.state;
 
-    fetch(`http://10.58.5.250:8000/orders/cart`, {
-      method: "DELETE",
-      headers: { Authorization: userToken },
-      body: JSON.stringify({
-        cart_id: cartId,
-      }),
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        this.setState({
-          cartItems: cartItems.filter((cartItem) => {
-            if (cartItem.cart_id === cartId) {
-              return false;
-            }
-            return true;
-          }),
-        });
-      });
+    const action = window.confirm("정말로 지우시겠습니까?");
+    if (action == true) {
+      // fetch(`http://10.58.5.250:8000/orders/cart/${cartId}`, {
+      //   method: "DELETE",
+      //   headers: { Authorization: userToken },
+      // })
+      //   .then((res) => res.json())
+      //   .then((res) => {
+      //     this.setState({
+      //       cartItems: cartItems.filter((cartItem) => {
+      //         if (cartItem.cart_id === cartId) {
+      //           return false;
+      //         }
+      //         return true;
+      //       }),
+      //     });
+      //   });
+    } else {
+      return;
+    }
   };
 
   handleAllDelete = () => {
     const { userToken } = this.state;
+    const { cartItems } = this.state;
 
-    fetch(`http://10.58.5.250:8000/orders/cart`, {
-      method: "DELETE",
-      headers: { Authorization: userToken },
-    })
-      .then((res) => res.json())
-      .then((res) =>
-        this.setState({
-          cartItems: [],
-        })
-      );
+    const action = window.confirm("정말로 비우시겠습니까?");
+    if (action == true) {
+      console.log("삭제완료");
+      // fetch(`http://10.58.5.250:8000/orders/cart`, {
+      //   method: "DELETE",
+      //   headers: { Authorization: userToken },
+      // })
+      //   .then((res) => res.json())
+      //   .then((res) =>
+      //     this.setState({
+      //       cartItems: [],
+      //     })
+      //   );
+    } else {
+      return;
+    }
   };
 
   render() {
