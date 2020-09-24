@@ -11,15 +11,21 @@ import "./ProductDetail.scss";
 class ProductDetail extends React.Component {
   constructor() {
     super();
-    this.state = { productInfo: [] };
+    this.state = {
+      productId: "",
+      productInfo: [],
+    };
   }
 
   componentDidMount() {
-    fetch(`http://10.58.5.117:8000/products/${this.props.match.params.id}`)
+    fetch(`http://10.58.5.250:8000/products/${this.props.match.params.id}`)
       .then((res) => res.json())
       .then((res) => {
         if (res.product_information) {
-          this.setState({ productInfo: res["product_information"][0] });
+          this.setState({
+            productId: this.props.match.params.id,
+            productInfo: res["product_information"][0],
+          });
         } else {
           console.log("제품 정보 가져오기 실패");
         }
@@ -27,7 +33,7 @@ class ProductDetail extends React.Component {
   }
 
   render() {
-    const { productInfo } = this.state;
+    const { productId, productInfo } = this.state;
 
     return (
       <>
@@ -38,7 +44,10 @@ class ProductDetail extends React.Component {
             <nav></nav>
             <section className="ProductMain">
               <ProductDetailFeed productInfo={productInfo} />
-              <ProductDetailRight productInfo={productInfo} />
+              <ProductDetailRight
+                productId={productId}
+                productInfo={productInfo}
+              />
             </section>
             <ProductDetailRecommend productInfo={productInfo} />
           </div>

@@ -7,13 +7,13 @@ import ProductRightEtc from "./ProductRightEtc";
 
 class ProductDetailRight extends React.Component {
   render() {
-    const { productInfo } = this.props;
+    const { productId, productInfo } = this.props;
 
     return (
       <section className="ProductDetailRight">
         <ProductRightSummary productInfo={productInfo} />
         <ProductRightColor productInfo={productInfo} />
-        <ProductRightSize sizeList={productInfo.size_list} />
+        <ProductRightSize productId={productId} productInfo={productInfo} />
         <ProductRightEtc />
       </section>
     );
