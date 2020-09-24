@@ -50,7 +50,6 @@ class Nav extends React.Component {
     this.setState({
       onSearchBar: !onSearchBar,
     });
-    console.log(onSearchBar);
   };
 
   render() {
