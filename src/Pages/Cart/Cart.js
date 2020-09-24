@@ -14,6 +14,7 @@ class Cart extends React.Component {
       recommendProducts: [],
       totalPrice: "",
       totalDiscountPrice: "",
+      finalPrice: "",
       userToken:
         "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NvdW50X2lkIjoyfQ.e2QoqJJ9LKcihDt--hz4VutWxwqsqu2d-tjbT8msc5g",
     };
@@ -23,6 +24,7 @@ class Cart extends React.Component {
     const { userToken } = this.state;
     let totalPrice = 0;
     let totalDiscountPrice = 0;
+    let finalPrice = 0;
 
     Promise.all([
       fetch("http://10.58.5.250:8000/orders/cart", {
@@ -41,74 +43,49 @@ class Cart extends React.Component {
           totalPrice += res1.cart_list[i].price * res1.cart_list[i].quantity;
           totalDiscountPrice +=
             res1.cart_list[i].price * (res1.cart_list[i].discount_rate / 100);
+          finalPrice = totalPrice - totalDiscountPrice;
         }
+
         this.setState({
           cartItems: res1.cart_list,
-          totalPrice: totalPrice.toLocaleString(),
-          totalDiscountPrice: totalDiscountPrice.toLocaleString(),
+          totalPrice: totalPrice,
+          totalDiscountPrice: totalDiscountPrice,
           recommendProducts: res2.CartPageRecommendItems,
+          finalPrice: finalPrice,
         });
       });
   }
 
-  // componentDidUpdate() {
-  //   const { userToken } = this.state;
-  //   let totalPrice = 0;
-  //   let totalDiscountPrice = 0;
-
-  //   fetch("http://10.58.5.250:8000/orders/cart", {
-  //     headers: {
-  //       Authorization: userToken,
-  //     },
-  //   })
-  //     .then((res) => res.json())
-  //     .then((res) => {
-  //       for (let i = 0; i < res.cart_list.length; i++) {
-  //         totalPrice += res.cart_list[i].price * res.cart_list[i].quantity;
-  //         totalDiscountPrice +=
-  //           res.cart_list[i].price * (res.cart_list[i].discount_rate / 100);
-  //       }
-  //       this.setState({
-  //         cartItems: res.cart_list,
-  //         totalPrice: totalPrice.toLocaleString(),
-  //         totalDiscountPrice: totalDiscountPrice.toLocaleString(),
-  //       });
-  //     });
-  // }
-
-  handleIncrease = (cartId) => {
+  updateItems = () => {
     const { userToken } = this.state;
-    const { cartItems } = this.state;
-
     let totalPrice = 0;
     let totalDiscountPrice = 0;
+    let finalPrice = 0;
 
-    this.setState(
-      {
-        cartItems: cartItems.map((cartItem) => {
-          if (cartItem.cart_id === cartId && cartItem.quantity < 5) {
-            return {
-              ...cartItem,
-              quantity: cartItem.quantity + 1,
-            };
-          }
-          return cartItem;
-        }),
+    fetch("http://10.58.5.250:8000/orders/cart", {
+      headers: {
+        Authorization: userToken,
       },
-      () => {
-        console.log(cartItems);
-        for (let i = 0; i < cartItems.length; i++) {
-          totalPrice += cartItems[i].price * cartItems[i].quantity;
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        for (let i = 0; i < res.cart_list.length; i++) {
+          totalPrice += res.cart_list[i].price * res.cart_list[i].quantity;
           totalDiscountPrice +=
-            cartItems[i].price * (cartItems[i].discount_rate / 100);
+            res.cart_list[i].price * (res.cart_list[i].discount_rate / 100);
+          finalPrice = totalPrice - totalDiscountPrice;
         }
-        console.log(totalPrice);
         this.setState({
+          cartItems: res.cart_list,
           totalPrice: totalPrice.toLocaleString(),
           totalDiscountPrice: totalDiscountPrice.toLocaleString(),
+          finalPrice: finalPrice.toLocaleString(),
         });
-      }
-    );
+      });
+  };
+
+  handleIncrease = (cartId) => {
+    const { userToken, cartItems } = this.state;
 
     fetch(`http://10.58.5.250:8000/orders/cart`, {
       method: "PATCH",
@@ -123,43 +100,13 @@ class Cart extends React.Component {
       .then((res) => res.json())
       .then((res) => {
         if (res.message === "MODIFIED") {
-          console.log("증가 성공");
-        } else {
-          console.log("5개 이상으로 올라갈 수 없습니다.");
+          this.updateItems();
         }
       });
   };
 
   handleDecrease = (cartId) => {
-    const { userToken } = this.state;
-    const { cartItems } = this.state;
-
-    let totalPrice = 0;
-    let totalDiscountPrice = 0;
-
-    this.setState(
-      {
-        cartItems: cartItems.map((cartItem) => {
-          if (cartItem.cart_id === cartId && cartItem.quantity > 1) {
-            return { ...cartItem, quantity: cartItem.quantity - 1 };
-          }
-          return cartItem;
-        }),
-      },
-      () => {
-        console.log(cartItems);
-        for (let i = 0; i < cartItems.length; i++) {
-          totalPrice += cartItems[i].price * cartItems[i].quantity;
-          totalDiscountPrice +=
-            cartItems[i].price * (cartItems[i].discount_rate / 100);
-        }
-        console.log(totalPrice);
-        this.setState({
-          totalPrice: totalPrice.toLocaleString(),
-          totalDiscountPrice: totalDiscountPrice.toLocaleString(),
-        });
-      }
-    );
+    const { userToken, cartItems } = this.state;
 
     fetch(`http://10.58.5.250:8000/orders/cart`, {
       method: "PATCH",
@@ -174,19 +121,16 @@ class Cart extends React.Component {
       .then((res) => res.json())
       .then((res) => {
         if (res.message === "MODIFIED") {
-          console.log("감소 성공");
-        } else {
-          console.log("1개 이하로 내려갈 수 없습니다.");
+          this.updateItems();
         }
       });
   };
 
   handleOneDelete = (cartId) => {
-    const { userToken } = this.state;
-    const { cartItems } = this.state;
+    const { userToken, cartItems } = this.state;
 
     const action = window.confirm("정말로 지우시겠습니까?");
-    if (action == true) {
+    if (action === true) {
       fetch(`http://10.58.5.250:8000/orders/cart/${cartId}`, {
         method: "DELETE",
         headers: { Authorization: userToken },
@@ -208,11 +152,10 @@ class Cart extends React.Component {
   };
 
   handleAllDelete = () => {
-    const { userToken } = this.state;
-    const { cartItems } = this.state;
+    const { userToken, cartItems } = this.state;
 
     const action = window.confirm("정말로 비우시겠습니까?");
-    if (action == true) {
+    if (action === true) {
       console.log("삭제완료");
       fetch(`http://10.58.5.250:8000/orders/cart`, {
         method: "DELETE",
@@ -235,6 +178,7 @@ class Cart extends React.Component {
       totalPrice,
       totalDiscountPrice,
       recommendProducts,
+      finalPrice,
     } = this.state;
 
     return (
@@ -254,6 +198,7 @@ class Cart extends React.Component {
             <CartRight
               totalPrice={totalPrice}
               totalDiscountPrice={totalDiscountPrice}
+              finalPrice={finalPrice}
             />
           </section>
         </section>

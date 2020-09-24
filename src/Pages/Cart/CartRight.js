@@ -3,7 +3,7 @@ import "./CartRight.scss";
 
 class CartRight extends React.Component {
   render() {
-    const { totalPrice, totalDiscountPrice } = this.props;
+    const { totalPrice, totalDiscountPrice, finalPrice } = this.props;
 
     return (
       <section className="CartRight">
@@ -15,7 +15,7 @@ class CartRight extends React.Component {
             <div className="OrderPrice">
               <div className="OrderPriceItem">
                 <span>상품금액</span>
-                <span>{totalPrice} 원</span>
+                <span>{totalPrice.toLocaleString()} 원</span>
               </div>
               <div className="OrderPriceShip">
                 <span>배송비</span>
@@ -23,13 +23,11 @@ class CartRight extends React.Component {
               </div>
               <div className="OrderPriceDiscount">
                 <span>총 할인 금액</span>
-                <span>{totalDiscountPrice} 원</span>
+                <span>{totalDiscountPrice.toLocaleString()} 원</span>
               </div>
               <div className="OrderPriceTotal">
                 <span>총 결제 금액</span>
-                <span>
-                  {(totalPrice - totalDiscountPrice).toLocaleString()} 원
-                </span>
+                <span>{finalPrice.toLocaleString()} 원</span>
               </div>
             </div>
             <div className="OrderBtnContainer">
