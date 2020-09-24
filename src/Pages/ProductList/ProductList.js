@@ -25,7 +25,17 @@ export class ProductList extends React.Component {
     };
   }
 
+  componentDidUpdate(prevprops) {
+    if (
+      prevprops.location.search.split("=")[1] !==
+      this.props.location.search.split("=")[1]
+    ) {
+      this.getDataInitial();
+    }
+  }
+
   getDataInitial = () => {
+    console.log(this.props);
     window.onbeforeunload = () => {
       window.scrollTo(0, 0);
     };
@@ -36,10 +46,11 @@ export class ProductList extends React.Component {
         loadingStatus: !this.state.loadingStatus,
         products: [],
         ProductMainImage: { MainImg: [] },
+        queryId: categoryId,
       },
       () => {
         // fetch("/data/ProductList/Products.json")
-        fetch(`http://10.58.1.230:8000/products?sub_category_id=${categoryId}`)
+        fetch(`http://10.58.1.230:8002/products?sub_category_id=${categoryId}`)
           .then((res) => res.json())
           .then((res) => {
             // 무한스크롤 기능 확인을 위한 임의 함수
@@ -113,6 +124,7 @@ export class ProductList extends React.Component {
               ),
             1000
           );
+          window.addEventListener("scroll", this.infiniteScroll);
         }
       );
     }
@@ -273,6 +285,7 @@ export class ProductList extends React.Component {
   }
 
   render() {
+    console.log(this.state.products);
     const {
       wholeProducts,
       products,

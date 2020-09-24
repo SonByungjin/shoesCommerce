@@ -30,7 +30,7 @@ class ShoesMenuList extends React.Component {
         <ul className={activeId ? "showList" : "closeList"}>
           {shoesMenuList.map((menu) => {
             return (
-              <li key={menu.id}>
+              <li onClick={closeMenu} key={menu.id}>
                 <Link to={`/productList?category=${menu.id}`}>{menu.name}</Link>
               </li>
             );

@@ -4,8 +4,6 @@ import PromoBanner from "../../Components/PromoBanner/PromoBanner";
 import Nav from "../../Components/Nav/Nav";
 import WishProduct from "./WishProduct/WishProduct";
 import ProfileImg from "./ProfileImg";
-import ProductDetailRight from "../ProductDetail/ProductDetailRight/ProductDetailRight";
-import ProductDetailFeed from "../ProductDetail/ProductDetailFeed/ProductDetailFeed";
 import WishLIstModal from "./WishLIstModal/WishLIstModal";
 import "./WishList.scss";
 
@@ -14,9 +12,8 @@ class WishList extends Component {
     super();
     this.state = {
       wishlist: [],
-      productModal: false,
+      productModal: null,
       productInfo: [],
-      modalImgIdx: [],
     };
   }
 
@@ -26,8 +23,8 @@ class WishList extends Component {
 
   getWishList = () => {
     fetch(
-      // "/data/ProductList/wishlist.json",
-      "http://10.58.5.250:8000/false_account/wishlist",
+      "/data/ProductList/wishlist.json",
+      // "http://10.58.5.250:8000/false_account/wishlist",
       {
         headers: {
           Authorization: localStorage.getItem("token"),
@@ -42,18 +39,18 @@ class WishList extends Component {
       });
   };
 
-  productModalToggle = (serial_number) => {
+  productModalToggle = (product_id, idx) => {
     this.setState(
       {
-        productModal: !this.state.productModal,
+        productModal: idx,
       },
       () => {
-        this.modalData(serial_number);
+        this.modalData(product_id);
       }
     );
   };
 
-  modalData = (product_id, idx) => {
+  modalData = (product_id) => {
     fetch(`http://10.58.5.250:8000/products/${product_id}`)
       .then((res) => res.json())
       .then((res) => {
@@ -62,50 +59,26 @@ class WishList extends Component {
             productInfo: res["product_information"][0],
           });
         }
-        this.setState({
-          modalImgIdx: idx,
-        });
       });
   };
 
   render() {
-    const { wishlist, productModal, productInfo, modalImgIdx } = this.state;
+    const { wishlist, productModal, productInfo } = this.state;
     return (
       <div className="WishList">
         <PromoBanner />
         <Nav />
-        {/* <div
-          className={
-            productModal ? "productModalWrapper" : "closeProductModalWrapper"
-          }
-        >
-          <div className="productPopup">
-            <div className="productModal">
-              <div className="productImgContainer">
-                <img
-                  alt="heartImg"
-                  className="heartImg"
-                  src="/images/productList/heart_fill.png"
-                />
-                <img
-                  alt="productImg"
-                  className="productImg"
-                  src="https://image.converse.co.kr/cmsstatic/product/168636C_168636C_pdp-primary.jpg?gallery="
-                />
-              </div>
-              <div className="productInfo">
-                <ProductDetailRight productInfo={productInfo} />
-              </div>
-              <div className="closeModal">
-                <span onClick={this.productModalToggle}>x</span>
-              </div>
-            </div>
-          </div>
-        </div> */}
-        {wishlist.map((ImgIdx) => {
-          <WishLIstModal mainImg={} ImgIdx={ImgIdx}>
-            <ProductDetailRight productInfo={productInfo} />
-          </WishLIstModal>;
+
+        {wishlist.map((wishproduct, idx) => {
+          return (
+            <WishLIstModal
+              idx={idx}
+              mainImg={wishproduct.main_image}
+              productModal={productModal}
+              productModalToggle={this.productModalToggle}
+              productInfo={productInfo}
+            />
+          );
         })}
         <div className="wishlistMain">
           <div className="userInfo">
