@@ -42,7 +42,7 @@ class CartRight extends React.Component {
             고객님의 프로모션 코드를 지금 확인하세요!
           </div>
           <div className="PromoCode">
-            <input className="PromoCodeInput" defaultValue="코드입력"></input>
+            <input className="PromoCodeInput" placeholder="코드입력"></input>
             <button className="PromoCodeApply">적용</button>
           </div>
         </section>
