@@ -31,14 +31,20 @@ class CartMainItem extends React.Component {
           </div>
           <div className="cartMainItemPrice">
             <div className="cartMainItemPriceContainerOne">
-              <span className="originalPrice">
+              <span
+                className={
+                  !cartItem.discount_rate
+                    ? "originalPrice"
+                    : "originalPrice underline"
+                }
+              >
                 {cartItem.price.toLocaleString()} 원
               </span>
               {cartItem.discount_rate && (
                 <span className="discountPrice">
                   {(
                     cartItem.price *
-                    (cartItem.discount_rate / 100)
+                    ((100 - cartItem.discount_rate) / 100)
                   ).toLocaleString()}{" "}
                   원
                 </span>

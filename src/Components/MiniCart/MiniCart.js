@@ -15,16 +15,11 @@ class MiniCart extends React.Component {
     };
   }
 
-  removeItemFromBasket(itemId) {
-    const items = this.state.miniCartData.filter((item) => item.id !== itemId);
-
-    this.setState({ miniCartData: items });
-  }
-
   componentDidMount() {
     const { userToken } = this.state;
     let totalPrice = 0;
     let totalDiscountPrice = 0;
+    let finalPrice = 0;
 
     fetch("http://10.58.5.250:8000/orders/cart", {
       headers: {
@@ -37,33 +32,76 @@ class MiniCart extends React.Component {
           totalPrice += res.cart_list[i].price * res.cart_list[i].quantity;
           totalDiscountPrice +=
             res.cart_list[i].price * (res.cart_list[i].discount_rate / 100);
+          finalPrice = totalPrice - totalDiscountPrice;
         }
         this.setState({
           cartItems: res.cart_list,
           totalPrice: totalPrice.toLocaleString(),
           totalDiscountPrice: totalDiscountPrice.toLocaleString(),
+          finalPrice: finalPrice.toLocaleString(),
         });
       });
-    //추후 백엔드 데이터에 맞게 수정 (json 파일 뒤에 /productID 형식으로 받아올 예정)
-    // fetch(`/data/MiniCart/MiniCartProduct.json`)
-    //   .then((res) => res.json())
-    //   .then((res) => {
-    //     for (let i = 0; i < res.miniCartData.length; i++) {
-    //       totalCost += res.miniCartData[i].price * res.miniCartData[i].quantity;
-    //       totalDiscountPrice +=
-    //         res.miniCartData[i].price *
-    //         (100 - res.miniCartData[i].discount_rate);
-    //     }
-    //     this.setState({
-    //       miniCartData: res.miniCartData,
-    //       totalCost: totalCost,
-    //       totalDiscountPrice: totalDiscountPrice,
-    //     });
-    //   });
   }
 
+  handleOneDelete = (cartId) => {
+    const { userToken, cartItems } = this.state;
+
+    const action = window.confirm("정말로 지우시겠습니까?");
+    if (action === true) {
+      fetch(`http://10.58.5.250:8000/orders/cart/${cartId}`, {
+        method: "DELETE",
+        headers: { Authorization: userToken },
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          this.setState(
+            {
+              cartItems: cartItems.filter((cartItem) => {
+                if (cartItem.cart_id === cartId) {
+                  return false;
+                }
+                return true;
+              }),
+            },
+            this.updateItems()
+          );
+        });
+    } else {
+      return;
+    }
+  };
+
+  updateItems = () => {
+    const { userToken } = this.state;
+    let totalPrice = 0;
+    let totalDiscountPrice = 0;
+    let finalPrice = 0;
+
+    fetch("http://10.58.5.250:8000/orders/cart", {
+      headers: {
+        Authorization: userToken,
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        for (let i = 0; i < res.cart_list.length; i++) {
+          totalPrice += res.cart_list[i].price * res.cart_list[i].quantity;
+          totalDiscountPrice +=
+            res.cart_list[i].price * (res.cart_list[i].discount_rate / 100);
+          finalPrice = totalPrice - totalDiscountPrice;
+        }
+        this.setState({
+          cartItems: res.cart_list,
+          totalPrice: totalPrice.toLocaleString(),
+          totalDiscountPrice: totalDiscountPrice.toLocaleString(),
+          finalPrice: finalPrice.toLocaleString(),
+        });
+      });
+  };
+
   render() {
-    const { cartItems, totalCost, totalDiscountPrice } = this.state;
+    const { cartItems, totalCost, totalDiscountPrice, finalPrice } = this.state;
+    const { showMiniCart } = this.props;
 
     return (
       <>
@@ -76,10 +114,7 @@ class MiniCart extends React.Component {
                   <div className="miniCartLink">
                     <Link to="/cart">{iconData.cartIcon}</Link>
                   </div>
-                  <button
-                    className="miniCartClose"
-                    onClick={this.props.closeModal}
-                  >
+                  <button className="miniCartClose" onClick={showMiniCart}>
                     {iconData.closeIcon}
                   </button>
                 </div>
@@ -108,9 +143,17 @@ class MiniCart extends React.Component {
                         <span> {product.quantity}개</span>
                       </div>
                       <div className="productMiniPrice">
-                        {!product.discount_rate && (
-                          <span>{product.price}원 </span>
-                        )}
+                        {
+                          <span
+                            class={
+                              product.discount_rate
+                                ? "miniCartPrice"
+                                : "miniCartPrice underline"
+                            }
+                          >
+                            {product.price}원{" "}
+                          </span>
+                        }
                         {product.discount_rate && (
                           <span className="productSale">
                             {product.price *
@@ -127,7 +170,7 @@ class MiniCart extends React.Component {
                     </div>
                     <div
                       className="removeBtn"
-                      // onClick={() => this.removeItemFromBasket(product.id)}
+                      onClick={() => this.handleOneDelete(product.cart_id)}
                     >
                       {iconData.closeIcon}
                     </div>
@@ -139,7 +182,7 @@ class MiniCart extends React.Component {
                   <div className="subTotalsCalc">
                     <span className="totalCost">총 상품금액</span>
                     <strong className="totalValue">
-                      {totalCost.toLocaleString()} 원
+                      {finalPrice} 원
                       {/* {totalDiscountPrice.toLocaleString()} */}
                     </strong>
                   </div>

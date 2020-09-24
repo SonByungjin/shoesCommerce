@@ -16,13 +16,15 @@ class ProductDetailRecommend extends React.Component {
 
   render() {
     const { productInfo } = this.props;
+    console.log(productInfo);
+    console.log(productInfo.recommended_product);
 
     return (
       <section className="ProductDetailRecommend">
         <h1 className="title">추천상품</h1>
         <div className="ProductRecommend">
           <ul>
-            {productInfo.recommended_product?.map((product) => {
+            {productInfo.recommended_products?.map((product) => {
               return (
                 <li key={product.serial_number}>
                   <div className="picContainer">

@@ -35,14 +35,18 @@ class ProductDetail extends React.Component {
   }
 
   showMiniCart = () => {
-    console.log("success");
     this.setState({
       isMiniCartDrop: !this.state.isMiniCartDrop,
     });
   };
 
   render() {
-    const { productId, productInfo, isMiniCartDrop } = this.state;
+    const {
+      productId,
+      productInfo,
+      isMiniCartDrop,
+      handleOneDelete,
+    } = this.state;
 
     return (
       <>
@@ -61,7 +65,7 @@ class ProductDetail extends React.Component {
             </section>
             <ProductDetailRecommend productInfo={productInfo} />
           </div>
-          {isMiniCartDrop && <MiniCart />}
+          {isMiniCartDrop && <MiniCart showMiniCart={this.showMiniCart} />}
         </section>
         <Footer />
       </>

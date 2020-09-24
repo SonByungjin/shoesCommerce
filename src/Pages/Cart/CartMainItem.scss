@@ -50,6 +50,10 @@
         .originalPrice {
           color: black;
         }
+        .originalPrice.underline {
+          color: gray;
+          text-decoration: line-through;
+        }
         .discountRatio {
           color: red;
         }

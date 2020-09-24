@@ -8,9 +8,24 @@ class ProductRightSummary extends React.Component {
     return (
       <section className="ProductRightSummary">
         <h1 className="productName">{productInfo.series_name}</h1>
-        <p className="productPrice">
-          {productInfo.price && productInfo.price.toLocaleString()}
-        </p>
+        <span
+          className={
+            productInfo.discount_rate
+              ? "productPrice"
+              : "productPrice underline"
+          }
+        >
+          {productInfo.price && productInfo.price.toLocaleString()} 원
+        </span>
+        <span className="productDiscountPrice">
+          {productInfo.discount_rate &&
+            `${
+              productInfo.price * ((100 - productInfo.discount_rate) / 100)
+            } 원`}{" "}
+        </span>
+        <span className="discountRate">
+          {productInfo.discount_rate && `${productInfo.discount_rate} %`}
+        </span>
         <p className="productGender">{productInfo.sex}</p>
         <div className="productDetailsBox">
           <span className="productDetails">

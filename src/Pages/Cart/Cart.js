@@ -137,14 +137,17 @@ class Cart extends React.Component {
       })
         .then((res) => res.json())
         .then((res) => {
-          this.setState({
-            cartItems: cartItems.filter((cartItem) => {
-              if (cartItem.cart_id === cartId) {
-                return false;
-              }
-              return true;
-            }),
-          });
+          this.setState(
+            {
+              cartItems: cartItems.filter((cartItem) => {
+                if (cartItem.cart_id === cartId) {
+                  return false;
+                }
+                return true;
+              }),
+            },
+            this.updateItems()
+          );
         });
     } else {
       return;
