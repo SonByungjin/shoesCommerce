@@ -67,14 +67,7 @@ class ProductContainer extends Component {
       selectColorValid,
       loveItAnimation,
     } = this.state;
-    const {
-      mainId,
-      imgUrl,
-      name,
-      price,
-      colorList,
-      DynamicRouting,
-    } = this.props;
+    const { mainId, imgUrl, name, price, colorList } = this.props;
     const [frontImg, backImg] = imgUrl;
 
     return (
@@ -84,7 +77,6 @@ class ProductContainer extends Component {
         onMouseOut={this.colorListValid}
       >
         <div
-          // className="loveItContainer"
           className={
             loveItAnimation ? "loveItContainer" : "loveItContainerUnvalid"
           }
@@ -116,7 +108,7 @@ class ProductContainer extends Component {
             />
           </div>
           <Link to={`/productDetail/${mainId}`}>
-            <div className="mainShoesImage" onClick={DynamicRouting}>
+            <div className="mainShoesImage">
               <img
                 alt="frontShoesImg"
                 className="frontShoesImg"

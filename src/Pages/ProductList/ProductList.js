@@ -25,13 +25,52 @@ export class ProductList extends React.Component {
     };
   }
 
-  handleFilter = () => {
-    this.setState({
-      hideFilterVaild: !this.state.hideFilterVaild,
-    });
+  getDataInitial = () => {
+    window.onbeforeunload = () => {
+      window.scrollTo(0, 0);
+    };
+
+    const categoryId = this.props.location.search.split("=")[1];
+    this.setState(
+      {
+        loadingStatus: !this.state.loadingStatus,
+        products: [],
+        ProductMainImage: { MainImg: [] },
+      },
+      () => {
+        // fetch("/data/ProductList/Products.json")
+        fetch(`http://10.58.1.230:8000/products?sub_category_id=${categoryId}`)
+          .then((res) => res.json())
+          .then((res) => {
+            // 무한스크롤 기능 확인을 위한 임의 함수
+            let result = res.products.slice(
+              this.state.products.length,
+              this.state.products.length + 14
+            );
+
+            // let result = res.products;
+            setTimeout(
+              () =>
+                this.setState(
+                  {
+                    loadingStatus: !this.state.loadingStatus,
+                  },
+                  () => {
+                    this.setState({
+                      wholeProducts: res.products,
+                      products: [...this.state.products, ...result],
+                    });
+                  }
+                ),
+              1000
+            );
+            window.addEventListener("scroll", this.infiniteScroll);
+          });
+      }
+    );
   };
 
-  infiniteScroll = () => {
+  infiniteScroll = (e) => {
     let scrollHeight = Math.max(
       document.documentElement.scrollHeight,
       document.body.scrollHeight
@@ -48,15 +87,16 @@ export class ProductList extends React.Component {
   };
 
   pagination = () => {
-    if (this.state.wholeProducts.length > this.state.products.length) {
+    const { wholeProducts, products } = this.state;
+    if (wholeProducts.length > products.length) {
       this.setState(
         {
           loadingStatus: !this.state.loadingStatus,
         },
         () => {
-          let result = this.state.wholeProducts.slice(
-            this.state.products.length,
-            this.state.products.length + 14
+          let result = wholeProducts.slice(
+            products.length,
+            products.length + 14
           );
 
           setTimeout(
@@ -81,7 +121,7 @@ export class ProductList extends React.Component {
 
   filterQueryString = () => {
     const categoryId = this.props.location.search.split("=")[1];
-    let filteringQueryStringApi = `http://10.58.5.148:8000/products?sub_category_id=${categoryId}&${
+    let filteringQueryStringApi = `http://10.58.1.230:8000/products?sub_category_id=${categoryId}&${
       this.state.filteringColor
         ? this.state.filteringColor
             .map((color) => {
@@ -111,10 +151,15 @@ export class ProductList extends React.Component {
   };
 
   getfilteringData = (filteringQueryStringApi) => {
+    window.onbeforeunload = () => {
+      window.scrollTo(0, 0);
+    };
+
     this.setState(
       {
         loadingStatus: !this.state.loadingStatus,
         products: [],
+        ProductMainImage: { MainImg: [] },
       },
       () => {
         fetch(filteringQueryStringApi)
@@ -146,46 +191,6 @@ export class ProductList extends React.Component {
     );
   };
 
-  getDataInitial = () => {
-    const categoryId = this.props.location.search.split("=")[1];
-    this.setState(
-      {
-        loadingStatus: !this.state.loadingStatus,
-        products: [],
-      },
-      () => {
-        fetch("/data/ProductList/Products.json")
-          // fetch(`http://10.58.5.148:8000/products?sub_category_id=${categoryId}`)
-          .then((res) => res.json())
-          .then((res) => {
-            // 무한스크롤 기능 확인을 위한 임의 함수
-            let result = res.products.slice(
-              this.state.products.length,
-              this.state.products.length + 14
-            );
-
-            // let result = res.products;
-            setTimeout(
-              () =>
-                this.setState(
-                  {
-                    loadingStatus: !this.state.loadingStatus,
-                  },
-                  () => {
-                    this.setState({
-                      wholeProducts: res.products,
-                      products: [...this.state.products, ...result],
-                    });
-                  }
-                ),
-              1000
-            );
-            window.addEventListener("scroll", this.infiniteScroll);
-          });
-      }
-    );
-  };
-
   fixedImage = (colorEl, pdIdx) => {
     let updateProductMainImage = this.state.ProductMainImage;
     updateProductMainImage.MainImg[pdIdx].mainId = colorEl.id;
@@ -195,10 +200,10 @@ export class ProductList extends React.Component {
     });
   };
 
-  DynamicRouting = () => {
-    console.log(this.props.history);
-    console.log(this.props.location);
-    console.log(this.props.match);
+  handleFilter = () => {
+    this.setState({
+      hideFilterVaild: !this.state.hideFilterVaild,
+    });
   };
 
   filteringColor = (Color) => {
@@ -265,15 +270,10 @@ export class ProductList extends React.Component {
   };
 
   componentDidMount() {
-    window.onbeforeunload = () => {
-      window.scrollTo(0, 0);
-    };
     this.getDataInitial();
   }
 
   render() {
-    console.log(HeaderImg.HeaderImg);
-    console.log(HeaderImg.HeaderImg[this.state.queryId]);
     const {
       wholeProducts,
       products,
@@ -352,7 +352,6 @@ export class ProductList extends React.Component {
                     price={price}
                     colorList={color_image}
                     fixedImage={(colorEl) => this.fixedImage(colorEl, pdIdx)}
-                    DynamicRouting={this.DynamicRouting}
                   />
                 );
               })}
