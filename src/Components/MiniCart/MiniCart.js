@@ -48,13 +48,7 @@ class MiniCart extends React.Component {
       <>
         <section className="miniCart">
           <div className="sectionMiniCart">
-            <div
-              className={
-                this.props.openModal
-                  ? "miniCartDrop"
-                  : "miniCartDrop miniCartActive"
-              }
-            >
+            <div className="miniCartDrop">
               <div className="miniCartHeader">
                 <h2 className="headerItems">미니 장바구니</h2>
                 <div className="headerActions">

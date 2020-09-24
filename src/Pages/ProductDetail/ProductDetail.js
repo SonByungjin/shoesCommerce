@@ -5,6 +5,7 @@ import Nav from "../../Components/Nav/Nav";
 import ProductDetailFeed from "./ProductDetailFeed/ProductDetailFeed";
 import ProductDetailRight from "./ProductDetailRight/ProductDetailRight";
 import ProductDetailRecommend from "./ProductDetailRecommend/ProductDetailRecommend";
+import MiniCart from "../../Components/MiniCart/MiniCart";
 import Footer from "../../Components/Footer/Footer";
 import "./ProductDetail.scss";
 
@@ -14,6 +15,7 @@ class ProductDetail extends React.Component {
     this.state = {
       productId: "",
       productInfo: [],
+      isMiniCartDrop: false,
     };
   }
 
@@ -32,8 +34,15 @@ class ProductDetail extends React.Component {
       });
   }
 
+  showMiniCart = () => {
+    console.log("success");
+    this.setState({
+      isMiniCartDrop: !this.state.isMiniCartDrop,
+    });
+  };
+
   render() {
-    const { productId, productInfo } = this.state;
+    const { productId, productInfo, isMiniCartDrop } = this.state;
 
     return (
       <>
@@ -47,10 +56,12 @@ class ProductDetail extends React.Component {
               <ProductDetailRight
                 productId={productId}
                 productInfo={productInfo}
+                showMiniCart={this.showMiniCart}
               />
             </section>
             <ProductDetailRecommend productInfo={productInfo} />
           </div>
+          {isMiniCartDrop && <MiniCart />}
         </section>
         <Footer />
       </>

@@ -64,7 +64,7 @@ class ProductRightSize extends React.Component {
 
   addToCart = (id, quantity, size) => {
     const { userToken } = this.state;
-    const { productId, productInfo } = this.props;
+    const { showMiniCart } = this.props;
 
     fetch(`http://10.58.5.250:8000/orders/cart`, {
       method: "POST",
@@ -79,12 +79,12 @@ class ProductRightSize extends React.Component {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
+        showMiniCart();
       });
   };
 
   render() {
-    const { productId, productInfo } = this.props;
+    const { productId, productInfo, showMiniCart } = this.props;
 
     return (
       <section className="ProductRightSize">
@@ -141,13 +141,13 @@ class ProductRightSize extends React.Component {
             <div className="isLogin">
               <span
                 className="cart"
-                onClick={() =>
+                onClick={() => {
                   this.addToCart(
                     productId,
                     this.state.quantity,
                     productInfo.size_list[this.state.current]
-                  )
-                }
+                  );
+                }}
               >
                 장바구니
               </span>
