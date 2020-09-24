@@ -28,9 +28,9 @@ class Nav extends React.Component {
     });
   }
 
-  componentWillUnmount() {
-    window.removeEventListener("scroll", null);
-  }
+  // componentWillUnmount() {
+  //   window.removeEventListener("scroll", null);
+  // }
 
   activeMenuList = (id) => {
     const { activeId } = this.state;
