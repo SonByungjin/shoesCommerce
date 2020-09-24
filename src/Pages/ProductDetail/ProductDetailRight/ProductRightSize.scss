@@ -30,9 +30,11 @@
     margin-top: 30px;
     .size {
       display: flex;
+      flex-wrap: wrap;
       width: 100%;
       span,
       .NotFocused {
+        width: 75px;
         font-size: 14px;
         border: 1px solid #e5e5e5;
         padding: 15px 24px;

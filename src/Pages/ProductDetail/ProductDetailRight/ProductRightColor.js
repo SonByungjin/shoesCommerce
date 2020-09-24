@@ -2,39 +2,33 @@ import React from "react";
 import "./ProductRightColor.scss";
 
 class ProductRightColor extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      color: "화이트",
-      style: "168635C",
-    };
-  }
-
   render() {
+    const { productInfo } = this.props;
+
     return (
       <section className="ProductRightColor">
         <div className="ProductColorInfo">
           <div className="colorSection">
             <span className="colorSectionTitle">컬러</span>
-            <span className="colorSectionProp">{this.state.color}</span>
+            <span className="colorSectionProp">{productInfo.color}</span>
           </div>
           <div className="styleSection">
             <span className="styleSectionTitle">스타일 : </span>
-            <span className="styleSectionProp">{this.state.style}</span>
+            <span className="styleSectionProp">
+              {productInfo.serial_number}
+            </span>
           </div>
         </div>
         <div className="ProductColorPic">
           <ul>
-            <li>
-              <img
-                alt="ProductColorPic"
-                src="https://image.converse.co.kr/cmsstatic/product/168635C_168635C_pdp-option.jpg?browse="
-              />
-              <img
-                alt="ProductColorPic"
-                src="https://image.converse.co.kr/cmsstatic/product/168636C_168636C_pdp-option.jpg?browse="
-              />
-            </li>
+            {productInfo.related_products &&
+              productInfo.related_products.map((product, index) => {
+                return (
+                  <li key={index}>
+                    <img alt="productSubImg" src={product.main_image}></img>
+                  </li>
+                );
+              })}
           </ul>
         </div>
       </section>

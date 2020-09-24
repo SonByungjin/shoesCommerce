@@ -2,46 +2,39 @@ import React from "react";
 import "./ProductDetailRecommend.scss";
 
 class ProductDetailRecommend extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      recommendProductList: [],
-    };
-  }
-
-  componentDidMount() {
-    fetch("http://localhost:3000/data/ProductDetail/RecommendMOCK.json", {
-      method: "GET",
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        this.setState({
-          recommendProductList: res.recommendItem,
-        });
-      });
-  }
+  // componentDidMount() {
+  //   fetch("http://localhost:3000/data/ProductDetail/RecommendMOCK.json", {
+  //     method: "GET",
+  //   })
+  //     .then((res) => res.json())
+  //     .then((res) => {
+  //       this.setState({
+  //         recommendProductList: res.recommendItem,
+  //       });
+  //     });
+  // }
 
   render() {
-    const { recommendProductList } = this.state;
+    const { productInfo } = this.props;
 
     return (
       <section className="ProductDetailRecommend">
         <h1 className="title">추천상품</h1>
         <div className="ProductRecommend">
           <ul>
-            {recommendProductList.map((product, index) => {
+            {productInfo.recommended_product?.map((product) => {
               return (
-                <li key={index}>
+                <li key={product.serial_number}>
                   <div className="picContainer">
                     <img
                       className="picBeforeHover"
                       alt="product before hover"
-                      src={product.picture}
+                      src={product.main_image}
                     />
                     <img
                       className="picAfterHover"
                       alt="product after hover"
-                      src={product.pictureHover}
+                      src={product.hover_image}
                     />
                     <span
                       className={
