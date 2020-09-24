@@ -3,10 +3,10 @@ const productColor = [
   "blue",
   "green",
   "navy",
-  "purple",
+  "violet",
   "brown",
   "gray",
-  "gold",
+  "kakhi",
   "beige",
   "red",
   "orange",
@@ -35,25 +35,30 @@ const productSize = [
 ];
 const productSilluet = [
   {
-    img: "",
+    EngName: "HIGH",
     name: "하이",
   },
   {
-    img: "",
+    EngName: "LOW",
     name: "로우",
   },
   {
-    img: "",
+    EngName: "MID",
     name: "미드",
   },
   {
-    img: "",
+    EngName: "PLATFORM",
     name: "플랫폼",
   },
   {
-    img: "",
+    EngName: "SLIP",
     name: "슬립",
   },
 ];
 
-export { productColor, productSize, productSilluet };
+const filterImage = [
+  "data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg'  viewBox='0 0 40 5'%3E%3Cpath fill='%23000' d='M0 0h40v4.5H0z' /%3E%3C/svg%3E",
+  "data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg'  viewBox='0 0 40 40'%3E%3Cpath fill='%23000' d='M40 17.857H22.143V0h-4.286v17.857H0v4.286h17.857V40h4.286V22.143H40z' /%3E%3C/svg%3E",
+];
+
+export { productColor, productSize, productSilluet, filterImage };

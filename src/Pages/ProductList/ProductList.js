@@ -6,28 +6,71 @@ import FilterHorizontalBar from "./Components/FilterHorizontalBar/FilterHorizont
 import Footer from "../../Components/Footer/Footer";
 import PromoBanner from "../../Components/PromoBanner/PromoBanner";
 import Nav from "../../Components/Nav/Nav";
+import HeaderImg from "./HeaderImg";
 import "./ProductList.scss";
 
 export class ProductList extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
+      wholeProducts: [],
       products: [],
       hideFilterVaild: false,
-      preItems: 0,
-      items: 14,
       loadingStatus: false,
       ProductMainImage: { MainImg: [] },
+      filteringColor: [],
+      filteringSize: [],
+      filteringSilluet: [],
+      queryId: this.props.location.search.split("=")[1],
     };
   }
 
-  handleFilter = () => {
-    this.setState({
-      hideFilterVaild: !this.state.hideFilterVaild,
-    });
+  getDataInitial = () => {
+    window.onbeforeunload = () => {
+      window.scrollTo(0, 0);
+    };
+
+    const categoryId = this.props.location.search.split("=")[1];
+    this.setState(
+      {
+        loadingStatus: !this.state.loadingStatus,
+        products: [],
+        ProductMainImage: { MainImg: [] },
+      },
+      () => {
+        // fetch("/data/ProductList/Products.json")
+        fetch(`http://10.58.1.230:8000/products?sub_category_id=${categoryId}`)
+          .then((res) => res.json())
+          .then((res) => {
+            // 무한스크롤 기능 확인을 위한 임의 함수
+            let result = res.products.slice(
+              this.state.products.length,
+              this.state.products.length + 14
+            );
+
+            // let result = res.products;
+            setTimeout(
+              () =>
+                this.setState(
+                  {
+                    loadingStatus: !this.state.loadingStatus,
+                  },
+                  () => {
+                    this.setState({
+                      wholeProducts: res.products,
+                      products: [...this.state.products, ...result],
+                    });
+                  }
+                ),
+              1000
+            );
+            window.addEventListener("scroll", this.infiniteScroll);
+          });
+      }
+    );
   };
 
-  infiniteScroll = () => {
+  infiniteScroll = (e) => {
     let scrollHeight = Math.max(
       document.documentElement.scrollHeight,
       document.body.scrollHeight
@@ -38,52 +81,114 @@ export class ProductList extends React.Component {
     );
     let clientHeight = document.documentElement.clientHeight;
 
-    if (scrollTop + clientHeight >= scrollHeight) {
-      this.setState({
-        preItems: this.state.items,
-        items: this.state.items + 14,
-      });
-      this.handleItemCount();
+    if (scrollTop + clientHeight === scrollHeight) {
+      this.pagination();
     }
   };
 
-  handleItemCount = () => {
-    if (this.state.preItems === this.state.products.length) {
+  pagination = () => {
+    const { wholeProducts, products } = this.state;
+    if (wholeProducts.length > products.length) {
       this.setState(
         {
           loadingStatus: !this.state.loadingStatus,
         },
         () => {
-          // fetch("/data/ProductList/Products.json")
-          fetch("http://10.58.5.68:8000/product/chuck70")
-            .then((res) => res.json())
-            .then((res) => {
-              // 무한스크롤 기능 확인을 위한 임의 함수
-              // let result = res.products.slice(
-              //   this.state.preItems,
-              //   this.state.items
-              // );
+          let result = wholeProducts.slice(
+            products.length,
+            products.length + 14
+          );
 
-              let result = res.products;
-              setTimeout(
-                () =>
-                  this.setState(
-                    {
-                      loadingStatus: !this.state.loadingStatus,
-                    },
-                    () => {
-                      this.setState({
-                        products: [...this.state.products, ...result],
-                      });
-                    }
-                  ),
-                1000
-              );
-              window.addEventListener("scroll", this.infiniteScroll);
-            });
+          setTimeout(
+            () =>
+              this.setState(
+                {
+                  loadingStatus: !this.state.loadingStatus,
+                },
+                () => {
+                  this.setState({
+                    products: [...this.state.products, ...result],
+                  });
+                }
+              ),
+            1000
+          );
+          window.addEventListener("scroll", this.infiniteScroll);
         }
       );
     }
+  };
+
+  filterQueryString = () => {
+    const categoryId = this.props.location.search.split("=")[1];
+    let filteringQueryStringApi = `http://10.58.1.230:8000/products?sub_category_id=${categoryId}&${
+      this.state.filteringColor
+        ? this.state.filteringColor
+            .map((color) => {
+              return `color=${color}&`;
+            })
+            .join("")
+        : ""
+    }${
+      this.state.filteringSize
+        ? this.state.filteringSize
+            .map((size) => {
+              return `size=${size}&`;
+            })
+            .join("")
+        : ""
+    }${
+      this.state.filteringSilluet
+        ? this.state.filteringSilluet
+            .map((silluet) => {
+              return `silouette=${silluet}&`;
+            })
+            .join("")
+        : ""
+    }`.slice(0, -1);
+    this.getfilteringData(filteringQueryStringApi);
+    console.log(filteringQueryStringApi);
+  };
+
+  getfilteringData = (filteringQueryStringApi) => {
+    window.onbeforeunload = () => {
+      window.scrollTo(0, 0);
+    };
+
+    this.setState(
+      {
+        loadingStatus: !this.state.loadingStatus,
+        products: [],
+        ProductMainImage: { MainImg: [] },
+      },
+      () => {
+        fetch(filteringQueryStringApi)
+          .then((res) => res.json())
+          .then((res) => {
+            console.log(res);
+            let result = res.products.slice(
+              this.state.products.length,
+              this.state.products.length + 14
+            );
+            setTimeout(
+              () =>
+                this.setState(
+                  {
+                    loadingStatus: !this.state.loadingStatus,
+                  },
+                  () => {
+                    this.setState({
+                      wholeProducts: res.products,
+                      products: result,
+                    });
+                  }
+                ),
+              1000
+            );
+            window.addEventListener("scroll", this.infiniteScroll);
+          });
+      }
+    );
   };
 
   fixedImage = (colorEl, pdIdx) => {
@@ -95,24 +200,88 @@ export class ProductList extends React.Component {
     });
   };
 
-  DynamicRouting = () => {
-    console.log(this.props.history);
-    console.log(this.props.location);
-    console.log(this.props.match);
+  handleFilter = () => {
+    this.setState({
+      hideFilterVaild: !this.state.hideFilterVaild,
+    });
+  };
+
+  filteringColor = (Color) => {
+    this.state.filteringColor.includes(Color)
+      ? (() => {
+          let colorIdx = this.state.filteringColor.indexOf(Color);
+          const newArray = [...this.state.filteringColor];
+          newArray.splice(colorIdx, 1);
+          this.setState(
+            {
+              filteringColor: newArray,
+            },
+            () => this.filterQueryString()
+          );
+        })()
+      : this.setState(
+          {
+            filteringColor: [...this.state.filteringColor, Color],
+          },
+          () => this.filterQueryString()
+        );
+  };
+
+  filteringSize = (size) => {
+    this.state.filteringSize.includes(size)
+      ? (() => {
+          let colorIdx = this.state.filteringSize.indexOf(size);
+          const newArray = [...this.state.filteringSize];
+          newArray.splice(colorIdx, 1);
+          this.setState(
+            {
+              filteringSize: newArray,
+            },
+            () => this.filterQueryString()
+          );
+        })()
+      : this.setState(
+          {
+            filteringSize: [...this.state.filteringSize, size],
+          },
+          () => this.filterQueryString()
+        );
+  };
+
+  filteringSilluet = (silluetEngName) => {
+    this.state.filteringSilluet.includes(silluetEngName)
+      ? (() => {
+          let colorIdx = this.state.filteringSilluet.indexOf(silluetEngName);
+          const newArray = [...this.state.filteringSilluet];
+          newArray.splice(colorIdx, 1);
+          this.setState(
+            {
+              filteringSilluet: newArray,
+            },
+            () => this.filterQueryString()
+          );
+        })()
+      : this.setState(
+          {
+            filteringSilluet: [...this.state.filteringSilluet, silluetEngName],
+          },
+          () => this.filterQueryString()
+        );
   };
 
   componentDidMount() {
-    this.handleItemCount();
+    this.getDataInitial();
   }
 
   render() {
     const {
+      wholeProducts,
       products,
       hideFilterVaild,
       loadingStatus,
       ProductMainImage,
+      queryId,
     } = this.state;
-    console.log(ProductMainImage);
     return (
       <div className="ProductList">
         <div
@@ -120,24 +289,23 @@ export class ProductList extends React.Component {
             loadingStatus ? "loadingImageValid" : "loadingImageUnvalid"
           }
         >
-          <img src="/images/productList/preloader.gif" />
+          <img alt="loadingImg" src="/images/productList/preloader.gif" />
         </div>
-
-        {/* <div className="PromoBanner">banner 컴포넌트 예정</div> */}
         <PromoBanner />
-        {/* <nav className="Nav">nav 컴포넌트 예정</nav> */}
         <Nav />
         <header>
-          <span className="shoesTitle">SHOES</span>
+          <span className="shoesTitle">
+            {HeaderImg.HeaderImg[queryId - 1].categoryName}
+          </span>
           <img
             alt="headerImges"
-            src="https://image.converse.co.kr/cmsstatic/structured-content/15400/D-Converse-SP20-PWH-Best-Sellers-.jpg"
+            src={HeaderImg.HeaderImg[queryId - 1].imgUrl}
           />
         </header>
         <FilterHorizontalBar
           hideFilterValid={hideFilterVaild}
           handleFilter={this.handleFilter}
-          cnt={products.length}
+          cnt={wholeProducts.length}
         />
         <div className="bottomOfPage">
           <div
@@ -147,7 +315,13 @@ export class ProductList extends React.Component {
                 : "hideVerticalFilterUnvalild"
             }
           >
-            <FilterVerticalBar />
+            <FilterVerticalBar
+              filteringColor={(Color) => this.filteringColor(Color)}
+              filteringSize={(size) => this.filteringSize(size)}
+              filteringSilluet={(silluetEngName) =>
+                this.filteringSilluet(silluetEngName)
+              }
+            />
           </div>
           <main
             className={
@@ -168,9 +342,9 @@ export class ProductList extends React.Component {
                   mainId: id,
                   ImgUrl: image_url,
                 });
-                console.log(ProductMainImage);
                 return (
                   <ProductContainer
+                    key={pdIdx}
                     hideFilterValid={hideFilterVaild}
                     mainId={id}
                     imgUrl={ProductMainImage.MainImg[pdIdx].ImgUrl}
@@ -178,7 +352,6 @@ export class ProductList extends React.Component {
                     price={price}
                     colorList={color_image}
                     fixedImage={(colorEl) => this.fixedImage(colorEl, pdIdx)}
-                    DynamicRouting={this.DynamicRouting}
                   />
                 );
               })}
