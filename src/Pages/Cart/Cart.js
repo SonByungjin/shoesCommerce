@@ -15,7 +15,7 @@ class Cart extends React.Component {
       totalPrice: "",
       totalDiscountPrice: "",
       userToken:
-        "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NvdW50X2lkIjo2fQ.wHby_biqql1xpQEL5W1s6NbWrv1HJ8sff984oGlLXjI",
+        "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NvdW50X2lkIjoyfQ.e2QoqJJ9LKcihDt--hz4VutWxwqsqu2d-tjbT8msc5g",
     };
   }
 
@@ -38,22 +38,50 @@ class Cart extends React.Component {
       })
       .then(([res1, res2]) => {
         for (let i = 0; i < res1.cart_list.length; i++) {
-          totalPrice += res1.cart_list[i].price;
+          totalPrice += res1.cart_list[i].price * res1.cart_list[i].quantity;
           totalDiscountPrice +=
             res1.cart_list[i].price * (res1.cart_list[i].discount_rate / 100);
         }
         this.setState({
           cartItems: res1.cart_list,
-          totalPrice,
-          totalDiscountPrice,
+          totalPrice: totalPrice.toLocaleString(),
+          totalDiscountPrice: totalDiscountPrice.toLocaleString(),
           recommendProducts: res2.CartPageRecommendItems,
         });
       });
   }
 
+  // componentDidUpdate() {
+  //   const { userToken } = this.state;
+  //   let totalPrice = 0;
+  //   let totalDiscountPrice = 0;
+
+  //   fetch("http://10.58.5.250:8000/orders/cart", {
+  //     headers: {
+  //       Authorization: userToken,
+  //     },
+  //   })
+  //     .then((res) => res.json())
+  //     .then((res) => {
+  //       for (let i = 0; i < res.cart_list.length; i++) {
+  //         totalPrice += res.cart_list[i].price * res.cart_list[i].quantity;
+  //         totalDiscountPrice +=
+  //           res.cart_list[i].price * (res.cart_list[i].discount_rate / 100);
+  //       }
+  //       this.setState({
+  //         cartItems: res.cart_list,
+  //         totalPrice: totalPrice.toLocaleString(),
+  //         totalDiscountPrice: totalDiscountPrice.toLocaleString(),
+  //       });
+  //     });
+  // }
+
   handleIncrease = (cartId) => {
     const { userToken } = this.state;
     const { cartItems } = this.state;
+
+    let totalPrice = 0;
+    let totalDiscountPrice = 0;
 
     this.setState(
       {
@@ -68,10 +96,16 @@ class Cart extends React.Component {
         }),
       },
       () => {
+        console.log(cartItems);
+        for (let i = 0; i < cartItems.length; i++) {
+          totalPrice += cartItems[i].price * cartItems[i].quantity;
+          totalDiscountPrice +=
+            cartItems[i].price * (cartItems[i].discount_rate / 100);
+        }
+        console.log(totalPrice);
         this.setState({
-          totalPrice: cartItems.reduce((totalPrice, cartItem) => {
-            totalPrice = totalPrice + cartItem.price * cartItem.quantity;
-          }, 0),
+          totalPrice: totalPrice.toLocaleString(),
+          totalDiscountPrice: totalDiscountPrice.toLocaleString(),
         });
       }
     );
@@ -100,14 +134,32 @@ class Cart extends React.Component {
     const { userToken } = this.state;
     const { cartItems } = this.state;
 
-    this.setState({
-      cartItems: cartItems.map((cartItem) => {
-        if (cartItem.cart_id === cartId && cartItem.quantity > 1) {
-          return { ...cartItem, quantity: cartItem.quantity - 1 };
+    let totalPrice = 0;
+    let totalDiscountPrice = 0;
+
+    this.setState(
+      {
+        cartItems: cartItems.map((cartItem) => {
+          if (cartItem.cart_id === cartId && cartItem.quantity > 1) {
+            return { ...cartItem, quantity: cartItem.quantity - 1 };
+          }
+          return cartItem;
+        }),
+      },
+      () => {
+        console.log(cartItems);
+        for (let i = 0; i < cartItems.length; i++) {
+          totalPrice += cartItems[i].price * cartItems[i].quantity;
+          totalDiscountPrice +=
+            cartItems[i].price * (cartItems[i].discount_rate / 100);
         }
-        return cartItem;
-      }),
-    });
+        console.log(totalPrice);
+        this.setState({
+          totalPrice: totalPrice.toLocaleString(),
+          totalDiscountPrice: totalDiscountPrice.toLocaleString(),
+        });
+      }
+    );
 
     fetch(`http://10.58.5.250:8000/orders/cart`, {
       method: "PATCH",
@@ -135,21 +187,21 @@ class Cart extends React.Component {
 
     const action = window.confirm("정말로 지우시겠습니까?");
     if (action == true) {
-      // fetch(`http://10.58.5.250:8000/orders/cart/${cartId}`, {
-      //   method: "DELETE",
-      //   headers: { Authorization: userToken },
-      // })
-      //   .then((res) => res.json())
-      //   .then((res) => {
-      //     this.setState({
-      //       cartItems: cartItems.filter((cartItem) => {
-      //         if (cartItem.cart_id === cartId) {
-      //           return false;
-      //         }
-      //         return true;
-      //       }),
-      //     });
-      //   });
+      fetch(`http://10.58.5.250:8000/orders/cart/${cartId}`, {
+        method: "DELETE",
+        headers: { Authorization: userToken },
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          this.setState({
+            cartItems: cartItems.filter((cartItem) => {
+              if (cartItem.cart_id === cartId) {
+                return false;
+              }
+              return true;
+            }),
+          });
+        });
     } else {
       return;
     }
@@ -162,16 +214,16 @@ class Cart extends React.Component {
     const action = window.confirm("정말로 비우시겠습니까?");
     if (action == true) {
       console.log("삭제완료");
-      // fetch(`http://10.58.5.250:8000/orders/cart`, {
-      //   method: "DELETE",
-      //   headers: { Authorization: userToken },
-      // })
-      //   .then((res) => res.json())
-      //   .then((res) =>
-      //     this.setState({
-      //       cartItems: [],
-      //     })
-      //   );
+      fetch(`http://10.58.5.250:8000/orders/cart`, {
+        method: "DELETE",
+        headers: { Authorization: userToken },
+      })
+        .then((res) => res.json())
+        .then((res) =>
+          this.setState({
+            cartItems: [],
+          })
+        );
     } else {
       return;
     }

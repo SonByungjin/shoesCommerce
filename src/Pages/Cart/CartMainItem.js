@@ -8,7 +8,6 @@ class CartMainItem extends React.Component {
       increaseQuantity,
       decreaseQuantity,
       handleOneDelete,
-      handleAllDelete,
     } = this.props;
 
     return (
