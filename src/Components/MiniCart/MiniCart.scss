@@ -13,6 +13,15 @@
     }
 }
 
+@keyframes move {
+    0% {
+        transform: translate(0px, 0px);       
+}
+    100% {
+        transform: translate(500px, 0px);
+    }
+}
+
 
 .miniCartDrop {
     position: fixed;
@@ -23,13 +32,11 @@
     background-color:#ffffff;
     animation: movemove 0.3s 0.3s;
     animation-fill-mode: both;
-    // .miniCartActive {
-    //     display: flex;
-    //     justify-content: center;
-    //     align-items: center;
-    //     background-color: white;
-    //     width: 900px;
-    // }
+    &.miniCartActive {
+        animation: move 0.3s 0.3s;
+        animation-fill-mode: both;
+        // display: none;
+    }
     .miniCartHeader {
         height: 60px;
         padding-left: 26px;
@@ -58,6 +65,7 @@
                 border: none;
                 border-radius: 0;
                 color: inherit;
+                outline: none;
                 cursor: pointer;
                 width: 60px;
                 height: 60px;
