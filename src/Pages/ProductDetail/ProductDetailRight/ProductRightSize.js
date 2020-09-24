@@ -65,8 +65,6 @@ class ProductRightSize extends React.Component {
   addToCart = (id, quantity, size) => {
     const { userToken } = this.state;
     const { productId, productInfo } = this.props;
-    console.log(productInfo);
-    console.log(productId);
 
     fetch(`http://10.58.5.250:8000/orders/cart`, {
       method: "POST",
@@ -83,9 +81,6 @@ class ProductRightSize extends React.Component {
       .then((res) => {
         console.log(res);
       });
-    console.log(id);
-    console.log(quantity);
-    console.log(size);
   };
 
   render() {
