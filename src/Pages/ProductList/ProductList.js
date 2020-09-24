@@ -94,35 +94,6 @@ export class ProductList extends React.Component {
           loadingStatus: !this.state.loadingStatus,
         },
         () => {
-<<<<<<< HEAD
-          // fetch("/data/ProductList/Products.json")
-          fetch("http://10.58.1.173:8000/product/list/1")
-            .then((res) => res.json())
-            .then((res) => {
-              // 무한스크롤 기능 확인을 위한 임의 함수
-              // let result = res.products.slice(
-              //   this.state.preItems,
-              //   this.state.items
-              // );
-
-              let result = res.products;
-              setTimeout(
-                () =>
-                  this.setState(
-                    {
-                      loadingStatus: !this.state.loadingStatus,
-                    },
-                    () => {
-                      this.setState({
-                        products: [...this.state.products, ...result],
-                      });
-                    }
-                  ),
-                1000
-              );
-              // window.addEventListener("scroll", this.infiniteScroll);
-            });
-=======
           let result = wholeProducts.slice(
             products.length,
             products.length + 14
@@ -143,7 +114,6 @@ export class ProductList extends React.Component {
             1000
           );
           window.addEventListener("scroll", this.infiniteScroll);
->>>>>>> master
         }
       );
     }

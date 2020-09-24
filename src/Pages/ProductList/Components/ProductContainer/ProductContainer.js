@@ -29,23 +29,6 @@ class ProductContainer extends Component {
     this.setState({
       heartBoolean: !this.state.heartBoolean,
     });
-<<<<<<< HEAD
-    // console.log(localStorage.getItem("token"));
-    fetch("http://10.58.5.117:8000/false_account/wishlist", {
-      method: "POST",
-      headers: {
-        Authorization: localStorage.getItem("token"),
-      },
-      body: JSON.stringify({
-        product_id: mainId,
-      }),
-    });
-    // .then((response) => response.json())
-    // .then((result) => {
-    //   console.log(result);
-    // });
-    // console.log(mainId);
-=======
     this.setState({
       loveItAnimation: !this.state.loveItAnimation,
     });
@@ -61,7 +44,6 @@ class ProductContainer extends Component {
     //   .then((response) => response.json())
     //   .then((result) => {
     //   });
->>>>>>> master
   };
 
   changeImage = (idx) => {
