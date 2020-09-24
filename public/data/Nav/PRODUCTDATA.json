@@ -1,0 +1,34 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "name": "척테일러 올스타",
+      "image": "https://image.converse.co.kr//cmsstatic/product/M9160_M9160_primary.jpg"
+    },
+    {
+      "id": 2,
+      "name": "척테일러 올스타 슬립",
+      "image": "https://image.converse.co.kr//cmsstatic/product/M9621C_M9621C_primary.jpg"
+    },
+    {
+      "id": 3,
+      "name": "척테일러 올스타 투(공용)",
+      "image": "https://image.converse.co.kr//cmsstatic/product/M9622C_M9622C_primary.jpg"
+    },
+    {
+      "id": 4,
+      "name": "척테일러 올스타 투(공용)",
+      "image": "https://image.converse.co.kr//cmsstatic/product/M9622C_M9622C_primary.jpg"
+    },
+    {
+      "id": 5,
+      "name": "하이 테스트",
+      "image": "https://image.converse.co.kr//cmsstatic/product/M9622C_M9622C_primary.jpg"
+    },
+    {
+      "id": 6,
+      "name": "테스트 두번",
+      "image": "https://image.converse.co.kr//cmsstatic/product/M9622C_M9622C_primary.jpg"
+    }
+  ]
+}

@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import ActiveSearchBar from "./ActiveSearchBar";
 import ShoesMenuList from "./ShoesMenuList";
 import ClothesMenuList from "./ClothesMenuList";
 import KidsMenuList from "./KidsMenuList";
@@ -12,6 +13,7 @@ class Nav extends React.Component {
     this.state = {
       scrolled: false,
       activeId: 0,
+      onSearchBar: false,
       leftMenuList: NavData.leftMenuList,
       rightMenuIcons: NavData.rightMenuIcons,
     };
@@ -43,9 +45,23 @@ class Nav extends React.Component {
     });
   };
 
+  toggleSearchBar = () => {
+    const { onSearchBar } = this.state;
+    this.setState({
+      onSearchBar: !onSearchBar,
+    });
+    console.log(onSearchBar);
+  };
+
   render() {
-    const { scrolled, activeId, leftMenuList, rightMenuIcons } = this.state;
-    const { closeMenu } = this;
+    const {
+      scrolled,
+      activeId,
+      leftMenuList,
+      rightMenuIcons,
+      onSearchBar,
+    } = this.state;
+    const { closeMenu, toggleSearchBar } = this;
     const leftMenuObj = {
       0: "",
       1: <ShoesMenuList activeId={activeId} closeMenu={closeMenu} />,
@@ -57,9 +73,9 @@ class Nav extends React.Component {
         <nav>
           <ul className="leftMenu">
             <li>
-              <a href="/main">
+              <Link to="/main">
                 <img alt="navLogo" src="/images/Nav/navLogo.png" />
-              </a>
+              </Link>
             </li>
             {leftMenuList.map((menu) => {
               return (
@@ -81,7 +97,10 @@ class Nav extends React.Component {
                 </li>
               );
             })}
-            <li className={scrolled ? "searchBarScrolled" : "searchBar"}>
+            <li
+              className={scrolled ? "searchBarScrolled" : "searchBar"}
+              onClick={toggleSearchBar}
+            >
               <div className="text">검색</div>
               <div className="icon">
                 <img
@@ -92,6 +111,7 @@ class Nav extends React.Component {
             </li>
           </ul>
           <div className="onMenuList">{leftMenuObj[activeId]}</div>
+          <ActiveSearchBar onSearchBar={onSearchBar} />
         </nav>
       </div>
     );

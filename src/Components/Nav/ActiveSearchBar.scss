@@ -1,0 +1,265 @@
+@mixin add-opacity-animation {
+  animation: opacity-animation 0.2s;
+}
+
+.activeSearchBar {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  top: 60px;
+  width: 100%;
+  max-height: 740px;
+  height: 100vh;
+  background-color: #ffffff;
+  border-top: 1px solid #000000;
+  &::after {
+    content: "";
+    display: block;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.7);
+    width: 100%;
+    height: 100vh;
+    z-index: -10;
+    @include add-opacity-animation;
+  }
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1440px;
+    max-height: 740px;
+    width: 100%;
+    height: 100%;
+
+    .dashBoard {
+      display: flex;
+      flex-wrap: wrap;
+      width: 50%;
+
+      .content {
+        position: relative;
+        max-width: 360px;
+        max-height: 370px;
+        height: 100%;
+        width: 50%;
+
+        .productName {
+          position: absolute;
+          top: 15px;
+          left: 20px;
+          font-size: 14px;
+          font-weight: bold;
+        }
+
+        video {
+          width: 100%;
+          height: 100%;
+          outline: none;
+          object-fit: fill;
+        }
+
+        .top {
+          max-width: 360px;
+          max-height: 185px;
+          width: 100%;
+          height: 100%;
+
+          h1 {
+            font-size: 28px;
+            padding: 55px 0 0 20px;
+          }
+
+          svg {
+            width: 14px;
+            margin-left: 20px;
+          }
+
+          h2 {
+            display: inline-block;
+            font-size: 14px;
+            margin-left: 6px;
+            &:hover {
+              text-decoration: underline;
+              cursor: pointer;
+            }
+          }
+        }
+
+        .bottom {
+          position: relative;
+          max-width: 360px;
+          max-height: 185px;
+          width: 100%;
+          height: 50%;
+
+          .productName {
+            position: absolute;
+            top: 15px;
+            left: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            color: #000000;
+          }
+
+          img {
+            width: 100%;
+            height: 100%;
+          }
+        }
+
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      .content:nth-child(even) {
+        border-right: 1px solid #000000;
+      }
+    }
+
+    .searchBar {
+      width: 50%;
+
+      .searchArea {
+        width: 100%;
+        height: 50%;
+
+        h1 {
+          font-size: 40px;
+          padding: 40px 0 0 80px;
+        }
+
+        input {
+          width: 519px;
+          height: 48px;
+          font-size: 20px;
+          outline: none;
+          border: none;
+          border-bottom: 1px solid #999999;
+          margin: 30px 0 0 100px;
+          padding-left: 10px;
+          &::placeholder {
+            color: #757575;
+            font-weight: 600;
+          }
+        }
+
+        .recommendWords {
+          font-size: 20px;
+          font-weight: 600;
+          color: #757575;
+          margin: 20px 0 0 110px;
+
+          li {
+            padding-bottom: 10px;
+          }
+        }
+
+        .hidden {
+          display: none;
+        }
+
+        svg {
+          position: absolute;
+          top: 140px;
+          right: 18%;
+          width: 16px;
+        }
+      }
+
+      .hybridArea {
+        width: 100%;
+        height: 50%;
+        font-size: 40px;
+        padding: 40px 0 0 80px;
+        border-top: 1px solid #000000;
+
+        .popularSearchWords {
+          h1 {
+            margin-bottom: 30px;
+          }
+
+          ul {
+            li {
+              font-size: 20px;
+              font-weight: bold;
+              margin: 15px;
+              padding-left: 14px;
+              cursor: pointer;
+            }
+          }
+        }
+
+        .searchResults {
+          h1 {
+            margin-bottom: 8px;
+          }
+
+          ul {
+            display: flex;
+
+            li {
+              margin: 10px;
+
+              img {
+                width: 120px;
+                height: 160px;
+              }
+
+              .name {
+                font-size: 12px;
+              }
+            }
+          }
+        }
+
+        .hidden {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+.inactiveSearchBar {
+  display: none;
+}
+
+@media (max-width: 1500px) {
+  .navWrap {
+    .activeSearchBar {
+      .container {
+        .searchBar {
+          .searchArea {
+            svg {
+              right: 7%;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@keyframes opacity-animation {
+  0% {
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 0.25;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+
+  75% {
+    opacity: 0.75;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

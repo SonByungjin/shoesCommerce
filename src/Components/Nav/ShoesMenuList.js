@@ -8,13 +8,12 @@ class ShoesMenuList extends React.Component {
     super();
     this.state = {
       shoesMenuList: [],
-      // shoesMenuList: ShoesMenuListData.shoesMenuList,
       recommendItem: ShoesMenuListData.recommendItem,
     };
   }
 
   componentDidMount() {
-    fetch("http://10.58.5.148:8000/products/main")
+    fetch("http://10.58.1.230:8000/products/main")
       .then((res) => res.json())
       .then((res) => {
         this.setState({
@@ -32,9 +31,7 @@ class ShoesMenuList extends React.Component {
           {shoesMenuList.map((menu) => {
             return (
               <li key={menu.id}>
-                <Link to={`http://10.58.5.148:8000/products/${menu.id}`}>
-                  {menu.name}
-                </Link>
+                <Link to={`/productList/${menu.id}`}>{menu.name}</Link>
               </li>
             );
           })}
