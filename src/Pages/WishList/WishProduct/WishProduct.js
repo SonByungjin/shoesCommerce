@@ -3,11 +3,18 @@ import "./WishProduct.scss";
 
 class WishProduct extends Component {
   render() {
-    const { imgUrl, price, id, name, productModal } = this.props;
+    const {
+      imgUrl,
+      price,
+      id,
+      name,
+      productModal,
+      DeleteWishList,
+    } = this.props;
     return (
       <div className="WishProduct">
         <div className="wishProductImg">
-          <div className="heartImgContainer">
+          <div onClick={DeleteWishList} className="heartImgContainer">
             <img alt="heartImg" src="/images/WishList/heart_fill.png" />
           </div>
           <img src={imgUrl} />

@@ -13,7 +13,7 @@ class ActiveSearchBar extends Component {
   }
 
   componentDidMount() {
-    fetch("http://10.58.1.230:8000/products/search")
+    fetch("http://10.58.1.230:8002/products/search")
       .then((res) => res.json())
       .then((res) => {
         this.setState({

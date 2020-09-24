@@ -23,8 +23,8 @@ class WishList extends Component {
 
   getWishList = () => {
     fetch(
-      "/data/ProductList/wishlist.json",
-      // "http://10.58.5.250:8000/false_account/wishlist",
+      // "/data/ProductList/wishlist.json",
+      "http://10.58.5.250:8000/false_account/wishlist",
       {
         headers: {
           Authorization: localStorage.getItem("token"),
@@ -33,9 +33,12 @@ class WishList extends Component {
     )
       .then((res) => res.json())
       .then((res) => {
-        this.setState({
-          wishlist: res.wishlist,
-        });
+        this.setState(
+          {
+            wishlist: res.wishlist,
+          },
+          this.getWishList()
+        );
       });
   };
 
@@ -62,8 +65,30 @@ class WishList extends Component {
       });
   };
 
+  deleteWishList = (product_id) => {
+    fetch(
+      "http://10.58.5.250:8000/false_account/wishlist",
+      {
+        method: "POST",
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+        body: JSON.stringify({
+          id: product_id,
+        }),
+      },
+      this.getWishList()
+    );
+  };
+
+  AlertDeleteWishList = (product_id) => {
+    window.confirm("위시리스트에서 정말 삭제하시겠습니까?") &&
+      this.deleteWishList(product_id);
+  };
+
   render() {
     const { wishlist, productModal, productInfo } = this.state;
+    console.log(wishlist);
     return (
       <div className="WishList">
         <PromoBanner />
@@ -124,6 +149,7 @@ class WishList extends Component {
                 } = wishProduct;
                 return (
                   <WishProduct
+                    DeleteWishList={() => this.AlertDeleteWishList(product_id)}
                     imgUrl={main_image}
                     price={price}
                     id={product_id}
