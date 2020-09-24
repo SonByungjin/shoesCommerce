@@ -6,6 +6,7 @@ import WishProduct from "./WishProduct/WishProduct";
 import ProfileImg from "./ProfileImg";
 import ProductDetailRight from "../ProductDetail/ProductDetailRight/ProductDetailRight";
 import ProductDetailFeed from "../ProductDetail/ProductDetailFeed/ProductDetailFeed";
+import WishLIstModal from "./WishLIstModal/WishLIstModal";
 import "./WishList.scss";
 
 class WishList extends Component {
@@ -14,6 +15,8 @@ class WishList extends Component {
     this.state = {
       wishlist: [],
       productModal: false,
+      productInfo: [],
+      modalImgIdx: [],
     };
   }
 
@@ -23,8 +26,8 @@ class WishList extends Component {
 
   getWishList = () => {
     fetch(
-      "/data/ProductList/wishlist.json",
-      // "http://10.58.5.117:8000/false_account/wishlist"
+      // "/data/ProductList/wishlist.json",
+      "http://10.58.5.250:8000/false_account/wishlist",
       {
         headers: {
           Authorization: localStorage.getItem("token"),
@@ -39,19 +42,39 @@ class WishList extends Component {
       });
   };
 
-  productModalToggle = () => {
-    this.setState({
-      productModal: !this.state.productModal,
-    });
+  productModalToggle = (serial_number) => {
+    this.setState(
+      {
+        productModal: !this.state.productModal,
+      },
+      () => {
+        this.modalData(serial_number);
+      }
+    );
+  };
+
+  modalData = (product_id, idx) => {
+    fetch(`http://10.58.5.250:8000/products/${product_id}`)
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.product_information) {
+          this.setState({
+            productInfo: res["product_information"][0],
+          });
+        }
+        this.setState({
+          modalImgIdx: idx,
+        });
+      });
   };
 
   render() {
-    const { wishlist, productModal } = this.state;
+    const { wishlist, productModal, productInfo, modalImgIdx } = this.state;
     return (
       <div className="WishList">
         <PromoBanner />
         <Nav />
-        <div
+        {/* <div
           className={
             productModal ? "productModalWrapper" : "closeProductModalWrapper"
           }
@@ -71,14 +94,19 @@ class WishList extends Component {
                 />
               </div>
               <div className="productInfo">
-                <ProductDetailRight />
+                <ProductDetailRight productInfo={productInfo} />
               </div>
               <div className="closeModal">
                 <span onClick={this.productModalToggle}>x</span>
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
+        {wishlist.map((ImgIdx) => {
+          <WishLIstModal mainImg={} ImgIdx={ImgIdx}>
+            <ProductDetailRight productInfo={productInfo} />
+          </WishLIstModal>;
+        })}
         <div className="wishlistMain">
           <div className="userInfo">
             <div className="userName">
@@ -114,20 +142,22 @@ class WishList extends Component {
           <div className="wishProductList">
             <p>위시리스트</p>
             <div className="wishProductListMain">
-              {wishlist.map((wishProduct) => {
+              {wishlist.map((wishProduct, idx) => {
                 const {
                   main_image,
                   price,
-                  serial_number,
                   series_name,
+                  product_id,
                 } = wishProduct;
                 return (
                   <WishProduct
                     imgUrl={main_image}
                     price={price}
-                    id={serial_number}
+                    id={product_id}
                     name={series_name}
-                    productModal={this.productModalToggle}
+                    productModal={() =>
+                      this.productModalToggle(product_id, idx)
+                    }
                   />
                 );
               })}

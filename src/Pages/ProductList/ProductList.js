@@ -113,7 +113,6 @@ export class ProductList extends React.Component {
               ),
             1000
           );
-          window.addEventListener("scroll", this.infiniteScroll);
         }
       );
     }

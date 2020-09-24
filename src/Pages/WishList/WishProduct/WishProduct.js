@@ -17,7 +17,7 @@ class WishProduct extends Component {
           <span>{Number(price).toLocaleString("en")}원</span>
         </div>
         <div className="wishProductBuy">
-          <span onClick={productModal}>바로구매하기</span>
+          <span onClick={productModal}>장바구니 담기</span>
         </div>
       </div>
     );

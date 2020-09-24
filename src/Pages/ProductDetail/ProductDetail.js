@@ -15,9 +15,10 @@ class ProductDetail extends React.Component {
   }
 
   componentDidMount() {
-    fetch(`http://10.58.5.117:8000/products/${this.props.match.params.id}`)
+    fetch(`http://10.58.5.250:8000/products/${this.props.match.params.id}`)
       .then((res) => res.json())
       .then((res) => {
+        console.log(res);
         if (res.product_information) {
           this.setState({ productInfo: res["product_information"][0] });
         } else {

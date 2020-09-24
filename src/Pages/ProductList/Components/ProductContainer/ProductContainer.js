@@ -29,21 +29,24 @@ class ProductContainer extends Component {
     this.setState({
       heartBoolean: !this.state.heartBoolean,
     });
+
     this.setState({
       loveItAnimation: !this.state.loveItAnimation,
     });
-    // fetch("http://10.58.5.117:8000/false_account/wishlist", {
-    //   method: "POST",
-    //   headers: JSON.stringify({
-    //     Authorization: localStorage.getItem("token"),
-    //   }),
-    //   body: JSON.stringify({
-    //     id: mainId,
-    //   }),
-    // })
-    //   .then((response) => response.json())
-    //   .then((result) => {
-    //   });
+
+    fetch("http://10.58.5.250:8000/false_account/wishlist", {
+      method: "POST",
+      headers: {
+        Authorization: localStorage.getItem("token"),
+      },
+      body: JSON.stringify({
+        id: mainId,
+      }),
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        console.log(result);
+      });
   };
 
   changeImage = (idx) => {
