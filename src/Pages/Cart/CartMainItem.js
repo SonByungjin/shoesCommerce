@@ -3,7 +3,13 @@ import "./CartMainItem.scss";
 
 class CartMainItem extends React.Component {
   render() {
-    const { cartItem, increaseQuantity, decreaseQuantity } = this.props;
+    const {
+      cartItem,
+      increaseQuantity,
+      decreaseQuantity,
+      handleOneDelete,
+      handleAllDelete,
+    } = this.props;
 
     return (
       <section className="cartMainItem">
@@ -61,7 +67,12 @@ class CartMainItem extends React.Component {
             </div>
             <div className="cartMainItemPriceContainerThree">
               <span className="optionChange">옵션변경</span>
-              <span className="delete">삭제</span>
+              <span
+                className="delete"
+                onClick={() => handleOneDelete(cartItem.cart_id)}
+              >
+                삭제
+              </span>
             </div>
           </div>
         </div>

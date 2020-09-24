@@ -10,6 +10,8 @@ class CartMain extends React.Component {
       recommendItems,
       increaseQuantity,
       decreaseQuantity,
+      handleOneDelete,
+      handleAllDelete,
     } = this.props;
 
     return (
@@ -32,12 +34,18 @@ class CartMain extends React.Component {
                   cartItem={item}
                   increaseQuantity={increaseQuantity}
                   decreaseQuantity={decreaseQuantity}
+                  handleOneDelete={handleOneDelete}
                 />
               );
             })}
           </div>
           <div className="cartMainItemsDeleteContainer">
-            <button className="cartMainItemsDeleteBtn">장바구니 비우기</button>
+            <button
+              className="cartMainItemsDeleteBtn"
+              onClick={() => handleAllDelete()}
+            >
+              장바구니 비우기
+            </button>
           </div>
         </section>
         <section className="cartProductRecommend">

@@ -117,6 +117,45 @@ class Cart extends React.Component {
       });
   };
 
+  handleOneDelete = (cartId) => {
+    const { userToken } = this.state;
+    const { cartItems } = this.state;
+
+    fetch(`http://10.58.5.250:8000/orders/cart`, {
+      method: "DELETE",
+      headers: { Authorization: userToken },
+      body: JSON.stringify({
+        cart_id: cartId,
+      }),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        this.setState({
+          cartItems: cartItems.filter((cartItem) => {
+            if (cartItem.cart_id === cartId) {
+              return false;
+            }
+            return true;
+          }),
+        });
+      });
+  };
+
+  handleAllDelete = () => {
+    const { userToken } = this.state;
+
+    fetch(`http://10.58.5.250:8000/orders/cart`, {
+      method: "DELETE",
+      headers: { Authorization: userToken },
+    })
+      .then((res) => res.json())
+      .then((res) =>
+        this.setState({
+          cartItems: [],
+        })
+      );
+  };
+
   render() {
     const {
       cartItems,
@@ -136,6 +175,8 @@ class Cart extends React.Component {
               recommendItems={recommendProducts}
               increaseQuantity={this.handleIncrease}
               decreaseQuantity={this.handleDecrease}
+              handleOneDelete={this.handleOneDelete}
+              handleAllDelete={this.handleAllDelete}
             />
             <CartRight
               totalPrice={totalPrice}
