@@ -31,7 +31,7 @@ class ShoesMenuList extends React.Component {
           {shoesMenuList.map((menu) => {
             return (
               <li key={menu.id}>
-                <Link to={`/productList/${menu.id}`}>{menu.name}</Link>
+                <Link to={`/productList?category=${menu.id}`}>{menu.name}</Link>
               </li>
             );
           })}

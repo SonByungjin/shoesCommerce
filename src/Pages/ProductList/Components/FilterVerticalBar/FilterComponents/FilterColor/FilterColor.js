@@ -5,38 +5,33 @@ class FilterColor extends Component {
   constructor() {
     super();
     this.state = {
-      selectColor: [
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-      ],
+      selectColor: {
+        black: false,
+        blue: false,
+        green: false,
+        navy: false,
+        violet: false,
+        brown: false,
+        gray: false,
+        kakhi: false,
+        beige: false,
+        red: false,
+        orange: false,
+        pink: false,
+        yellow: false,
+        white: false,
+      },
     };
   }
 
-  handleColor = (idx) => {
-    this.setState(
-      {
-        selectColor: [
-          ...this.state.selectColor.slice(0, idx),
-          !this.state.selectColor[idx],
-          ...this.state.selectColor.slice(idx + 1),
-        ],
-      },
-      () => {
-        console.log(this.state.selectColor);
-      }
-    );
+  handleColor = (idx, Color) => {
+    let updateSelectColor = this.state.selectColor;
+    updateSelectColor[Color] = !updateSelectColor[Color];
+    console.log(updateSelectColor);
+    this.setState({
+      selectColor: updateSelectColor,
+    });
+    this.props.filteringColor(Color);
   };
 
   render() {
@@ -55,20 +50,21 @@ class FilterColor extends Component {
           <div
             className={hideFilterImage[2] ? "hideFilterImage" : "filterImage"}
           >
-            <img className="minusImage" src={filterImage[0]} />
-            <img className="plusImage" src={filterImage[1]} />
+            <img alt="minusImage" className="minusImage" src={filterImage[0]} />
+            <img alt="plusImage" className="plusImage" src={filterImage[1]} />
           </div>
         </div>
         <div className={hideFilterImage[2] ? "hideTypeOfColor" : "typeOfColor"}>
           {productColor.map((Color, idx) => (
             <div
-              onClick={() => this.handleColor(idx)}
+              key={idx}
+              onClick={() => this.handleColor(idx, Color)}
               style={{ backgroundColor: Color }}
               className="colorCircle"
             >
               <div
                 className={
-                  selectColor[idx] ? "selectColorAfter" : "selectColorBefore"
+                  selectColor[Color] ? "selectColorAfter" : "selectColorBefore"
                 }
               ></div>
             </div>
