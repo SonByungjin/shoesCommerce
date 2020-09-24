@@ -17,18 +17,15 @@ class WishList extends Component {
     };
   }
 
-  productModalToggle = () => {
-    this.setState({
-      productModal: !this.state.productModal,
-    });
-  };
-
   componentDidMount() {
+    this.getWishList();
+  }
+
+  getWishList = () => {
     fetch(
       "/data/ProductList/wishlist.json",
       // "http://10.58.5.117:8000/false_account/wishlist"
       {
-        method: "GET",
         headers: {
           Authorization: localStorage.getItem("token"),
         },
@@ -40,7 +37,13 @@ class WishList extends Component {
           wishlist: res.wishlist,
         });
       });
-  }
+  };
+
+  productModalToggle = () => {
+    this.setState({
+      productModal: !this.state.productModal,
+    });
+  };
 
   render() {
     const { wishlist, productModal } = this.state;
