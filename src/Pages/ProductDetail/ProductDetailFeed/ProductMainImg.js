@@ -2,49 +2,26 @@ import React from "react";
 import "./ProductMainImg.scss";
 
 class ProductMainImg extends React.Component {
-  constructor(props) {
-    super();
-  }
-
   render() {
+    const { productMainImg } = this.props;
+    const { productSubImg } = this.props;
+
     return (
       <div className="ProductMainImg">
         <section className="mainImg">
-          <img alt="Product Main img" src={this.props.productMainImage} />
+          <img alt="Product Main img" src={productMainImg} />
         </section>
         <section className="mainImgMore">
           <div className="imgMoreContainer">
             <ul>
-              <li>
-                <img
-                  alt="Product MainDetailImg"
-                  src="https://image.converse.co.kr/cmsstatic/product/168636C_168636C_02.jpg?browse="
-                />
-              </li>
-              <li>
-                <img
-                  alt="Product MainDetailImg"
-                  src="https://image.converse.co.kr/cmsstatic/product/168636C_168636C_03.jpg?browse="
-                />
-              </li>
-              <li>
-                <img
-                  alt="Product MainDetailImg"
-                  src="https://image.converse.co.kr/cmsstatic/product/168636C_168636C_04.jpg?browse="
-                />
-              </li>
-              <li>
-                <img
-                  alt="Product MainDetailImg"
-                  src="https://image.converse.co.kr/cmsstatic/product/168636C_168636C_05.jpg?browse="
-                />
-              </li>
-              <li>
-                <img
-                  alt="Product MainDetailImg"
-                  src="https://image.converse.co.kr/cmsstatic/product/168636C_168636C_06.jpg?browse="
-                />
-              </li>
+              {productSubImg &&
+                productSubImg.map((product, index) => {
+                  return (
+                    <li key={index}>
+                      <img alt="productSubImg" src={product.medium_url}></img>
+                    </li>
+                  );
+                })}
             </ul>
           </div>
         </section>
