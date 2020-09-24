@@ -15,6 +15,7 @@ class ProductContainer extends Component {
       showColorShoesImage: null,
       colorListValid: false,
       selectColorValid: props.mainId,
+      loveItAnimation: false,
     };
   }
 
@@ -28,6 +29,7 @@ class ProductContainer extends Component {
     this.setState({
       heartBoolean: !this.state.heartBoolean,
     });
+<<<<<<< HEAD
     // console.log(localStorage.getItem("token"));
     fetch("http://10.58.5.117:8000/false_account/wishlist", {
       method: "POST",
@@ -43,6 +45,23 @@ class ProductContainer extends Component {
     //   console.log(result);
     // });
     // console.log(mainId);
+=======
+    this.setState({
+      loveItAnimation: !this.state.loveItAnimation,
+    });
+    // fetch("http://10.58.5.117:8000/false_account/wishlist", {
+    //   method: "POST",
+    //   headers: JSON.stringify({
+    //     Authorization: localStorage.getItem("token"),
+    //   }),
+    //   body: JSON.stringify({
+    //     id: mainId,
+    //   }),
+    // })
+    //   .then((response) => response.json())
+    //   .then((result) => {
+    //   });
+>>>>>>> master
   };
 
   changeImage = (idx) => {
@@ -64,15 +83,9 @@ class ProductContainer extends Component {
       heartBoolean,
       colorListValid,
       selectColorValid,
+      loveItAnimation,
     } = this.state;
-    const {
-      mainId,
-      imgUrl,
-      name,
-      price,
-      colorList,
-      DynamicRouting,
-    } = this.props;
+    const { mainId, imgUrl, name, price, colorList } = this.props;
     const [frontImg, backImg] = imgUrl;
 
     return (
@@ -81,6 +94,20 @@ class ProductContainer extends Component {
         onMouseOver={this.colorListValid}
         onMouseOut={this.colorListValid}
       >
+        <div
+          className={
+            loveItAnimation ? "loveItContainer" : "loveItContainerUnvalid"
+          }
+        >
+          <ul className="loveIttext">
+            <li className="noOneLoveIt">LOVE IT</li>
+            <li className="noTwoLoveIt">LOVE IT</li>
+            <li className="noThreeLoveIt">LOVE IT</li>
+            <li className="noFourLoveIt">LOVE IT</li>
+            <li className="noFiveLoveIt">LOVE IT</li>
+            <li className="noSixLoveIt">LOVE IT</li>
+          </ul>
+        </div>
         <div className="productImage" key={this.props.id}>
           <div className="heartImgContainer">
             <img
@@ -98,8 +125,8 @@ class ProductContainer extends Component {
               src={heartImg[1]}
             />
           </div>
-          <Link to="/productDetail/1">
-            <div className="mainShoesImage" onClick={DynamicRouting}>
+          <Link to={`/productDetail/${mainId}`}>
+            <div className="mainShoesImage">
               <img
                 alt="frontShoesImg"
                 className="frontShoesImg"
@@ -113,6 +140,7 @@ class ProductContainer extends Component {
               const { id, image_url } = colorEl;
               return (
                 <div
+                  key={id}
                   pdSerialNumber={id}
                   className={
                     this.state.showColorShoesImage === idx
@@ -120,8 +148,16 @@ class ProductContainer extends Component {
                       : "colorShoesImage"
                   }
                 >
-                  <img src={image_url[0]} className="colorShoesImageFront" />
-                  <img src={image_url[1]} className="colorShoesImageBack" />
+                  <img
+                    alt="colorShoesImageFront"
+                    src={image_url[0]}
+                    className="colorShoesImageFront"
+                  />
+                  <img
+                    alt="colorShoesImageBack"
+                    src={image_url[1]}
+                    className="colorShoesImageBack"
+                  />
                 </div>
               );
             })}

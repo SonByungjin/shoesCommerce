@@ -26,19 +26,15 @@ class FilterSize extends Component {
       ],
     };
   }
-  handleSize = (idx) => {
-    this.setState(
-      {
-        selectSize: [
-          ...this.state.selectSize.slice(0, idx),
-          !this.state.selectSize[idx],
-          ...this.state.selectSize.slice(idx + 1),
-        ],
-      },
-      () => {
-        console.log(this.state.selectSize);
-      }
-    );
+  handleSize = (idx, size) => {
+    this.setState({
+      selectSize: [
+        ...this.state.selectSize.slice(0, idx),
+        !this.state.selectSize[idx],
+        ...this.state.selectSize.slice(idx + 1),
+      ],
+    });
+    this.props.filteringSize(size);
   };
 
   render() {
@@ -57,17 +53,18 @@ class FilterSize extends Component {
           <div
             className={hideFilterImage[3] ? "hideFilterImage" : "filterImage"}
           >
-            <img className="minusImage" src={filterImage[0]} />
-            <img className="plusImage" src={filterImage[1]} />
+            <img alt="minusImage" className="minusImage" src={filterImage[0]} />
+            <img alt="plusImage" className="plusImage" src={filterImage[1]} />
           </div>
         </div>
         <div className={hideFilterImage[3] ? "hideTypeOfSize" : "typeOfSize"}>
-          {productSize.map((el, idx) => (
+          {productSize.map((size, idx) => (
             <div
+              key={idx}
               className={selectSize[idx] ? "selectSizeSquare" : "sizeSquare"}
-              onClick={() => this.handleSize(idx)}
+              onClick={() => this.handleSize(idx, size)}
             >
-              {el}
+              {size}
             </div>
           ))}
         </div>

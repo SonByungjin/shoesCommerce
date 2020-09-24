@@ -20,6 +20,7 @@ class ProductColors extends Component {
             const { color, id } = colorEl;
             return (
               <div
+                key={idx}
                 pdSerialNumber={id}
                 style={{ backgroundColor: color }}
                 className="colorCircle"
@@ -28,6 +29,7 @@ class ProductColors extends Component {
                 onMouseOut={() => changeImage(null)}
               >
                 <div
+                  key={idx}
                   className={
                     selectColorValid === id
                       ? "selectColorValid"
@@ -35,6 +37,7 @@ class ProductColors extends Component {
                   }
                 >
                   <div
+                    key={idx}
                     style={{ backgroundColor: color }}
                     className="selectInnerCirlce"
                   ></div>
