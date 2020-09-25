@@ -14,7 +14,7 @@ class ProductDetailRecommend extends React.Component {
             {productInfo.recommended_products?.map((product, index) => {
               return (
                 <li key={index}>
-                  <Link to={`/productDetail/${product.id}`}>
+                  <a href={`/productDetail/${product.id}`}>
                     <div className="picContainer">
                       <img
                         className="picBeforeHover"
@@ -36,7 +36,7 @@ class ProductDetailRecommend extends React.Component {
                         BEST SELLER
                       </span>
                     </div>
-                  </Link>
+                  </a>
                 </li>
               );
             })}

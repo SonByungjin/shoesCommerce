@@ -1,4 +1,5 @@
 import React from "react";
+import { firstAPI, secondAPI } from "../../../Config";
 import "./ProductRightColor.scss";
 
 class ProductRightColor extends React.Component {
@@ -24,17 +25,19 @@ class ProductRightColor extends React.Component {
             {productInfo?.related_products &&
               productInfo?.related_products.map((product, index) => {
                 return (
-                  <li key={index}>
-                    <img
-                      alt="productSubImg"
-                      src={product.main_image}
-                      className={
-                        productId == product.id
-                          ? "productSubImg selected"
-                          : "productSubImg"
-                      }
-                    ></img>
-                  </li>
+                  <a href={`${firstAPI}/productDetail/${product.id}`}>
+                    <li key={index}>
+                      <img
+                        alt="productSubImg"
+                        src={product.main_image}
+                        className={
+                          productId == product.id
+                            ? "productSubImg selected"
+                            : "productSubImg"
+                        }
+                      ></img>
+                    </li>
+                  </a>
                 );
               })}
           </ul>

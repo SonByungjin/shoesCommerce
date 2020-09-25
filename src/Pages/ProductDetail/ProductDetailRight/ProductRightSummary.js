@@ -7,13 +7,6 @@ class ProductRightSummary extends React.Component {
 
     return (
       <section className="ProductRightSummary">
-<<<<<<< HEAD
-        <h1 className="productName">{productInfo?.series_name}</h1>
-        <p className="productPrice">
-          {productInfo?.price && productInfo.price.toLocaleString()}
-        </p>
-        <p className="productGender">{productInfo?.sex}</p>
-=======
         <h1 className="productName">{productInfo.series_name}</h1>
         <span
           className={
@@ -34,7 +27,6 @@ class ProductRightSummary extends React.Component {
           {productInfo.discount_rate && `${productInfo.discount_rate} %`}
         </span>
         <p className="productGender">{productInfo.sex}</p>
->>>>>>> master
         <div className="productDetailsBox">
           <span className="productDetails">
             {productInfo?.simple_description}

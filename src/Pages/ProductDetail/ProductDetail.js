@@ -21,11 +21,7 @@ class ProductDetail extends React.Component {
   }
 
   componentDidMount() {
-<<<<<<< HEAD
-    fetch(`http://10.58.5.250:8000/products/${this.props.match.params.id}`)
-=======
     fetch(`${secondAPI}/products/${this.props.match.params.id}`)
->>>>>>> master
       .then((res) => res.json())
       .then((res) => {
         console.log(res);

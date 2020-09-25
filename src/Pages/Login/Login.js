@@ -27,11 +27,7 @@ class Login extends React.Component {
     //     });
     //   }
     // };
-<<<<<<< HEAD
-    fetch("http://10.58.5.250:8000/false_account/signin", {
-=======
-    fetch(`${secondAPI}/false_account/signin`, {
->>>>>>> master
+    fetch(`${secondAPI}/account/signin`, {
       method: "POST",
       body: JSON.stringify({
         email: idValue,

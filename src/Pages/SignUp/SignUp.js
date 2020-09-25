@@ -178,7 +178,7 @@ class SignUp extends React.Component {
       isMale,
     } = this.state;
 
-    fetch(`${secondAPI}/false_account/signup`, {
+    fetch(`${secondAPI}/account/signup`, {
       method: "POST",
       body: JSON.stringify({
         email: emailValue,

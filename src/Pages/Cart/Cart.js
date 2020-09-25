@@ -16,13 +16,10 @@ class Cart extends React.Component {
       totalPrice: "",
       totalDiscountPrice: "",
       finalPrice: "",
-      userToken:
-        "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NvdW50X2lkIjoyfQ.e2QoqJJ9LKcihDt--hz4VutWxwqsqu2d-tjbT8msc5g",
     };
   }
 
   componentDidMount() {
-    const { userToken } = this.state;
     let totalPrice = 0;
     let totalDiscountPrice = 0;
     let finalPrice = 0;
@@ -30,8 +27,7 @@ class Cart extends React.Component {
     Promise.all([
       fetch(`${secondAPI}/orders/cart`, {
         headers: {
-          Authorization: userToken,
-          // Authorization: localStorage.getItem("access_token"),
+          Authorization: localStorage.getItem("token"),
         },
       }),
       fetch("http://localhost:3000/data/ProductDetail/CartPageRecommend.json"),
@@ -58,14 +54,13 @@ class Cart extends React.Component {
   }
 
   updateItems = () => {
-    const { userToken } = this.state;
     let totalPrice = 0;
     let totalDiscountPrice = 0;
     let finalPrice = 0;
 
     fetch(`${secondAPI}/orders/cart`, {
       headers: {
-        Authorization: userToken,
+        Authorization: localStorage.getItem("token"),
       },
     })
       .then((res) => res.json())
@@ -86,12 +81,12 @@ class Cart extends React.Component {
   };
 
   handleIncrease = (cartId) => {
-    const { userToken, cartItems } = this.state;
+    const { cartItems } = this.state;
 
     fetch(`${secondAPI}/orders/cart`, {
       method: "PATCH",
       headers: {
-        Authorization: userToken,
+        Authorization: localStorage.getItem("token"),
       },
       body: JSON.stringify({
         cart_id: cartId,
@@ -107,12 +102,10 @@ class Cart extends React.Component {
   };
 
   handleDecrease = (cartId) => {
-    const { userToken } = this.state;
-
     fetch(`${secondAPI}/orders/cart`, {
       method: "PATCH",
       headers: {
-        Authorization: userToken,
+        Authorization: localStorage.getItem("token"),
       },
       body: JSON.stringify({
         cart_id: cartId,
@@ -128,13 +121,13 @@ class Cart extends React.Component {
   };
 
   handleOneDelete = (cartId) => {
-    const { userToken, cartItems } = this.state;
+    const { cartItems } = this.state;
 
     const action = window.confirm("정말로 지우시겠습니까?");
     if (action === true) {
       fetch(`${secondAPI}/orders/cart/${cartId}`, {
         method: "DELETE",
-        headers: { Authorization: userToken },
+        headers: { Authorization: localStorage.getItem("token") },
       })
         .then((res) => res.json())
         .then((res) => {
@@ -156,14 +149,14 @@ class Cart extends React.Component {
   };
 
   handleAllDelete = () => {
-    const { userToken, cartItems } = this.state;
+    const { cartItems } = this.state;
 
     const action = window.confirm("정말로 비우시겠습니까?");
     if (action === true) {
       console.log("삭제완료");
       fetch(`${secondAPI}/orders/cart`, {
         method: "DELETE",
-        headers: { Authorization: userToken },
+        headers: { Authorization: localStorage.getItem("token") },
       })
         .then((res) => res.json())
         .then((res) =>

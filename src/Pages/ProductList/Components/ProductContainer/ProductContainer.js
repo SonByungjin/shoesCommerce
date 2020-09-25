@@ -34,11 +34,11 @@ class ProductContainer extends Component {
     this.setState({
       loveItAnimation: !this.state.loveItAnimation,
     });
-    fetch(`${secondAPI}/false_account/wishlist`, {
+    fetch(`${secondAPI}/account/wishlist`, {
       method: "POST",
-      headers: JSON.stringify({
+      headers: {
         Authorization: localStorage.getItem("token"),
-      }),
+      },
       body: JSON.stringify({
         id: mainId,
       }),

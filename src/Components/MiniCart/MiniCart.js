@@ -11,20 +11,17 @@ class MiniCart extends React.Component {
       cartItems: [],
       totalPrice: "",
       totalDiscountPrice: "",
-      userToken:
-        "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NvdW50X2lkIjoyfQ.e2QoqJJ9LKcihDt--hz4VutWxwqsqu2d-tjbT8msc5g",
     };
   }
 
   componentDidMount() {
-    const { userToken } = this.state;
     let totalPrice = 0;
     let totalDiscountPrice = 0;
     let finalPrice = 0;
 
     fetch(`${secondAPI}/orders/cart`, {
       headers: {
-        Authorization: userToken,
+        Authorization: localStorage.getItem("token"),
       },
     })
       .then((res) => res.json())
@@ -45,13 +42,13 @@ class MiniCart extends React.Component {
   }
 
   handleOneDelete = (cartId) => {
-    const { userToken, cartItems } = this.state;
+    const { cartItems } = this.state;
 
     const action = window.confirm("정말로 지우시겠습니까?");
     if (action === true) {
       fetch(`${secondAPI}/orders/cart/${cartId}`, {
         method: "DELETE",
-        headers: { Authorization: userToken },
+        headers: { Authorization: localStorage.getItem("token") },
       })
         .then((res) => res.json())
         .then((res) => {
@@ -73,13 +70,12 @@ class MiniCart extends React.Component {
   };
 
   updateItems = () => {
-    const { userToken } = this.state;
     let totalPrice = 0;
     let totalDiscountPrice = 0;
     let finalPrice = 0;
     fetch(`${secondAPI}/orders/cart`, {
       headers: {
-        Authorization: userToken,
+        Authorization: localStorage.getItem("token"),
       },
     })
       .then((res) => res.json())

@@ -1,6 +1,7 @@
 import React from "react";
 import SizeGuide from "../../../Components/SizeGuideModal/SizeGuide";
 import SizeFind from "../../../Components/SizeGuideModal/SizeFind";
+import { firstAPI, secondAPI } from "../../../Config";
 import "./ProductRightSize.scss";
 import { Link } from "react-router-dom";
 
@@ -16,17 +17,13 @@ class ProductRightSize extends React.Component {
       quantityOverFive: false,
       cartItems: [],
       cartItemsId: [],
-      userToken:
-        "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NvdW50X2lkIjoyfQ.e2QoqJJ9LKcihDt--hz4VutWxwqsqu2d-tjbT8msc5g",
     };
   }
 
   componentDidMount() {
-    const { userToken } = this.state;
-
-    fetch("http://10.58.5.250:8000/orders/cart", {
+    fetch(`${firstAPI}/orders/cart`, {
       headers: {
-        Authorization: userToken,
+        Authorization: localStorage.getItem("token"),
       },
     })
       .then((res) => res.json())
@@ -76,11 +73,9 @@ class ProductRightSize extends React.Component {
   };
 
   updateItems = () => {
-    const { userToken } = this.state;
-
-    fetch("http://10.58.5.250:8000/orders/cart", {
+    fetch(`${firstAPI}/orders/cart`, {
       headers: {
-        Authorization: userToken,
+        Authorization: localStorage.getItem("token"),
       },
     })
       .then((res) => res.json())
@@ -92,16 +87,16 @@ class ProductRightSize extends React.Component {
   };
 
   addToCart = (id, quantity, size) => {
-    const { cartItems, userToken } = this.state;
+    const { cartItems } = this.state;
     const { showMiniCart } = this.props;
 
     console.log(cartItems);
     for (let i = 0; i < cartItems.length; i++) {
       if (cartItems[i].id === Number(id) && cartItems[i].size == size) {
-        fetch(`http://10.58.5.250:8000/orders/cart`, {
+        fetch(`${firstAPI}/orders/cart`, {
           method: "PATCH",
           headers: {
-            Authorization: userToken,
+            Authorization: localStorage.getItem("token"),
           },
           body: JSON.stringify({
             cart_id: cartItems[i].cart_id,
@@ -121,10 +116,10 @@ class ProductRightSize extends React.Component {
         return;
       }
     }
-    fetch(`http://10.58.5.250:8000/orders/cart`, {
+    fetch(`${firstAPI}/orders/cart`, {
       method: "POST",
       headers: {
-        Authorization: userToken,
+        Authorization: localStorage.getItem("token"),
       },
       body: JSON.stringify({
         product_id: id,
