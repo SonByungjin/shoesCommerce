@@ -4,8 +4,7 @@ import PromoBanner from "../../Components/PromoBanner/PromoBanner";
 import Nav from "../../Components/Nav/Nav";
 import WishProduct from "./WishProduct/WishProduct";
 import ProfileImg from "./ProfileImg";
-import ProductDetailRight from "../ProductDetail/ProductDetailRight/ProductDetailRight";
-import ProductDetailFeed from "../ProductDetail/ProductDetailFeed/ProductDetailFeed";
+import WishLIstModal from "./WishLIstModal/WishLIstModal";
 import { firstAPI, secondAPI } from "../../Config";
 import "./WishList.scss";
 
@@ -14,7 +13,8 @@ class WishList extends Component {
     super();
     this.state = {
       wishlist: [],
-      productModal: false,
+      productModal: null,
+      productInfo: [],
     };
   }
 
@@ -25,7 +25,7 @@ class WishList extends Component {
   getWishList = () => {
     fetch(
       // "/data/ProductList/wishlist.json",
-      `${secondAPI}/false_account/wishlist`,
+      `${secondAPI}/account/wishlist`,
       {
         headers: {
           Authorization: localStorage.getItem("token"),
@@ -40,46 +40,66 @@ class WishList extends Component {
       });
   };
 
-  productModalToggle = () => {
-    this.setState({
-      productModal: !this.state.productModal,
+  productModalToggle = (product_id, idx) => {
+    this.setState(
+      {
+        productModal: idx,
+      },
+      () => {
+        this.modalData(product_id);
+      }
+    );
+  };
+
+  modalData = (product_id) => {
+    fetch(`${firstAPI}/products/${product_id}`)
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.product_information) {
+          this.setState({
+            productInfo: res["product_information"][0],
+          });
+        }
+      });
+  };
+
+  deleteWishList = (product_id) => {
+    fetch(`${firstAPI}/account/wishlist`, {
+      method: "POST",
+      headers: {
+        Authorization: localStorage.getItem("token"),
+      },
+      body: JSON.stringify({
+        id: product_id,
+      }),
     });
+    setTimeout(this.getWishList(), 0);
+  };
+
+  AlertDeleteWishList = (product_id) => {
+    window.confirm("위시리스트에서 정말 삭제하시겠습니까?") &&
+      this.deleteWishList(product_id);
   };
 
   render() {
-    const { wishlist, productModal } = this.state;
+    const { wishlist, productModal, productInfo } = this.state;
+    console.log(wishlist);
     return (
       <div className="WishList">
         <PromoBanner />
         <Nav />
-        <div
-          className={
-            productModal ? "productModalWrapper" : "closeProductModalWrapper"
-          }
-        >
-          <div className="productPopup">
-            <div className="productModal">
-              <div className="productImgContainer">
-                <img
-                  alt="heartImg"
-                  className="heartImg"
-                  src="/images/productList/heart_fill.png"
-                />
-                <img
-                  alt="productImg"
-                  className="productImg"
-                  src="https://image.converse.co.kr/cmsstatic/product/168636C_168636C_pdp-primary.jpg?gallery="
-                />
-              </div>
-              <div className="productInfo">
-                <ProductDetailRight />
-              </div>
-              <div className="closeModal">
-                <span onClick={this.productModalToggle}>x</span>
-              </div>
-            </div>
-          </div>
-        </div>
+
+        {wishlist.map((wishproduct, idx) => {
+          return (
+            <WishLIstModal
+              idx={idx}
+              mainImg={wishproduct.main_image}
+              productModal={productModal}
+              productModalToggle={this.productModalToggle}
+              productInfo={productInfo}
+            />
+          );
+        })}
         <div className="wishlistMain">
           <div className="userInfo">
             <div className="userName">
@@ -115,20 +135,23 @@ class WishList extends Component {
           <div className="wishProductList">
             <p>위시리스트</p>
             <div className="wishProductListMain">
-              {wishlist.map((wishProduct) => {
+              {wishlist.map((wishProduct, idx) => {
                 const {
                   main_image,
                   price,
-                  serial_number,
                   series_name,
+                  product_id,
                 } = wishProduct;
                 return (
                   <WishProduct
+                    DeleteWishList={() => this.AlertDeleteWishList(product_id)}
                     imgUrl={main_image}
                     price={price}
-                    id={serial_number}
+                    id={product_id}
                     name={series_name}
-                    productModal={this.productModalToggle}
+                    productModal={() =>
+                      this.productModalToggle(product_id, idx)
+                    }
                   />
                 );
               })}

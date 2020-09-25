@@ -29,7 +29,7 @@ class ProductRightSummary extends React.Component {
         <p className="productGender">{productInfo.sex}</p>
         <div className="productDetailsBox">
           <span className="productDetails">
-            {productInfo.simple_description}
+            {productInfo?.simple_description}
           </span>
           <span className="showMore">더보기</span>
         </div>

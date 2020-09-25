@@ -27,7 +27,7 @@ class Login extends React.Component {
     //     });
     //   }
     // };
-    fetch(`${secondAPI}/false_account/signin`, {
+    fetch(`${secondAPI}/account/signin`, {
       method: "POST",
       body: JSON.stringify({
         email: idValue,

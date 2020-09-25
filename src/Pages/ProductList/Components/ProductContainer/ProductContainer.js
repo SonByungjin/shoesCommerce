@@ -12,7 +12,7 @@ class ProductContainer extends Component {
         "https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/heart.png",
         "/images/productList/heart_fill.png",
       ],
-      heartBoolean: false,
+      heartBoolean: props.wishlist,
       showColorShoesImage: null,
       colorListValid: false,
       selectColorValid: props.mainId,
@@ -30,14 +30,15 @@ class ProductContainer extends Component {
     this.setState({
       heartBoolean: !this.state.heartBoolean,
     });
+
     this.setState({
       loveItAnimation: !this.state.loveItAnimation,
     });
-    fetch(`${secondAPI}/false_account/wishlist`, {
+    fetch(`${secondAPI}/account/wishlist`, {
       method: "POST",
-      headers: JSON.stringify({
+      headers: {
         Authorization: localStorage.getItem("token"),
-      }),
+      },
       body: JSON.stringify({
         id: mainId,
       }),
@@ -67,7 +68,15 @@ class ProductContainer extends Component {
       selectColorValid,
       loveItAnimation,
     } = this.state;
-    const { mainId, imgUrl, name, price, colorList } = this.props;
+    const {
+      mainId,
+      imgUrl,
+      name,
+      price,
+      colorList,
+      discount,
+      wishlist,
+    } = this.props;
     const [frontImg, backImg] = imgUrl;
 
     return (
@@ -146,7 +155,15 @@ class ProductContainer extends Component {
           </div>
         </div>
         <p className="productName">{name}</p>
-        <p className="productPrice">{Number(price).toLocaleString("en")}원</p>
+        <div className={discount ? "discountPrice" : "productPrice"}>
+          <span id="price">{Number(price).toLocaleString("en")}원</span>
+          <span id="discountPrice">
+            {`${(Number(price) * (1 - discount / 100)).toLocaleString(
+              "en"
+            )} 원`}
+          </span>
+          <span id="discountRate">{`  ${discount}`}%</span>
+        </div>
         <ProductColors
           colorList={colorList}
           changeImage={this.changeImage}

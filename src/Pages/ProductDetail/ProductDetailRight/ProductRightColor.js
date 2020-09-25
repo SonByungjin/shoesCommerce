@@ -1,4 +1,5 @@
 import React from "react";
+import { firstAPI, secondAPI } from "../../../Config";
 import "./ProductRightColor.scss";
 
 class ProductRightColor extends React.Component {
@@ -10,31 +11,33 @@ class ProductRightColor extends React.Component {
         <div className="ProductColorInfo">
           <div className="colorSection">
             <span className="colorSectionTitle">컬러</span>
-            <span className="colorSectionProp">{productInfo.color}</span>
+            <span className="colorSectionProp">{productInfo?.color}</span>
           </div>
           <div className="styleSection">
             <span className="styleSectionTitle">스타일 : </span>
             <span className="styleSectionProp">
-              {productInfo.serial_number}
+              {productInfo?.serial_number}
             </span>
           </div>
         </div>
         <div className="ProductColorPic">
           <ul>
-            {productInfo.related_products &&
-              productInfo.related_products.map((product, index) => {
+            {productInfo?.related_products &&
+              productInfo?.related_products.map((product, index) => {
                 return (
-                  <li key={index}>
-                    <img
-                      alt="productSubImg"
-                      src={product.main_image}
-                      className={
-                        productId == product.id
-                          ? "productSubImg selected"
-                          : "productSubImg"
-                      }
-                    ></img>
-                  </li>
+                  <a href={`${firstAPI}/productDetail/${product.id}`}>
+                    <li key={index}>
+                      <img
+                        alt="productSubImg"
+                        src={product.main_image}
+                        className={
+                          productId == product.id
+                            ? "productSubImg selected"
+                            : "productSubImg"
+                        }
+                      ></img>
+                    </li>
+                  </a>
                 );
               })}
           </ul>

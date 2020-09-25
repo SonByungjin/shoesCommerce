@@ -24,6 +24,7 @@ class ProductDetail extends React.Component {
     fetch(`${secondAPI}/products/${this.props.match.params.id}`)
       .then((res) => res.json())
       .then((res) => {
+        console.log(res);
         if (res.product_information) {
           this.setState({
             productId: this.props.match.params.id,

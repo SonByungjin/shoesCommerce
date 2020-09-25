@@ -26,7 +26,17 @@ export class ProductList extends React.Component {
     };
   }
 
+  componentDidUpdate(prevprops) {
+    if (
+      prevprops.location.search.split("=")[1] !==
+      this.props.location.search.split("=")[1]
+    ) {
+      this.getDataInitial();
+    }
+  }
+
   getDataInitial = () => {
+    console.log(this.props);
     window.onbeforeunload = () => {
       window.scrollTo(0, 0);
     };
@@ -37,10 +47,15 @@ export class ProductList extends React.Component {
         loadingStatus: !this.state.loadingStatus,
         products: [],
         ProductMainImage: { MainImg: [] },
+        queryId: categoryId,
       },
       () => {
         // fetch("/data/ProductList/Products.json")
-        fetch(`${firstAPI}/products?sub_category_id=${categoryId}`)
+        fetch(`${firstAPI}/products?sub_category_id=${categoryId}`, {
+          headers: {
+            Authorization: localStorage.getItem("token"),
+          },
+        })
           .then((res) => res.json())
           .then((res) => {
             // 무한스크롤 기능 확인을 위한 임의 함수
@@ -82,6 +97,7 @@ export class ProductList extends React.Component {
     let clientHeight = document.documentElement.clientHeight;
 
     if (scrollTop + clientHeight === scrollHeight) {
+      // window.removeEventListener("scroll", this.infiniteScroll);
       this.pagination();
     }
   };
@@ -113,7 +129,7 @@ export class ProductList extends React.Component {
               ),
             1000
           );
-          window.addEventListener("scroll", this.infiniteScroll);
+          // window.addEventListener("scroll", this.infiniteScroll);
         }
       );
     }
@@ -162,7 +178,11 @@ export class ProductList extends React.Component {
         ProductMainImage: { MainImg: [] },
       },
       () => {
-        fetch(filteringQueryStringApi)
+        fetch(filteringQueryStringApi, {
+          headers: {
+            Authorization: localStorage.getItem("token"),
+          },
+        })
           .then((res) => res.json())
           .then((res) => {
             console.log(res);
@@ -335,6 +355,8 @@ export class ProductList extends React.Component {
                   image_url,
                   series_name,
                   price,
+                  discount_rate,
+                  wishlist,
                 } = product.main_image;
                 const { color_image } = product;
                 ProductMainImage.MainImg.push({
@@ -352,6 +374,8 @@ export class ProductList extends React.Component {
                     price={price}
                     colorList={color_image}
                     fixedImage={(colorEl) => this.fixedImage(colorEl, pdIdx)}
+                    discount={discount_rate}
+                    wishlist={wishlist}
                   />
                 );
               })}
