@@ -4,6 +4,7 @@ import CartRight from "./CartRight";
 import PromoBanner from "../../Components/PromoBanner/PromoBanner";
 import Nav from "../../Components/Nav/Nav";
 import Footer from "../../Components/Footer/Footer";
+import { secondAPI } from "../../Config";
 import "./Cart.scss";
 
 class Cart extends React.Component {
@@ -27,7 +28,7 @@ class Cart extends React.Component {
     let finalPrice = 0;
 
     Promise.all([
-      fetch("http://10.58.5.250:8000/orders/cart", {
+      fetch(`${secondAPI}/orders/cart`, {
         headers: {
           Authorization: userToken,
           // Authorization: localStorage.getItem("access_token"),
@@ -62,7 +63,7 @@ class Cart extends React.Component {
     let totalDiscountPrice = 0;
     let finalPrice = 0;
 
-    fetch("http://10.58.5.250:8000/orders/cart", {
+    fetch(`${secondAPI}/orders/cart`, {
       headers: {
         Authorization: userToken,
       },
@@ -87,7 +88,7 @@ class Cart extends React.Component {
   handleIncrease = (cartId) => {
     const { userToken, cartItems } = this.state;
 
-    fetch(`http://10.58.5.250:8000/orders/cart`, {
+    fetch(`${secondAPI}/orders/cart`, {
       method: "PATCH",
       headers: {
         Authorization: userToken,
@@ -108,7 +109,7 @@ class Cart extends React.Component {
   handleDecrease = (cartId) => {
     const { userToken } = this.state;
 
-    fetch(`http://10.58.5.250:8000/orders/cart`, {
+    fetch(`${secondAPI}/orders/cart`, {
       method: "PATCH",
       headers: {
         Authorization: userToken,
@@ -131,7 +132,7 @@ class Cart extends React.Component {
 
     const action = window.confirm("정말로 지우시겠습니까?");
     if (action === true) {
-      fetch(`http://10.58.5.250:8000/orders/cart/${cartId}`, {
+      fetch(`${secondAPI}/orders/cart/${cartId}`, {
         method: "DELETE",
         headers: { Authorization: userToken },
       })
@@ -160,7 +161,7 @@ class Cart extends React.Component {
     const action = window.confirm("정말로 비우시겠습니까?");
     if (action === true) {
       console.log("삭제완료");
-      fetch(`http://10.58.5.250:8000/orders/cart`, {
+      fetch(`${secondAPI}/orders/cart`, {
         method: "DELETE",
         headers: { Authorization: userToken },
       })

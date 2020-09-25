@@ -6,6 +6,7 @@ import WishProduct from "./WishProduct/WishProduct";
 import ProfileImg from "./ProfileImg";
 import ProductDetailRight from "../ProductDetail/ProductDetailRight/ProductDetailRight";
 import ProductDetailFeed from "../ProductDetail/ProductDetailFeed/ProductDetailFeed";
+import { firstAPI, secondAPI } from "../../Config";
 import "./WishList.scss";
 
 class WishList extends Component {
@@ -23,8 +24,8 @@ class WishList extends Component {
 
   getWishList = () => {
     fetch(
-      "/data/ProductList/wishlist.json",
-      // "http://10.58.5.117:8000/false_account/wishlist"
+      // "/data/ProductList/wishlist.json",
+      `${secondAPI}/false_account/wishlist`,
       {
         headers: {
           Authorization: localStorage.getItem("token"),

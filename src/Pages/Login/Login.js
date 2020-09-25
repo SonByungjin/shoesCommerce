@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { secondAPI } from "../../Config";
 import PromoBanner from "../../Components/PromoBanner/PromoBanner";
 import Nav from "../../Components/Nav/Nav";
 import Footer from "../../Components/Footer/Footer";
@@ -26,7 +27,7 @@ class Login extends React.Component {
     //     });
     //   }
     // };
-    fetch("http://10.58.5.117:8000/false_account/signin", {
+    fetch(`${secondAPI}/false_account/signin`, {
       method: "POST",
       body: JSON.stringify({
         email: idValue,
