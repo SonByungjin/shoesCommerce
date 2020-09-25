@@ -11,7 +11,7 @@ class ProductContainer extends Component {
         "https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/heart.png",
         "/images/productList/heart_fill.png",
       ],
-      heartBoolean: false,
+      heartBoolean: props.wishlist,
       showColorShoesImage: null,
       colorListValid: false,
       selectColorValid: props.mainId,
