@@ -7,6 +7,7 @@ import Footer from "../../Components/Footer/Footer";
 import PromoBanner from "../../Components/PromoBanner/PromoBanner";
 import Nav from "../../Components/Nav/Nav";
 import HeaderImg from "./HeaderImg";
+import { firstAPI } from "../../Config";
 import "./ProductList.scss";
 
 export class ProductList extends React.Component {
@@ -49,14 +50,12 @@ export class ProductList extends React.Component {
         queryId: categoryId,
       },
       () => {
-        fetch(
-          `http://10.58.1.230:8002/products?sub_category_id=${categoryId}`,
-          {
-            headers: {
-              Authorization: localStorage.getItem("token"),
-            },
-          }
-        )
+        // fetch("/data/ProductList/Products.json")
+        fetch(`${firstAPI}/products?sub_category_id=${categoryId}`, {
+          headers: {
+            Authorization: localStorage.getItem("token"),
+          },
+        })
           .then((res) => res.json())
           .then((res) => {
             // 무한스크롤 기능 확인을 위한 임의 함수
@@ -64,7 +63,6 @@ export class ProductList extends React.Component {
               this.state.products.length,
               this.state.products.length + 14
             );
-
             // let result = res.products;
             setTimeout(
               () =>
@@ -139,7 +137,7 @@ export class ProductList extends React.Component {
 
   filterQueryString = () => {
     const categoryId = this.props.location.search.split("=")[1];
-    let filteringQueryStringApi = `http://10.58.1.230:8000/products?sub_category_id=${categoryId}&${
+    let filteringQueryStringApi = `${firstAPI}/products?sub_category_id=${categoryId}&${
       this.state.filteringColor
         ? this.state.filteringColor
             .map((color) => {

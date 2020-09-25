@@ -11,6 +11,7 @@ import DashBoard4 from "./Components/DashBoard4";
 import DashBoard5 from "./Components/DashBoard5";
 import ShoesIconList from "./Components/ShoesIconList";
 import MarketingTile from "./Components/MarketingTile";
+import CommunityTiles from "./Components/CommunityTiles";
 import Footer from "../../Components/Footer/Footer";
 import "./Main.scss";
 
@@ -30,6 +31,7 @@ class Main extends React.Component {
           <DashBoard4 />
           <DashBoard5 />
           <MediaTile3 />
+          <CommunityTiles />
         </article>
         <MarketingTile />
         <Footer />

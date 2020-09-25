@@ -14,11 +14,16 @@ class SearchBar extends Component {
       <div className="searchBar">
         <section className="searchArea">
           <h1>검색</h1>
-          <input
-            type="text"
-            placeholder="검색어를 입력해주세요."
-            onChange={handleChange}
-          />
+          <div className="box">
+            <input
+              type="text"
+              placeholder="검색어를 입력해주세요."
+              onChange={handleChange}
+            />
+            <svg id="nav-search" viewBox="0 0 32 32">
+              <path d="M19 0C11.8 0 6 5.8 6 13c0 3 1 5.7 2.7 7.9L.8 28.8l2.4 2.4 7.9-7.9C13.3 25 16 26 19 26c7.2 0 13-5.8 13-13S26.2 0 19 0zm0 22.5c-5.3 0-9.5-4.3-9.5-9.5s4.3-9.5 9.5-9.5c5.3 0 9.5 4.3 9.5 9.5s-4.2 9.5-9.5 9.5z"></path>
+            </svg>
+          </div>
           <ul
             className={
               userInput.length >= 2 &&
@@ -31,9 +36,6 @@ class SearchBar extends Component {
               return <li key={index}>{product}</li>;
             })}
           </ul>
-          <svg id="nav-search" viewBox="0 0 32 32">
-            <path d="M19 0C11.8 0 6 5.8 6 13c0 3 1 5.7 2.7 7.9L.8 28.8l2.4 2.4 7.9-7.9C13.3 25 16 26 19 26c7.2 0 13-5.8 13-13S26.2 0 19 0zm0 22.5c-5.3 0-9.5-4.3-9.5-9.5s4.3-9.5 9.5-9.5c5.3 0 9.5 4.3 9.5 9.5s-4.2 9.5-9.5 9.5z"></path>
-          </svg>
         </section>
         <section className="hybridArea">
           <div

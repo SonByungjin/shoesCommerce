@@ -2,24 +2,42 @@ import React from "react";
 import SizeGuide from "../../../Components/SizeGuideModal/SizeGuide";
 import SizeFind from "../../../Components/SizeGuideModal/SizeFind";
 import "./ProductRightSize.scss";
+import { Link } from "react-router-dom";
 
 class ProductRightSize extends React.Component {
   constructor() {
     super();
     this.state = {
-      isLogined: false,
+      isLogined: true,
       current: "",
       isSizeFindOpen: false,
       isSizeGuideOpen: false,
-      quantity: "",
+      quantity: 1,
       quantityOverFive: false,
+      cartItems: [],
+      cartItemsId: [],
+      userToken:
+        "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NvdW50X2lkIjoyfQ.e2QoqJJ9LKcihDt--hz4VutWxwqsqu2d-tjbT8msc5g",
     };
   }
 
   componentDidMount() {
-    this.setState({
-      quantity: 1,
-    });
+    const { userToken } = this.state;
+
+    fetch("http://10.58.5.250:8000/orders/cart", {
+      headers: {
+        Authorization: userToken,
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        this.setState({
+          cartItems: res.cart_list,
+        });
+      });
+    // sessionStorage.getItem("access_token")
+    //   ? this.setState({ isLogined: true })
+    //   : this.setState({ isLogined: false });
   }
 
   handleClick = (index) => {
@@ -57,8 +75,72 @@ class ProductRightSize extends React.Component {
     }
   };
 
+  updateItems = () => {
+    const { userToken } = this.state;
+
+    fetch("http://10.58.5.250:8000/orders/cart", {
+      headers: {
+        Authorization: userToken,
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        this.setState({
+          cartItems: res.cart_list,
+        });
+      });
+  };
+
+  addToCart = (id, quantity, size) => {
+    const { cartItems, userToken } = this.state;
+    const { showMiniCart } = this.props;
+
+    console.log(cartItems);
+    for (let i = 0; i < cartItems.length; i++) {
+      if (cartItems[i].id === Number(id) && cartItems[i].size == size) {
+        fetch(`http://10.58.5.250:8000/orders/cart`, {
+          method: "PATCH",
+          headers: {
+            Authorization: userToken,
+          },
+          body: JSON.stringify({
+            cart_id: cartItems[i].cart_id,
+            quantity_change: +quantity,
+          }),
+        })
+          .then((res) => res.json())
+          .then((res) => {
+            if (res.message === "MODIFIED") {
+              console.log("success");
+              showMiniCart();
+              this.updateItems();
+            } else {
+              console.log(res.message);
+            }
+          });
+        return;
+      }
+    }
+    fetch(`http://10.58.5.250:8000/orders/cart`, {
+      method: "POST",
+      headers: {
+        Authorization: userToken,
+      },
+      body: JSON.stringify({
+        product_id: id,
+        quantity: quantity,
+        size: size,
+      }),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        showMiniCart();
+        this.updateItems();
+      });
+  };
+
   render() {
-    const { sizeList } = this.props;
+    const { productId, productInfo } = this.props;
 
     return (
       <section className="ProductRightSize">
@@ -78,8 +160,8 @@ class ProductRightSize extends React.Component {
         </div>
         <div className="second">
           <div className="size">
-            {sizeList &&
-              sizeList.map((size, index) => (
+            {productInfo.size_list &&
+              productInfo.size_list.map((size, index) => (
                 <span
                   key={index}
                   className={
@@ -111,17 +193,30 @@ class ProductRightSize extends React.Component {
           </div>
         </div>
         <div className="third">
-          {!this.state.isLogined ? (
-            <div className="isLogout">
-              <div className="loginBtn">로그인</div>
-            </div>
-          ) : (
+          {this.state.isLogined ? (
             <div className="isLogin">
-              <span className="cart">장바구니</span>
+              <span
+                className="cart"
+                onClick={() => {
+                  this.addToCart(
+                    productId,
+                    this.state.quantity,
+                    productInfo.size_list[this.state.current]
+                  );
+                }}
+              >
+                장바구니
+              </span>
               <span className="buy">바로구매</span>
               <span className="heart">
                 <p>♥</p>
               </span>
+            </div>
+          ) : (
+            <div className="isLogout">
+              <Link to="/Login">
+                <div className="loginBtn">로그인</div>
+              </Link>
             </div>
           )}
         </div>

@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { secondAPI } from "../../Config";
 import iconData from "./icon";
 import "./MiniCart.scss";
 
@@ -7,85 +8,134 @@ class MiniCart extends React.Component {
   constructor(props) {
     super();
     this.state = {
-      miniCartData: [],
-      totalCost: "",
-      price: "",
+      cartItems: [],
+      totalPrice: "",
       totalDiscountPrice: "",
+      userToken:
+        "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NvdW50X2lkIjoyfQ.e2QoqJJ9LKcihDt--hz4VutWxwqsqu2d-tjbT8msc5g",
     };
   }
 
-  removeItemFromBasket(itemId) {
-    const items = this.state.miniCartData.filter((item) => item.id !== itemId);
-
-    this.setState({ miniCartData: items });
-  }
-
   componentDidMount() {
-    let totalCost = 0;
+    const { userToken } = this.state;
+    let totalPrice = 0;
     let totalDiscountPrice = 0;
-    //추후 백엔드 데이터에 맞게 수정 (json 파일 뒤에 /productID 형식으로 받아올 예정)
-    fetch(`/data/MiniCart/MiniCartProduct.json`)
+    let finalPrice = 0;
+
+    fetch(`${secondAPI}/orders/cart`, {
+      headers: {
+        Authorization: userToken,
+      },
+    })
       .then((res) => res.json())
       .then((res) => {
-        for (let i = 0; i < res.miniCartData.length; i++) {
-          totalCost += res.miniCartData[i].price * res.miniCartData[i].quantity;
+        for (let i = 0; i < res.cart_list.length; i++) {
+          totalPrice += res.cart_list[i].price * res.cart_list[i].quantity;
           totalDiscountPrice +=
-            res.miniCartData[i].price *
-            (100 - res.miniCartData[i].discount_rate);
+            res.cart_list[i].price * (res.cart_list[i].discount_rate / 100);
+          finalPrice = totalPrice - totalDiscountPrice;
         }
         this.setState({
-          miniCartData: res.miniCartData,
-          totalCost: totalCost,
-          totalDiscountPrice: totalDiscountPrice,
+          cartItems: res.cart_list,
+          totalPrice: totalPrice.toLocaleString(),
+          totalDiscountPrice: totalDiscountPrice.toLocaleString(),
+          finalPrice: finalPrice.toLocaleString(),
         });
       });
   }
 
+  handleOneDelete = (cartId) => {
+    const { userToken, cartItems } = this.state;
+
+    const action = window.confirm("정말로 지우시겠습니까?");
+    if (action === true) {
+      fetch(`${secondAPI}/orders/cart/${cartId}`, {
+        method: "DELETE",
+        headers: { Authorization: userToken },
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          this.setState(
+            {
+              cartItems: cartItems.filter((cartItem) => {
+                if (cartItem.cart_id === cartId) {
+                  return false;
+                }
+                return true;
+              }),
+            },
+            this.updateItems()
+          );
+        });
+    } else {
+      return;
+    }
+  };
+
+  updateItems = () => {
+    const { userToken } = this.state;
+    let totalPrice = 0;
+    let totalDiscountPrice = 0;
+    let finalPrice = 0;
+    fetch(`${secondAPI}/orders/cart`, {
+      headers: {
+        Authorization: userToken,
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        for (let i = 0; i < res.cart_list.length; i++) {
+          totalPrice += res.cart_list[i].price * res.cart_list[i].quantity;
+          totalDiscountPrice +=
+            res.cart_list[i].price * (res.cart_list[i].discount_rate / 100);
+          finalPrice = totalPrice - totalDiscountPrice;
+        }
+        this.setState({
+          cartItems: res.cart_list,
+          totalPrice: totalPrice.toLocaleString(),
+          totalDiscountPrice: totalDiscountPrice.toLocaleString(),
+          finalPrice: finalPrice.toLocaleString(),
+        });
+      });
+  };
+
   render() {
-    const { miniCartData, totalCost, totalDiscountPrice } = this.state;
+    const { cartItems, totalCost, totalDiscountPrice, finalPrice } = this.state;
+    const { showMiniCart } = this.props;
 
     return (
       <>
         <section className="miniCart">
           <div className="sectionMiniCart">
-            <div
-              className={
-                this.props.openModal
-                  ? "miniCartDrop"
-                  : "miniCartDrop miniCartActive"
-              }
-            >
+            <div className="miniCartDrop">
               <div className="miniCartHeader">
                 <h2 className="headerItems">미니 장바구니</h2>
                 <div className="headerActions">
                   <div className="miniCartLink">
                     <Link to="/cart">{iconData.cartIcon}</Link>
                   </div>
-                  <button
-                    className="miniCartClose"
-                    onClick={this.props.closeModal}
-                  >
+                  <button className="miniCartClose" onClick={showMiniCart}>
                     {iconData.closeIcon}
                   </button>
                 </div>
               </div>
               <div className="productContainer">
-                {miniCartData?.map((product) => (
-                  <div className="miniCartProduct" key={product.id}>
+                {cartItems?.map((product, index) => (
+                  <div className="miniCartProduct" key={index}>
                     <div className="productMini">
                       <div
                         className="imgShoes"
                         title="루이 로페즈 프로 클래식 스웨이드"
                       >
                         <img
-                          src={product.pic}
+                          src={product.main_image}
                           alt="루이 로페즈 프로 클래식 스웨이드"
                         ></img>
                       </div>
                     </div>
                     <div className="productMiniDetails">
                       <div className="productMiniName">
-                        <span>{product.name}</span>
+                        <span>{product.series_name}</span>
                       </div>
                       <div className="productMiniOptions">
                         <span>{product.color}/</span>
@@ -93,15 +143,21 @@ class MiniCart extends React.Component {
                         <span> {product.quantity}개</span>
                       </div>
                       <div className="productMiniPrice">
-                        {!product.discount_rate && (
-                          <span>{product.price.toLocaleString()}원 </span>
-                        )}
+                        {
+                          <span
+                            className={
+                              !product.discount_rate
+                                ? "miniCartPrice"
+                                : "miniCartPrice underline"
+                            }
+                          >
+                            {product.price}원{" "}
+                          </span>
+                        }
                         {product.discount_rate && (
                           <span className="productSale">
-                            {(
-                              product.price *
-                              ((100 - product.discount_rate) / 100)
-                            ).toLocaleString()}
+                            {product.price *
+                              ((100 - product.discount_rate) / 100)}
                             원
                           </span>
                         )}
@@ -114,7 +170,7 @@ class MiniCart extends React.Component {
                     </div>
                     <div
                       className="removeBtn"
-                      onClick={() => this.removeItemFromBasket(product.id)}
+                      onClick={() => this.handleOneDelete(product.cart_id)}
                     >
                       {iconData.closeIcon}
                     </div>
@@ -126,7 +182,7 @@ class MiniCart extends React.Component {
                   <div className="subTotalsCalc">
                     <span className="totalCost">총 상품금액</span>
                     <strong className="totalValue">
-                      {totalCost.toLocaleString()} 원
+                      {finalPrice} 원
                       {/* {totalDiscountPrice.toLocaleString()} */}
                     </strong>
                   </div>

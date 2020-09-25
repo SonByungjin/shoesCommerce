@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import DashBoard from "./DashBoard";
 import SearchBar from "./SearchBar";
+import { firstAPI } from "../../Config";
 import "./ActiveSearchBar.scss";
 
 class ActiveSearchBar extends Component {
@@ -13,7 +14,7 @@ class ActiveSearchBar extends Component {
   }
 
   componentDidMount() {
-    fetch("http://10.58.1.230:8002/products/search")
+    fetch(`${firstAPI}/products/search`)
       .then((res) => res.json())
       .then((res) => {
         this.setState({

@@ -4,7 +4,13 @@ import PromoBanner from "../../Components/PromoBanner/PromoBanner";
 import Nav from "../../Components/Nav/Nav";
 import WishProduct from "./WishProduct/WishProduct";
 import ProfileImg from "./ProfileImg";
+<<<<<<< HEAD
 import WishLIstModal from "./WishLIstModal/WishLIstModal";
+=======
+import ProductDetailRight from "../ProductDetail/ProductDetailRight/ProductDetailRight";
+import ProductDetailFeed from "../ProductDetail/ProductDetailFeed/ProductDetailFeed";
+import { firstAPI, secondAPI } from "../../Config";
+>>>>>>> master
 import "./WishList.scss";
 
 class WishList extends Component {
@@ -22,11 +28,23 @@ class WishList extends Component {
   }
 
   getWishList = () => {
+<<<<<<< HEAD
     fetch("http://10.58.5.250:8000/false_account/wishlist", {
       headers: {
         Authorization: localStorage.getItem("token"),
       },
     })
+=======
+    fetch(
+      // "/data/ProductList/wishlist.json",
+      `${secondAPI}/false_account/wishlist`,
+      {
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      }
+    )
+>>>>>>> master
       .then((res) => res.json())
       .then((res) => {
         this.setState({

@@ -18,11 +18,17 @@
   }
 
   .ProductColorPic {
-    img {
+    .productSubImg {
+      width: 65px;
+      height: 60px;
+      margin-right: 7px;
+      border: 1px solid #f4f4f4;
+    }
+    .productSubImg.selected {
       width: 65px;
       height: 60px;
       margin-right: 6px;
-      border-bottom: 2px solid black;
+      border: 2px solid black;
     }
     ul {
       margin-top: 20px;

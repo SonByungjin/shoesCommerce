@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import ProductColors from "./ProductColors/ProductColors";
+import { firstAPI, secondAPI } from "../../../../Config";
 import "./ProductContainer.scss";
 
 class ProductContainer extends Component {
@@ -33,20 +34,17 @@ class ProductContainer extends Component {
     this.setState({
       loveItAnimation: !this.state.loveItAnimation,
     });
-
-    fetch("http://10.58.5.250:8000/false_account/wishlist", {
+    fetch(`${secondAPI}/false_account/wishlist`, {
       method: "POST",
-      headers: {
+      headers: JSON.stringify({
         Authorization: localStorage.getItem("token"),
-      },
+      }),
       body: JSON.stringify({
         id: mainId,
       }),
     })
       .then((response) => response.json())
-      .then((result) => {
-        console.log(result);
-      });
+      .then((result) => {});
   };
 
   changeImage = (idx) => {

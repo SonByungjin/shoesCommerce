@@ -3,7 +3,7 @@ import "./ProductRightColor.scss";
 
 class ProductRightColor extends React.Component {
   render() {
-    const { productInfo } = this.props;
+    const { productId, productInfo } = this.props;
 
     return (
       <section className="ProductRightColor">
@@ -25,7 +25,15 @@ class ProductRightColor extends React.Component {
               productInfo?.related_products.map((product, index) => {
                 return (
                   <li key={index}>
-                    <img alt="productSubImg" src={product.main_image}></img>
+                    <img
+                      alt="productSubImg"
+                      src={product.main_image}
+                      className={
+                        productId == product.id
+                          ? "productSubImg selected"
+                          : "productSubImg"
+                      }
+                    ></img>
                   </li>
                 );
               })}
