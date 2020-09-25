@@ -160,9 +160,12 @@ class Cart extends React.Component {
       })
         .then((res) => res.json())
         .then((res) =>
-          this.setState({
-            cartItems: [],
-          })
+          this.setState(
+            {
+              cartItems: [],
+            },
+            this.updateItems()
+          )
         );
     } else {
       return;
