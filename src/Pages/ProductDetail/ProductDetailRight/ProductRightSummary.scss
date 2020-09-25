@@ -13,6 +13,10 @@
   .productPrice {
     font-size: 18px;
   }
+  .productPrice.underline {
+    color: gray;
+    text-decoration: line-through;
+  }
   .productGender {
     font-size: 14px;
     color: #757575;

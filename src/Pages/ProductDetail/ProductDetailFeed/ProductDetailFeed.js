@@ -9,7 +9,6 @@ import "./ProductDetailFeed.scss";
 class ProductDetailFeed extends React.Component {
   render() {
     const { productInfo } = this.props;
-
     return (
       <div className="ProductDetailFeed">
         <ProductMainImg

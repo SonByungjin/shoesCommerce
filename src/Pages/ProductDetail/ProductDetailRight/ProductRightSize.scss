@@ -112,6 +112,7 @@
         width: 150px;
         border: 1px solid black;
         padding: 15px;
+        cursor: pointer;
       }
       .cart:hover {
         color: #757575;
@@ -122,6 +123,7 @@
         background-color: #000;
         padding: 15px;
         border: 1px solid black;
+        cursor: pointer;
       }
       .buy:hover {
         color: black;
@@ -133,6 +135,7 @@
         padding: 10px;
         width: 50px;
         font-size: 25px;
+        cursor: pointer;
       }
       .heart > p:hover {
         transform: scale(1.2);
