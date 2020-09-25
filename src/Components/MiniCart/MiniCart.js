@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { secondAPI } from "../../Config";
 import iconData from "./icon";
 import "./MiniCart.scss";
 
@@ -25,12 +26,8 @@ class MiniCart extends React.Component {
     const { userToken } = this.state;
     let totalPrice = 0;
     let totalDiscountPrice = 0;
-
-    fetch("http://10.58.5.250:8000/orders/cart", {
-      headers: {
-        Authorization: userToken,
-      },
-    })
+    //추후 백엔드 데이터에 맞게 수정 (json 파일 뒤에 /productID 형식으로 받아올 예정)
+    fetch(`${secondAPI}/orders/cart`)
       .then((res) => res.json())
       .then((res) => {
         for (let i = 0; i < res.cart_list.length; i++) {

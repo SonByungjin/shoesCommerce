@@ -37,22 +37,6 @@
   display: none;
 }
 
-@media (max-width: 1500px) {
-  .navWrap {
-    .activeSearchBar {
-      .container {
-        .searchBar {
-          .searchArea {
-            svg {
-              right: 7%;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
 @keyframes opacity-animation {
   0% {
     opacity: 0;
