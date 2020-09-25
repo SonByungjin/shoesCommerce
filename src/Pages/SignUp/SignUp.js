@@ -23,8 +23,10 @@ class SignUp extends React.Component {
       phoneError: "",
       birthValue: "",
       birthError: "",
-      isFemale: "",
-      isMale: "", // isMale 만 true false 값으로
+      isFemale: false,
+      isMale: false, // isMale 만 true false 값으로
+      isWomen: false,
+      isMen: false,
       checkAll: false,
       checkOne: false,
       checkTwo: false,
@@ -33,7 +35,43 @@ class SignUp extends React.Component {
     };
   }
 
+  handleGenderValue = (e) => {
+    const { name } = e.target;
+
+    if (name === "male") {
+      this.setState(
+        {
+          isWomen: false,
+          isMen: true,
+        },
+        () => this.gender()
+      );
+    } else {
+      this.setState(
+        {
+          isWomen: true,
+          isMen: false,
+        },
+        () => this.gender()
+      );
+    }
+    // this.gender();
+  };
+
+  gender = () => {
+    if (this.state.isWomen) {
+      return this.setState({
+        isMale: "false",
+      });
+    } else {
+      return this.setState({
+        isMale: "true",
+      });
+    }
+  };
+
   handleCheckAll = () => {
+    console.log(this.handleCheckAll);
     this.setState({ checkAll: !this.state.checkAll });
     if (this.state.checkAll === false) {
       this.setState({
@@ -129,6 +167,7 @@ class SignUp extends React.Component {
   };
 
   handleClick = () => {
+    console.log("Male", this.state.isMale);
     const {
       emailValue,
       passwordValue,
@@ -136,6 +175,7 @@ class SignUp extends React.Component {
       phoneValue,
       birthValue,
       nameValue,
+      isMale,
     } = this.state;
 
     fetch(`${secondAPI}/false_account/signup`, {
@@ -147,7 +187,7 @@ class SignUp extends React.Component {
         phone_number: phoneValue,
         date_of_birth: birthValue,
         name: nameValue,
-        is_male: true,
+        is_male: isMale,
       }),
     })
       .then((response) => response.json())
@@ -162,6 +202,7 @@ class SignUp extends React.Component {
   };
 
   render() {
+    // console.log(this.state.isone, this.state.istwo);
     const {
       emailValue,
       passwordValue,
@@ -172,6 +213,7 @@ class SignUp extends React.Component {
       isFemale,
       isMale,
     } = this.state;
+    console.log("Male", this.state.isMale);
 
     return (
       <>
@@ -223,6 +265,7 @@ class SignUp extends React.Component {
                         <span>{this.state.emailError}</span>
                         <input
                           className="password"
+                          maxLength="16"
                           name="passwordValue"
                           type="password"
                           onChange={this.handlePasswordValue}
@@ -232,6 +275,7 @@ class SignUp extends React.Component {
                         <span>{this.state.passwordError}</span>
                         <input
                           className="rePassword"
+                          maxLength="16"
                           name="rePasswordValue"
                           type="password"
                           onChange={this.handlerePasswordValue}
@@ -250,6 +294,7 @@ class SignUp extends React.Component {
                         <span>{this.state.nameError}</span>
                         <input
                           className="phoneNum"
+                          maxLength="11"
                           name="phoneValue"
                           type="text"
                           onChange={this.handlePhoneValue}
@@ -260,6 +305,7 @@ class SignUp extends React.Component {
                         <label>*생일/성별은 가입 후 수정이 불가합니다.</label>
                         <input
                           className="birth"
+                          maxLength="8"
                           name="birthValue"
                           type="text"
                           onChange={this.handleBirthValue}
@@ -271,16 +317,21 @@ class SignUp extends React.Component {
                           <input
                             type="radio"
                             id="genderType0"
-                            name="genderType"
-                            value={isFemale}
+                            // name="genderType"
+                            checked={this.state.isWomen ? true : ""}
+                            onChange={this.handleGenderValue}
+                            name="female"
+                            // value="female"
                           ></input>
                           <label htmlFor="genderType0">여성</label>
 
                           <input
                             type="radio"
                             id="genderType1"
-                            name="genderType"
-                            value={isMale}
+                            // name="genderType"
+                            checked={this.state.isMen ? true : ""}
+                            onChange={this.handleGenderValue}
+                            name="male"
                           ></input>
                           <label htmlFor="genderType1">남성</label>
                         </div>
