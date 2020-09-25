@@ -13,7 +13,7 @@ class ShoesMenuList extends React.Component {
   }
 
   componentDidMount() {
-    fetch("http://10.58.1.230:8000/products/main")
+    fetch("http://10.58.1.230:8002/products/main")
       .then((res) => res.json())
       .then((res) => {
         this.setState({

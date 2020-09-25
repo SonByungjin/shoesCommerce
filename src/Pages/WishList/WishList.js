@@ -22,23 +22,16 @@ class WishList extends Component {
   }
 
   getWishList = () => {
-    fetch(
-      // "/data/ProductList/wishlist.json",
-      "http://10.58.5.250:8000/false_account/wishlist",
-      {
-        headers: {
-          Authorization: localStorage.getItem("token"),
-        },
-      }
-    )
+    fetch("http://10.58.5.250:8000/false_account/wishlist", {
+      headers: {
+        Authorization: localStorage.getItem("token"),
+      },
+    })
       .then((res) => res.json())
       .then((res) => {
-        this.setState(
-          {
-            wishlist: res.wishlist,
-          },
-          this.getWishList()
-        );
+        this.setState({
+          wishlist: res.wishlist,
+        });
       });
   };
 
@@ -66,19 +59,16 @@ class WishList extends Component {
   };
 
   deleteWishList = (product_id) => {
-    fetch(
-      "http://10.58.5.250:8000/false_account/wishlist",
-      {
-        method: "POST",
-        headers: {
-          Authorization: localStorage.getItem("token"),
-        },
-        body: JSON.stringify({
-          id: product_id,
-        }),
+    fetch("http://10.58.5.250:8000/false_account/wishlist", {
+      method: "POST",
+      headers: {
+        Authorization: localStorage.getItem("token"),
       },
-      this.getWishList()
-    );
+      body: JSON.stringify({
+        id: product_id,
+      }),
+    });
+    setTimeout(this.getWishList(), 0);
   };
 
   AlertDeleteWishList = (product_id) => {
