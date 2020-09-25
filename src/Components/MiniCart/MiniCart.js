@@ -49,7 +49,7 @@ class MiniCart extends React.Component {
 
     const action = window.confirm("정말로 지우시겠습니까?");
     if (action === true) {
-      fetch(`http://10.58.5.250:8000/orders/cart/${cartId}`, {
+      fetch(`${secondAPI}/orders/cart/${cartId}`, {
         method: "DELETE",
         headers: { Authorization: userToken },
       })
