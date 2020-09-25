@@ -357,7 +357,6 @@ export class ProductList extends React.Component {
               })}
           </main>
         </div>
-        {/* <footer>footer 컴포넌트 예정</footer> */}
         <Footer />
       </div>
     );

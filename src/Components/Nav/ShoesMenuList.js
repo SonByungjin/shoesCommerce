@@ -29,9 +29,9 @@ class ShoesMenuList extends React.Component {
     return (
       <div className="shoesMenuList">
         <ul className={activeId ? "showList" : "closeList"}>
-          {shoesMenuList.map((menu) => {
+          {shoesMenuList.slice(0, 9).map((menu) => {
             return (
-              <li key={menu.id}>
+              <li onClick={closeMenu} key={menu.id}>
                 <Link to={`/productList?category=${menu.id}`}>{menu.name}</Link>
               </li>
             );
