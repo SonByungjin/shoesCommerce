@@ -180,7 +180,11 @@ export class ProductList extends React.Component {
         ProductMainImage: { MainImg: [] },
       },
       () => {
-        fetch(filteringQueryStringApi)
+        fetch(filteringQueryStringApi, {
+          headers: {
+            Authorization: localStorage.getItem("token"),
+          },
+        })
           .then((res) => res.json())
           .then((res) => {
             console.log(res);
