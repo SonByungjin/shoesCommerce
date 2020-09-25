@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import ShoesMenuListData from "./ShoesMenuListData";
+import { firstAPI } from "../../Config";
 import "./ShoesMenuList.scss";
 
 class ShoesMenuList extends React.Component {
@@ -13,7 +14,7 @@ class ShoesMenuList extends React.Component {
   }
 
   componentDidMount() {
-    fetch("http://10.58.1.230:8000/products/main")
+    fetch(`${firstAPI}/products/main`)
       .then((res) => res.json())
       .then((res) => {
         this.setState({
@@ -28,9 +29,9 @@ class ShoesMenuList extends React.Component {
     return (
       <div className="shoesMenuList">
         <ul className={activeId ? "showList" : "closeList"}>
-          {shoesMenuList.map((menu) => {
+          {shoesMenuList.slice(0, 9).map((menu) => {
             return (
-              <li key={menu.id}>
+              <li onClick={closeMenu} key={menu.id}>
                 <Link to={`/productList?category=${menu.id}`}>{menu.name}</Link>
               </li>
             );

@@ -1,5 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
+import { secondAPI } from "../../Config";
 import PromoBanner from "../../Components/PromoBanner/PromoBanner";
 import Nav from "../../Components/Nav/Nav";
 import Footer from "../../Components/Footer/Footer";
@@ -177,7 +178,7 @@ class SignUp extends React.Component {
       isMale,
     } = this.state;
 
-    fetch("http://10.58.5.250:8000/false_account/signup", {
+    fetch(`${secondAPI}/false_account/signup`, {
       method: "POST",
       body: JSON.stringify({
         email: emailValue,
