@@ -26,7 +26,7 @@ class ProductMainImg extends React.Component {
                   return (
                     <li key={index}>
                       {product.medium_type === "VIDEO" && (
-                        <video autoPlay loop controls>
+                        <video autoPlay loop muted>
                           <source
                             src={product.medium_url}
                             type="video/mp4"

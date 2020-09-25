@@ -77,8 +77,11 @@ class MiniCart extends React.Component {
     let totalPrice = 0;
     let totalDiscountPrice = 0;
     let finalPrice = 0;
-    //추후 백엔드 데이터에 맞게 수정 (json 파일 뒤에 /productID 형식으로 받아올 예정)
-    fetch(`${secondAPI}/orders/cart`)
+    fetch(`${secondAPI}/orders/cart`, {
+      headers: {
+        Authorization: userToken,
+      },
+    })
       .then((res) => res.json())
       .then((res) => {
         for (let i = 0; i < res.cart_list.length; i++) {
