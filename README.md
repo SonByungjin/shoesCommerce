@@ -34,7 +34,7 @@
     * To Be Updated
   - 김호균님
     * 회원가입, 로그인 페이지, 미니 장바구니 레이아웃 및 기능 구현
-    * To Be Updated
+    * 백엔드 API 통신 (POST)
   - 문상호님
     * 메인 페이지, Promotion Banner, Footer, Nav bar, 검색창 레이아웃 및 기능 구현
     * Nav bar 및 검색 기능에서 백엔드 API 통신 (GET)
@@ -58,7 +58,7 @@
   - Front-end
   
     * [권영빈님](https://youngbinkwon.tistory.com/148?category=839222, "권영빈 블로그")
-    * 김호균님 (To Be Updated)
+    * 김호균님 (https://velog.io/@kyman19940214/React-Converse-%ED%81%B4%EB%A1%A0-%ED%8C%80-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%ED%9B%84%EA%B8%B0 , "김호균 블로그" )
     * [문상호님](https://velog.io/@devmoonsh/Project-%EC%BB%A8%EB%B2%84%EC%8A%A4-%ED%81%B4%EB%A1%A0-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%ED%9B%84%EA%B8%B0, "문상호 블로그")
     * [손병진님](https://velog.io/@sgyos000/Converse-Website-Clone-Project-%ED%9B%84%EA%B8%B0, "손병진 블로그")
     
