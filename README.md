@@ -63,11 +63,11 @@
   - Front-end
   
     * [권영빈님](https://youngbinkwon.tistory.com/148?category=839222, "권영빈 블로그")
-    * [김호균님](https://velog.io/@kyman19940214/React-Converse-%ED%81%B4%EB%A1%A0-%ED%8C%80-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%ED%9B%84%EA%B8%B0, "김호균 블로그")
-    * [문상호님](https://velog.io/@devmoonsh/Project-%EC%BB%A8%EB%B2%84%EC%8A%A4-%ED%81%B4%EB%A1%A0-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%ED%9B%84%EA%B8%B0, "문상호 블로그")
-    * [손병진님](https://velog.io/@sgyos000/Converse-Website-Clone-Project-%ED%9B%84%EA%B8%B0, "손병진 블로그")
+    * [김호균님](https://velog.io/@kyman19940214/React-Converse-%ED%81%B4%EB%A1%A0-%ED%8C%80-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%ED%9B%84%EA%B8%B0)
+    * [문상호님](https://velog.io/@devmoonsh/Project-%EC%BB%A8%EB%B2%84%EC%8A%A4-%ED%81%B4%EB%A1%A0-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%ED%9B%84%EA%B8%B0)
+    * [손병진님](https://velog.io/@sgyos000/Converse-Website-Clone-Project-%ED%9B%84%EA%B8%B0)
     
   - Back-end
    
-    * [강경훈님](https://velog.io/@kgh239/1%EC%B0%A8-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%ED%9B%84%EA%B8%B0-Allstar, "강경훈 블로그")
-    * [김수정님](https://velog.io/@ksooj/TIL-2020.09.29-1%EC%B0%A8-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%ED%9B%84%EA%B8%B0, "김수정님 블로그")
+    * [강경훈님](https://velog.io/@kgh239/1%EC%B0%A8-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%ED%9B%84%EA%B8%B0-Allstar)
+    * [김수정님](https://velog.io/@ksooj/TIL-2020.09.29-1%EC%B0%A8-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%ED%9B%84%EA%B8%B0)
