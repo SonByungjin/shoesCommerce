@@ -13,6 +13,7 @@
   - HTML, CSS
   - JavaScript(ES6+)
   - React (CRA, class형 component 사용)
+  - React-router-dom (library)
   - Slick.js (library)
   - SASS(SCSS)
   - AWS(EC2)
@@ -37,8 +38,10 @@
     * 회원가입, 로그인 페이지, 미니 장바구니 레이아웃 및 기능 구현
     * 백엔드 API 통신 (POST)
   - 문상호님
-    * 메인 페이지, Promotion Banner, Footer, Nav bar, 검색창 레이아웃 및 기능 구현
-    * Nav bar 및 검색 기능에서 백엔드 API 통신 (GET)
+    * 메인 페이지, Footer 레이아웃
+    * Slick.js를 활용한 Promotion Banner 구현
+    * Nav bar 레이아웃, fetch 함수를 활용한 API 통신 (GET) -> nav bar에서 메뉴 클릭 시 소 카테고리들이 출력되도록 구현
+    * Nav bar 내 검색창 레이아웃, fetch 함수를 활용한 API 통신 (GET) -> 검색 기능 구현
   - 손병진님
     * 상품 리스트 페이지, 위시리스트 페이지 레이아웃 및 기능 구현
     * 무한 스크롤 + 로딩 이미지 (페이지네이션)
@@ -46,7 +49,6 @@
     
  
 * Back-end
-  - 모델링  
   - 강경훈님
     * Crawling
     * Dump 코드 작성
