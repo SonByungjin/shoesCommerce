@@ -52,8 +52,13 @@
     * Product views.py - ListView(필터링: 사이즈, 실루엣, 컬러+검색기능)
     * Cart views.py - 장바구니 생성 및 삭제
   - 김수정님
-    * To Be Updated
-    
+    * 장고 초기세팅
+    * 모델링 
+    * Product views.py - ProductView(상세페이지)
+    * Account models.py
+    * Account views.py - SignUpView, SignInView, WishListView
+    * Cart views.py - 장바구니 수정 및 조회 
+
 ## ✍️ 팀원 별 프로젝트 후기
   - Front-end
   
@@ -65,4 +70,4 @@
   - Back-end
    
     * [강경훈님](https://velog.io/@kgh239/1%EC%B0%A8-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%ED%9B%84%EA%B8%B0-Allstar, "강경훈 블로그")
-    * 김수정님 (To Be Updated)
+    * [김수정님](https://velog.io/@ksooj/TIL-2020.09.29-1%EC%B0%A8-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%ED%9B%84%EA%B8%B0, "김수정님 블로그")
