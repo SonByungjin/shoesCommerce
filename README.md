@@ -1,6 +1,7 @@
 # Converse 공식 홈페이지 클론 프로젝트 
 -----------------------------------
 ## 🖥 프로젝트 소개
+<img src='https://lh3.googleusercontent.com/proxy/G4ngoYM0C8e2XopN-ZniHE8yb5GaS01i-2uu3k8ibQOxboQL3V5j8y64aYMCYFl_VzpkdQrdF-H2PLjcuJl_xGwJPfem2Ipyqi-Mqe-z7iMc7Q2_W4ttfno-bcki_cHzbwtUklTQfGKNuEKDFR7HHSFp6qi0jGujuwqLxyc'>
 
 * 주제: 컨버스 공식 홈페이지 클론
 * 프로젝트 기간: 2020.09.14 - 2020.09.25 (12일 간)
@@ -45,6 +46,7 @@
     
  
 * Back-end
+  - 모델링  
   - 강경훈님
     * Crawling
     * Dump 코드 작성
